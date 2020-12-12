@@ -7,7 +7,10 @@
     "ios": "react-native run-ios",
     "start": "react-native start",
     "test": "jest",
-    "lint": "eslint . --ext .js,.jsx,.ts,.tsx"
+    "lint": "eslint . --ext .js,.jsx,.ts,.tsx",
+    "prettier": "prettier --ignore-path .gitignore \"src/**/*.+(js|json|ts|tsx)\"",
+    "format": "npm run prettier -- --write",
+    "check-format": "npm run prettier -- --list-different"
   },
   "dependencies": {
     "@react-native-community/masked-view": "^0.1.10",
@@ -35,6 +38,7 @@
     "eslint": "^6.5.1",
     "jest": "^25.1.0",
     "metro-react-native-babel-preset": "^0.59.0",
+    "prettier": "2.2.1",
     "react-test-renderer": "16.13.1",
     "typescript": "^3.8.3"
   },

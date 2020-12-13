@@ -1,0 +1,26 @@
+{
+  "common": {
+    "ok": "OK",
+    "cancel": "Cancel",
+    "yes": "Yes",
+    "no": "No",
+    "pluralizationExample": {
+      "one": "You have 1 item",
+      "other": "You have %{count} items",
+      "zero": "You cart is empty"
+    }
+  },
+  "errors": {},
+  "homeScreen": {
+    "appbarTitle": "Home"
+  },
+  "categoriesScreen": {
+    "appbarTitle": "Category"
+  },
+  "profileScreen": {
+    "appbarTitle": "Profile"
+  },
+  "cartScreen": {
+    "appbarTitle": "Cart"
+  }
+}

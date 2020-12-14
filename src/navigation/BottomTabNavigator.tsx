@@ -1,43 +1,51 @@
 import React from 'react';
-import { View } from 'react-native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import { Text } from 'react-native';
 import { translate } from '../i18n';
+import {
+  HomeScreen,
+  CategoriesScreen,
+  CartScreen,
+  ProfileScreen,
+} from '../screens';
+import {
+  NAVIGATION_TO_HOME_SCREEN,
+  NAVIGATION_TO_CATGEORIES_SCREEN,
+  NAVIGATION_TO_CART_SCREEN,
+  NAVIGATION_TO_PROFILE_SCREEN,
+} from './routes';
 
 const Tab = createBottomTabNavigator();
-
-const HomeScreen = () => (
-  <View>
-    <Text>{translate('common.pluralizationExample', { count: 0 })}</Text>
-    <Text>{translate('common.pluralizationExample', { count: 10 })}</Text>
-    <Text>{translate('common.pluralizationExample', { count: 1 })}</Text>
-  </View>
-);
-
-const CategoriesScreen = () => <Text>Category</Text>;
-
-const ProfileScreen = () => <Text>Profile</Text>;
-
-const CartScreen = () => <Text>Cart</Text>;
 
 const BottomTabNavigator = () => {
   return (
     <Tab.Navigator>
       <Tab.Screen
-        name={translate('homeScreen.appbarTitle')}
+        name={NAVIGATION_TO_HOME_SCREEN}
         component={HomeScreen}
+        options={{
+          tabBarLabel: translate('homeScreen.appbarTitle'),
+        }}
       />
       <Tab.Screen
-        name={translate('categoriesScreen.appbarTitle')}
+        name={NAVIGATION_TO_CATGEORIES_SCREEN}
         component={CategoriesScreen}
+        options={{
+          tabBarLabel: translate('categoriesScreen.appbarTitle'),
+        }}
       />
       <Tab.Screen
-        name={translate('profileScreen.appbarTitle')}
+        name={NAVIGATION_TO_PROFILE_SCREEN}
         component={ProfileScreen}
+        options={{
+          tabBarLabel: translate('profileScreen.appbarTitle'),
+        }}
       />
       <Tab.Screen
-        name={translate('cartScreen.appbarTitle')}
+        name={NAVIGATION_TO_CART_SCREEN}
         component={CartScreen}
+        options={{
+          tabBarLabel: translate('cartScreen.appbarTitle'),
+        }}
       />
     </Tab.Navigator>
   );

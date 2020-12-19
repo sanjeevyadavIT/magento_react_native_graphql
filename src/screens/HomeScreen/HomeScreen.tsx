@@ -2,7 +2,7 @@ import React from 'react';
 import { View, Text } from 'react-native';
 import { translate } from '../../i18n';
 
-const HomeScreen = () => (
+const HomeScreen = (): React.ReactElement => (
   <View>
     <Text>{translate('common.pluralizationExample', { count: 0 })}</Text>
     <Text>{translate('common.pluralizationExample', { count: 10 })}</Text>

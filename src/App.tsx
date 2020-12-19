@@ -3,7 +3,7 @@ import Navigator from './navigation';
 import { ApolloProvider } from '@apollo/client';
 import { apolloClient } from './apollo/client';
 
-const App = () => {
+const App = (): React.ReactElement => {
   return (
     <ApolloProvider client={apolloClient}>
       <Navigator />

@@ -6,7 +6,7 @@ import {
   NAVIGATION_TO_HOME_SCREEN,
   NAVIGATION_TO_CART_SCREEN,
   NAVIGATION_TO_PROFILE_SCREEN,
-} from './routes';
+} from './routeNames';
 
 const Tab = createBottomTabNavigator();
 

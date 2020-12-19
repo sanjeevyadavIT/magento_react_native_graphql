@@ -18,16 +18,14 @@ const mocks = [
     request: {
       query: GET_CATEGORIES,
       variables: {
-        id: '2',
+        id: 2,
       },
     },
     result: {
       data: {
         categoryList: {
           id: '2',
-          name: 'default category',
-          children_count: 0,
-          product_count: 0,
+          children: [],
         },
       },
     },

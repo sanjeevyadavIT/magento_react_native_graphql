@@ -4,11 +4,12 @@ import { createStackNavigator } from '@react-navigation/stack';
 import BottomTabNavigator from './BottomTabNavigator';
 import {
   NAVIGATION_TO_HOME_SCREEN,
-  NAVIGATION_TO_CATGEORIES_SCREEN,
+  NAVIGATION_TO_PRODUCT_LIST_SCREEN,
+  NAVIGATION_TO_CATEGORIES_SCREEN,
 } from './routeNames';
 import { StackParamList } from './routeParams';
 import { translate } from '../i18n';
-import { CategoriesScreen } from '../screens';
+import { CategoriesScreen, ProductListScreen } from '../screens';
 
 const Stack = createStackNavigator<StackParamList>();
 
@@ -25,7 +26,7 @@ const StackNavigator = () => (
       })}
     />
     <Stack.Screen
-      name={NAVIGATION_TO_CATGEORIES_SCREEN}
+      name={NAVIGATION_TO_CATEGORIES_SCREEN}
       component={CategoriesScreen}
       options={({ route }) => {
         const {
@@ -33,6 +34,18 @@ const StackNavigator = () => (
         } = route;
         return {
           title: name ?? translate('categoriesScreen.appbarTitle'),
+        };
+      }}
+    />
+    <Stack.Screen
+      name={NAVIGATION_TO_PRODUCT_LIST_SCREEN}
+      component={ProductListScreen}
+      options={({ route }) => {
+        const {
+          params: { name },
+        } = route;
+        return {
+          title: name ?? translate('productListScreen.appbarTitle'),
         };
       }}
     />

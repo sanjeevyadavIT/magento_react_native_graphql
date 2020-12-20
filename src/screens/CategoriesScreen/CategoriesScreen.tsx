@@ -6,15 +6,15 @@ import { CategoryListItem } from '../../components';
 import { useCategories } from '../../logic';
 import {
   StackParamList,
-  NAVIGATION_TO_CATGEORIES_SCREEN,
+  NAVIGATION_TO_CATEGORIES_SCREEN,
 } from '../../navigation';
 
 type Props = {
   navigation: StackNavigationProp<
     StackParamList,
-    NAVIGATION_TO_CATGEORIES_SCREEN
+    NAVIGATION_TO_CATEGORIES_SCREEN
   >;
-  route: RouteProp<StackParamList, NAVIGATION_TO_CATGEORIES_SCREEN>;
+  route: RouteProp<StackParamList, NAVIGATION_TO_CATEGORIES_SCREEN>;
 };
 
 const CategoriesScreen = ({
@@ -39,7 +39,7 @@ const CategoriesScreen = ({
     <View>
       <FlatList
         data={categories}
-        keyExtractor={item => `catgeoryItem${item.id.toString()}`}
+        keyExtractor={item => `categoryItem${item.id.toString()}`}
         renderItem={({ item }) => (
           <CategoryListItem item={item} navigation={navigation} />
         )}

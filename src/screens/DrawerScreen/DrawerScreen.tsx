@@ -26,7 +26,7 @@ const DrawerScreen = ({ navigation }: Props): React.ReactElement => {
     <View>
       <FlatList
         data={categories}
-        keyExtractor={item => `catgeoryItem${item.id.toString()}`}
+        keyExtractor={item => `categoryItem${item.id.toString()}`}
         renderItem={({ item }) => (
           <CategoryListItem item={item} navigation={navigation} />
         )}

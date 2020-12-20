@@ -9,14 +9,6 @@ interface CategoryListType {
   children: CategoryType[];
 }
 
-interface CatgeoryProductPreviewImageType {
-  items: Array<{
-    small_image: {
-      url: String;
-    };
-  }>;
-}
-
 export interface CategoryType {
   id: number;
   name: string;
@@ -24,10 +16,18 @@ export interface CategoryType {
   children_count: string;
   image: string;
   /**
-   * In case catgeory doesn't contain image,
-   * use one of the product's image inside the catgeory
+   * In case category doesn't contain image,
+   * use one of the product's image inside the category
    */
-  productPreviewImage: CatgeoryProductPreviewImageType;
+  productPreviewImage: CategoryProductPreviewImageType;
+}
+
+interface CategoryProductPreviewImageType {
+  items: Array<{
+    small_image: {
+      url: String;
+    };
+  }>;
 }
 
 export const GET_CATEGORIES = gql`

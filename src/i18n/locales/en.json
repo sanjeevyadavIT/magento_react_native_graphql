@@ -12,16 +12,19 @@
     }
   },
   "errors": {},
-  "homeScreen": {
-    "appbarTitle": "Home"
+  "cartScreen": {
+    "appbarTitle": "Cart"
   },
   "categoriesScreen": {
     "appbarTitle": "Category"
   },
+  "homeScreen": {
+    "appbarTitle": "Home"
+  },
+  "productListScreen": {
+    "appbarTitle": "Products"
+  },
   "profileScreen": {
     "appbarTitle": "Profile"
-  },
-  "cartScreen": {
-    "appbarTitle": "Cart"
   }
 }

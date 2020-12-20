@@ -1,8 +1,11 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { View, Text, StyleSheet, TouchableOpacity, Image } from 'react-native';
 import { SPACING } from '../../constants';
 import { CategoryType } from '../../apollo/queries/getCategories';
-import { NAVIGATION_TO_CATGEORIES_SCREEN } from '../../navigation';
+import {
+  NAVIGATION_TO_CATEGORIES_SCREEN,
+  NAVIGATION_TO_PRODUCT_LIST_SCREEN,
+} from '../../navigation';
 
 interface Props {
   item: CategoryType;
@@ -13,16 +16,20 @@ interface Props {
 
 // TODO: Extract hard-coded color & dimension values
 const CategoryListItem = ({ item, navigation }: Props): React.ReactElement => {
-  const onCatgeoryPress = () => {
+  const [disabled] = useState<boolean>(
+    +item.children_count < 1 && item.product_count < 1,
+  );
+  const onCategoryPress = () => {
     if (+item.children_count > 0) {
-      navigation.navigate(NAVIGATION_TO_CATGEORIES_SCREEN, {
+      navigation.navigate(NAVIGATION_TO_CATEGORIES_SCREEN, {
         categoryId: item.id,
         name: item.name,
       });
       return;
     }
-    navigation.navigate('productlist ', {
+    navigation.navigate(NAVIGATION_TO_PRODUCT_LIST_SCREEN, {
       categoryId: item.id,
+      name: item.name,
     });
   };
 
@@ -47,7 +54,7 @@ const CategoryListItem = ({ item, navigation }: Props): React.ReactElement => {
   };
 
   return (
-    <TouchableOpacity onPress={onCatgeoryPress}>
+    <TouchableOpacity disabled={disabled} onPress={onCategoryPress}>
       <View style={styles.categoryContainer}>{renderContent()}</View>
     </TouchableOpacity>
   );

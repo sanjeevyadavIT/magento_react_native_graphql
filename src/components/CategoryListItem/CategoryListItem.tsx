@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
+import { View, Text, StyleSheet, TouchableOpacity, Image } from 'react-native';
 import { SPACING } from '../../constants';
 import { CategoryType } from '../../apollo/queries/getCategories';
 import { NAVIGATION_TO_CATGEORIES_SCREEN } from '../../navigation';
@@ -11,6 +11,7 @@ interface Props {
   };
 }
 
+// TODO: Extract hard-coded color & dimension values
 const CategoryListItem = ({ item, navigation }: Props): React.ReactElement => {
   const onCatgeoryPress = () => {
     if (+item.children_count > 0) {
@@ -25,19 +26,46 @@ const CategoryListItem = ({ item, navigation }: Props): React.ReactElement => {
     });
   };
 
+  const renderImage = () => {
+    const rawUri =
+      item.image ?? item.productPreviewImage?.items?.[0]?.small_image?.url;
+    if (!rawUri) {
+      return null;
+    }
+    const uri = `${rawUri ?? ''}?width=100`;
+
+    return <Image source={{ uri }} resizeMode="cover" style={styles.image} />;
+  };
+
+  const renderContent = () => {
+    return (
+      <>
+        {renderImage()}
+        <Text style={styles.title}>{item.name}</Text>
+      </>
+    );
+  };
+
   return (
     <TouchableOpacity onPress={onCatgeoryPress}>
-      <View style={styles.categoryContainer}>
-        <Text>{item.name}</Text>
-      </View>
+      <View style={styles.categoryContainer}>{renderContent()}</View>
     </TouchableOpacity>
   );
 };
 
 const styles = StyleSheet.create({
   categoryContainer: {
-    padding: SPACING.large,
+    flexDirection: 'row',
     borderBottomWidth: StyleSheet.hairlineWidth,
+    borderBottomColor: '#ccc',
+  },
+  image: {
+    width: 70,
+    height: 70,
+  },
+  title: {
+    marginStart: SPACING.large,
+    marginTop: SPACING.large,
   },
 });
 

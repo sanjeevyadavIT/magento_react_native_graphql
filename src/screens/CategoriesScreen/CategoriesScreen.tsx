@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, ActivityIndicator, FlatList } from 'react-native';
+import { Text, View, ActivityIndicator, FlatList } from 'react-native';
 import { RouteProp } from '@react-navigation/native';
 import { StackNavigationProp } from '@react-navigation/stack';
 import { CategoryListItem } from '../../components';
@@ -29,6 +29,10 @@ const CategoriesScreen = ({
 
   if (loading) {
     return <ActivityIndicator />;
+  }
+
+  if (error) {
+    return <Text>{error.message}</Text>;
   }
 
   return (

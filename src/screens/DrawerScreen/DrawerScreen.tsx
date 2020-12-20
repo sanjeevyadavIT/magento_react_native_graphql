@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, ActivityIndicator, FlatList } from 'react-native';
+import { Text, View, ActivityIndicator, FlatList } from 'react-native';
 import { DrawerContentComponentProps } from '@react-navigation/drawer';
 import { CategoryListItem } from '../../components';
 import { useCategories } from '../../logic';
@@ -16,6 +16,10 @@ const DrawerScreen = ({ navigation }: Props): React.ReactElement => {
 
   if (loading) {
     return <ActivityIndicator />;
+  }
+
+  if (error) {
+    return <Text>{error.message}</Text>;
   }
 
   return (

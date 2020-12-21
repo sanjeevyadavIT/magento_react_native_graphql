@@ -1,5 +1,11 @@
 import React, { useEffect } from 'react';
-import { View, Text, ActivityIndicator } from 'react-native';
+import {
+  View,
+  RefreshControl,
+  StyleSheet,
+  ActivityIndicator,
+  FlatList,
+} from 'react-native';
 import { RouteProp } from '@react-navigation/native';
 import { StackNavigationProp } from '@react-navigation/stack';
 import { useCategoryProducts } from '../../logic';
@@ -7,6 +13,9 @@ import {
   NAVIGATION_TO_PRODUCT_LIST_SCREEN,
   StackParamList,
 } from '../../navigation';
+import ProductListItem from './ProductListItem';
+import { CategoryProductType } from '../../apollo/queries/getCategoryProducts';
+import { SPACING } from '../../constants';
 
 interface Props {
   navigation: StackNavigationProp<
@@ -22,27 +31,70 @@ const ProductListScreen = ({
     params: { categoryId },
   },
 }: Props): React.ReactElement => {
-  const { getCategoryProducts, products, loading, error } = useCategoryProducts(
-    {
-      categoryId,
-      pageSize: 10,
-      currentPage: 1,
-    },
-  );
+  const {
+    getCategoryProducts,
+    products,
+    loading,
+    currentPage,
+    error,
+    refresh,
+    loadMore,
+  } = useCategoryProducts({
+    categoryId,
+  });
 
   useEffect(() => {
     getCategoryProducts();
   }, []);
 
-  if (loading) {
-    return <ActivityIndicator />;
-  }
+  const renderItem = ({
+    item,
+    index,
+  }: {
+    item: CategoryProductType;
+    index: number;
+  }) => {
+    return <ProductListItem item={item} index={index} />;
+  };
+
+  const renderFooter = () => {
+    if (loading && products.length !== 0) {
+      return (
+        <View style={styles.footerContainer}>
+          <ActivityIndicator size="large" />
+        </View>
+      );
+    }
+    return null;
+  };
 
   return (
     <View>
-      <Text>{products && JSON.stringify(products, null, 2)}</Text>
+      <FlatList
+        numColumns={2}
+        data={products}
+        renderItem={renderItem}
+        contentContainerStyle={styles.flatlist}
+        keyExtractor={item => `productListItem${item.id.toString()}`}
+        refreshControl={
+          <RefreshControl
+            refreshing={loading && currentPage === 1}
+            onRefresh={refresh}
+          />
+        }
+        onEndReached={loadMore}
+        ListFooterComponent={renderFooter}
+      />
     </View>
   );
 };
+
+const styles = StyleSheet.create({
+  flatlist: {},
+  footerContainer: {
+    alignItems: 'center',
+    marginVertical: SPACING.small,
+  },
+});
 
 export default ProductListScreen;

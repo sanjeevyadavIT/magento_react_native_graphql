@@ -2,11 +2,12 @@ import { gql } from '@apollo/client';
 
 export interface CategoryProductsDataType {
   products: {
-    items: Array<CatgeoryProductType>;
+    total_count: number;
+    items: Array<CategoryProductType>;
   };
 }
 
-export interface CatgeoryProductType {
+export interface CategoryProductType {
   id: number;
   name: string;
   small_image: {
@@ -31,6 +32,7 @@ export const GET_CATGEORY_PRODUCTS = gql`
       pageSize: $pageSize
       currentPage: $currentPage
     ) {
+      total_count
       items {
         id
         name

@@ -2,21 +2,22 @@ import { useEffect, useState } from 'react';
 import { useLazyQuery, ApolloError } from '@apollo/client';
 import {
   GET_CATGEORY_PRODUCTS,
-  CatgeoryProductType,
+  CategoryProductType,
   CategoryProductsDataType,
 } from '../../apollo/queries/getCategoryProducts';
 
 interface Props {
   categoryId: string;
-  pageSize: number;
-  currentPage: number;
 }
 
 interface Result {
-  products: Array<CatgeoryProductType>;
+  products: Array<CategoryProductType>;
   getCategoryProducts(): void;
   loading: boolean;
   error: ApolloError | undefined;
+  currentPage: number;
+  refresh(): void;
+  loadMore(): void;
 }
 
 interface CategoryProductsVars {
@@ -25,33 +26,70 @@ interface CategoryProductsVars {
   currentPage: number;
 }
 
-export const useCategoryProducts = ({
-  categoryId: id,
-  pageSize,
-  currentPage,
-}: Props): Result => {
-  const [products, setProducts] = useState<Array<CatgeoryProductType>>([]);
-  const [getCategoryProducts, { called, data, loading, error }] = useLazyQuery<
+const PAGE_SIZE = 10;
+
+export const useCategoryProducts = ({ categoryId: id }: Props): Result => {
+  const [products, setProducts] = useState<Array<CategoryProductType>>([]);
+  const [currentPage, setCurrentPage] = useState<number>(1);
+
+  const [getCategoryProducts, { loading, error }] = useLazyQuery<
     CategoryProductsDataType,
     CategoryProductsVars
   >(GET_CATGEORY_PRODUCTS, {
     variables: {
       id,
-      pageSize,
+      pageSize: PAGE_SIZE,
       currentPage,
     },
+    fetchPolicy: 'no-cache',
+    onCompleted: responseData => {
+      if (responseData?.products?.items && currentPage === 1) {
+        setProducts(responseData.products.items);
+      } else if (
+        responseData?.products?.items &&
+        products.length < responseData.products.total_count &&
+        products.length < currentPage * PAGE_SIZE
+      ) {
+        setProducts(prevState => [
+          ...prevState,
+          ...responseData?.products?.items,
+        ]);
+      }
+    },
   });
+  console.log({ currentPage, loading });
 
   useEffect(() => {
-    if (data) {
-      setProducts(data.products.items);
+    if (!loading) {
+      getCategoryProducts();
     }
-  }, [data]);
+  }, [currentPage, getCategoryProducts]);
+
+  const loadMore = () => {
+    if (loading) {
+      return;
+    }
+
+    if (currentPage * PAGE_SIZE === products.length) {
+      setCurrentPage(prevState => prevState + 1);
+    }
+  };
+
+  const refresh = () => {
+    if (currentPage !== 1) {
+      setCurrentPage(1);
+    } else {
+      getCategoryProducts();
+    }
+  };
 
   return {
     products,
     loading,
     error,
     getCategoryProducts,
+    currentPage,
+    refresh,
+    loadMore,
   };
 };

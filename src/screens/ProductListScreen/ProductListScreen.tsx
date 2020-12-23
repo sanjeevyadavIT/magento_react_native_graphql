@@ -11,6 +11,7 @@ import { StackNavigationProp } from '@react-navigation/stack';
 import { useCategoryProducts } from '../../logic';
 import {
   NAVIGATION_TO_PRODUCT_LIST_SCREEN,
+  NAVIGATION_TO_PRODUCT_DETAILS_SCREEN,
   StackParamList,
 } from '../../navigation';
 import ProductListItem from './ProductListItem';
@@ -47,6 +48,12 @@ const ProductListScreen = ({
     getCategoryProducts();
   }, []);
 
+  const onProductItemClicked = (index: number) => {
+    navigation.navigate(NAVIGATION_TO_PRODUCT_DETAILS_SCREEN, {
+      name: products[index].name,
+    });
+  };
+
   const renderItem = ({
     item,
     index,
@@ -54,7 +61,13 @@ const ProductListScreen = ({
     item: CategoryProductType;
     index: number;
   }) => {
-    return <ProductListItem item={item} index={index} />;
+    return (
+      <ProductListItem
+        item={item}
+        index={index}
+        onPress={onProductItemClicked}
+      />
+    );
   };
 
   const renderFooter = () => {

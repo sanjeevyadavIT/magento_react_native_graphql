@@ -5,11 +5,16 @@ import BottomTabNavigator from './BottomTabNavigator';
 import {
   NAVIGATION_TO_HOME_SCREEN,
   NAVIGATION_TO_PRODUCT_LIST_SCREEN,
+  NAVIGATION_TO_PRODUCT_DETAILS_SCREEN,
   NAVIGATION_TO_CATEGORIES_SCREEN,
 } from './routeNames';
 import { StackParamList } from './routeParams';
 import { translate } from '../i18n';
-import { CategoriesScreen, ProductListScreen } from '../screens';
+import {
+  CategoriesScreen,
+  ProductListScreen,
+  ProductDetailsScreen,
+} from '../screens';
 
 const Stack = createStackNavigator<StackParamList>();
 
@@ -46,6 +51,18 @@ const StackNavigator = () => (
         } = route;
         return {
           title: name ?? translate('productListScreen.appbarTitle'),
+        };
+      }}
+    />
+    <Stack.Screen
+      name={NAVIGATION_TO_PRODUCT_DETAILS_SCREEN}
+      component={ProductDetailsScreen}
+      options={({ route }) => {
+        const {
+          params: { name },
+        } = route;
+        return {
+          title: name ?? translate('productDetailsScreen.appbarTitle'),
         };
       }}
     />

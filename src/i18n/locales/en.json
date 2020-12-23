@@ -21,6 +21,9 @@
   "homeScreen": {
     "appbarTitle": "Home"
   },
+  "productDetailsScreen": {
+    "appbarTitle": "Product Details"
+  },
   "productListScreen": {
     "appbarTitle": "Products"
   },

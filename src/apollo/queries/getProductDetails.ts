@@ -3,6 +3,7 @@ import {
   MEDIA_GALLERY_FRAGMENT,
   MediaGalleryItemType,
 } from './mediaGalleryFragment';
+import { PriceRangeType } from './getCategoryProducts';
 
 export interface ProductDetailsDataType {
   products: {
@@ -14,6 +15,10 @@ export interface ProductDetailsType {
   id: number;
   sku: string;
   name: string;
+  description: {
+    html: string;
+  };
+  price_range: PriceRangeType;
   media_gallery: Array<MediaGalleryItemType>;
 }
 
@@ -24,6 +29,17 @@ export const GET_PRODUCT_DETAILS = gql`
         id
         sku
         name
+        description {
+          html
+        }
+        price_range {
+          maximum_price {
+            final_price {
+              currency
+              value
+            }
+          }
+        }
         ...MediaGallery
       }
     }

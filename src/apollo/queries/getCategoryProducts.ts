@@ -14,10 +14,10 @@ export interface CategoryProductType {
   small_image: {
     url: String;
   };
-  price_range: CatgeoryProductPriceType;
+  price_range: PriceRangeType;
 }
 
-interface CatgeoryProductPriceType {
+export interface PriceRangeType {
   maximum_price: {
     final_price: {
       currency: string;

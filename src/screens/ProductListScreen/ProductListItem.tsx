@@ -8,6 +8,8 @@ import {
   TouchableOpacity,
 } from 'react-native';
 import { CategoryProductType } from '../../apollo/queries/getCategoryProducts';
+import { getPriceStringFromPriceRange } from '../../logic';
+import { SPACING } from '../../constants';
 
 interface Props {
   item: CategoryProductType;
@@ -36,6 +38,9 @@ const ProductListItem = ({
       <View style={[styles.container, index % 2 !== 0 && styles.leftBorder]}>
         {renderImage()}
         <Text style={styles.name}>{item.name}</Text>
+        <Text style={styles.price}>
+          {getPriceStringFromPriceRange(item.price_range)}
+        </Text>
       </View>
     </TouchableOpacity>
   );
@@ -60,6 +65,11 @@ const styles = StyleSheet.create({
   name: {
     textAlign: 'center',
     fontSize: 16,
+  },
+  price: {
+    textAlign: 'center',
+    fontWeight: 'bold',
+    marginBottom: SPACING.small,
   },
 });
 

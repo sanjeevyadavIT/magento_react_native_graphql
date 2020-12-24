@@ -17,5 +17,6 @@ export type StackParamList = {
   };
   [NAVIGATION_TO_PRODUCT_DETAILS_SCREEN]: {
     name: string;
+    sku: string;
   };
 };

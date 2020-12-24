@@ -51,6 +51,7 @@ const ProductListScreen = ({
   const onProductItemClicked = (index: number) => {
     navigation.navigate(NAVIGATION_TO_PRODUCT_DETAILS_SCREEN, {
       name: products[index].name,
+      sku: products[index].sku,
     });
   };
 

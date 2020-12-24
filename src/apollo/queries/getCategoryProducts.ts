@@ -9,6 +9,7 @@ export interface CategoryProductsDataType {
 
 export interface CategoryProductType {
   id: number;
+  sku: string;
   name: string;
   small_image: {
     url: String;
@@ -35,6 +36,7 @@ export const GET_CATGEORY_PRODUCTS = gql`
       total_count
       items {
         id
+        sku
         name
         small_image {
           url

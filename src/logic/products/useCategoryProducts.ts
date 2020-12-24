@@ -57,7 +57,6 @@ export const useCategoryProducts = ({ categoryId: id }: Props): Result => {
       }
     },
   });
-  console.log({ currentPage, loading });
 
   useEffect(() => {
     if (!loading) {

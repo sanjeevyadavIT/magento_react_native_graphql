@@ -2,6 +2,7 @@ import React, { useEffect } from 'react';
 import { View, Text, ActivityIndicator } from 'react-native';
 import { RouteProp } from '@react-navigation/native';
 import { StackNavigationProp } from '@react-navigation/stack';
+import { MediaGallery } from '../../components';
 import {
   StackParamList,
   NAVIGATION_TO_PRODUCT_DETAILS_SCREEN,
@@ -45,7 +46,7 @@ const ProductDetailsScreen = ({
 
   return (
     <View>
-      <Text>{productDetails && JSON.stringify(productDetails, null, 2)}</Text>
+      <MediaGallery items={productDetails?.media_gallery ?? []} />
     </View>
   );
 };

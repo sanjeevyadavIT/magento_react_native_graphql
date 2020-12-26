@@ -1,3 +1,4 @@
 import SPACING from './spacing';
+import DIMENS from './dimens';
 
-export { SPACING };
+export { DIMENS, SPACING };

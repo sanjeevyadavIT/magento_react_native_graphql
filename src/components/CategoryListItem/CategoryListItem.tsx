@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
-import { View, Text, StyleSheet, TouchableOpacity, Image } from 'react-native';
-import { SPACING } from '../../constants';
+import { StyleSheet } from 'react-native';
+import { ListItem, Image } from 'react-native-elements';
+import { SPACING, DIMENS } from '../../constants';
 import { CategoryType } from '../../apollo/queries/getCategories';
 import {
   NAVIGATION_TO_CATEGORIES_SCREEN,
@@ -14,7 +15,6 @@ interface Props {
   };
 }
 
-// TODO: Extract hard-coded color & dimension values
 const CategoryListItem = ({ item, navigation }: Props): React.ReactElement => {
   const [disabled] = useState<boolean>(
     +item.children_count < 1 && item.product_count < 1,
@@ -47,32 +47,33 @@ const CategoryListItem = ({ item, navigation }: Props): React.ReactElement => {
   const renderContent = () => {
     return (
       <>
-        {renderImage()}
-        <Text style={styles.title}>{item.name}</Text>
+        <ListItem.Content>
+          <ListItem.Title>{item.name}</ListItem.Title>
+        </ListItem.Content>
       </>
     );
   };
 
   return (
-    <TouchableOpacity disabled={disabled} onPress={onCategoryPress}>
-      <View style={styles.categoryContainer}>{renderContent()}</View>
-    </TouchableOpacity>
+    <ListItem
+      containerStyle={styles.conatiner}
+      disabled={disabled}
+      onPress={onCategoryPress}
+      bottomDivider
+    >
+      {renderImage()}
+      {renderContent()}
+    </ListItem>
   );
 };
 
 const styles = StyleSheet.create({
-  categoryContainer: {
-    flexDirection: 'row',
-    borderBottomWidth: StyleSheet.hairlineWidth,
-    borderBottomColor: '#ccc',
+  conatiner: {
+    padding: 0,
   },
   image: {
-    width: 70,
-    height: 70,
-  },
-  title: {
-    marginStart: SPACING.large,
-    marginTop: SPACING.large,
+    width: DIMENS.categoryListItem.imageWidth,
+    height: DIMENS.categoryListItem.imageHeight,
   },
 });
 

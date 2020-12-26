@@ -4,11 +4,12 @@ import { OverflowMenuProvider } from 'react-navigation-header-buttons';
 import Navigator from './navigation';
 import { ApolloProvider } from '@apollo/client';
 import { apolloClient } from './apollo/client';
+import { theme } from './theme';
 
 const App = (): React.ReactElement => {
   return (
     <ApolloProvider client={apolloClient}>
-      <ThemeProvider>
+      <ThemeProvider theme={theme}>
         <OverflowMenuProvider>
           <Navigator />
         </OverflowMenuProvider>

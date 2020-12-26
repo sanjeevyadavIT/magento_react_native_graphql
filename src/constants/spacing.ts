@@ -8,14 +8,16 @@
  *
  * Feel free to delete this block.
  */
+import { moderateScale } from 'react-native-size-matters';
 
-enum SPACING {
-  baseSpacing = 10,
-  tiny = baseSpacing * 0.4,
-  small = baseSpacing * 0.8,
-  medium = baseSpacing * 1.2,
-  large = baseSpacing * 1.6,
-  extraLarge = baseSpacing * 2.4,
-}
+const baseSpacing = 10;
+
+const SPACING = Object.freeze({
+  tiny: moderateScale(baseSpacing * 0.4),
+  small: moderateScale(baseSpacing * 0.8),
+  medium: moderateScale(baseSpacing * 1.2),
+  large: moderateScale(baseSpacing * 1.6),
+  extraLarge: moderateScale(baseSpacing * 2.4),
+});
 
 export default SPACING;

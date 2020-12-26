@@ -1,5 +1,6 @@
 import React from 'react';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import { Icon } from 'react-native-elements';
 import { translate } from '../i18n';
 import { HomeScreen, CartScreen, ProfileScreen } from '../screens';
 import {
@@ -18,6 +19,9 @@ const BottomTabNavigator = () => {
         component={HomeScreen}
         options={{
           tabBarLabel: translate('homeScreen.appbarTitle'),
+          tabBarIcon: ({ color, size }) => (
+            <Icon name="home" color={color} size={size} />
+          ),
         }}
       />
       <Tab.Screen
@@ -25,6 +29,9 @@ const BottomTabNavigator = () => {
         component={ProfileScreen}
         options={{
           tabBarLabel: translate('profileScreen.appbarTitle'),
+          tabBarIcon: ({ color, size }) => (
+            <Icon name="person" color={color} size={size} />
+          ),
         }}
       />
       <Tab.Screen
@@ -32,6 +39,9 @@ const BottomTabNavigator = () => {
         component={CartScreen}
         options={{
           tabBarLabel: translate('cartScreen.appbarTitle'),
+          tabBarIcon: ({ color, size }) => (
+            <Icon name="shopping-cart" color={color} size={size} />
+          ),
         }}
       />
     </Tab.Navigator>

@@ -25,12 +25,15 @@
     "i18n-js": "^3.8.0",
     "react": "16.13.1",
     "react-native": "0.63.3",
+    "react-native-elements": "^3.0.1",
     "react-native-gesture-handler": "^1.9.0",
     "react-native-localize": "^2.0.1",
     "react-native-reanimated": "^1.13.2",
     "react-native-render-html": "^5.0.1",
     "react-native-safe-area-context": "^3.1.9",
-    "react-native-screens": "^2.15.0"
+    "react-native-screens": "^2.15.0",
+    "react-native-vector-icons": "^7.1.0",
+    "react-navigation-header-buttons": "^6.0.1"
   },
   "devDependencies": {
     "@babel/core": "^7.8.4",
@@ -58,6 +61,9 @@
     "preset": "react-native",
     "timers": "fake",
     "testEnvironment": "jsdom",
+    "transformIgnorePatterns": [
+      "node_modules/(?!@ngrx|(?!deck.gl)|ng-dynamic)"
+    ],
     "setupFiles": [
       "./node_modules/react-native-gesture-handler/jestSetup.js",
       "./jest-setup.js"

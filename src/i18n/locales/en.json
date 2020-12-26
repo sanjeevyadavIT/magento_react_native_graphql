@@ -5,6 +5,7 @@
     "cancel": "Cancel",
     "yes": "Yes",
     "no": "No",
+    "menu": "Menu",
     "pluralizationExample": {
       "one": "You have 1 item",
       "other": "You have %{count} items",

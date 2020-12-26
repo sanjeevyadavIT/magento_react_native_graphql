@@ -1,7 +1,7 @@
 import React from 'react';
-import { Button } from 'react-native';
 import { createStackNavigator } from '@react-navigation/stack';
 import BottomTabNavigator from './BottomTabNavigator';
+import { CustomHeaderButtons, CustomHeaderItem } from '../components';
 import {
   NAVIGATION_TO_HOME_SCREEN,
   NAVIGATION_TO_PRODUCT_LIST_SCREEN,
@@ -26,7 +26,13 @@ const StackNavigator = () => (
       options={({ navigation }) => ({
         title: translate('common.brand'),
         headerLeft: () => (
-          <Button onPress={navigation.toggleDrawer} title="⇶" />
+          <CustomHeaderButtons>
+            <CustomHeaderItem
+              title={translate('common.menu')}
+              iconName="menu"
+              onPress={navigation.toggleDrawer}
+            />
+          </CustomHeaderButtons>
         ),
       })}
     />

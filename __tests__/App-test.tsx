@@ -5,6 +5,8 @@
 import 'react-native';
 import React from 'react';
 import { MockedProvider } from '@apollo/client/testing';
+import { ThemeProvider } from 'react-native-elements';
+import { OverflowMenuProvider } from 'react-navigation-header-buttons';
 import Navigator from '../src/navigation';
 import { GET_CATEGORIES } from '../src/apollo/queries/getCategories';
 
@@ -35,7 +37,11 @@ const mocks = [
 it('renders correctly', () => {
   renderer.create(
     <MockedProvider mocks={mocks} addTypename={false}>
-      <Navigator />
+      <ThemeProvider>
+        <OverflowMenuProvider>
+          <Navigator />
+        </OverflowMenuProvider>
+      </ThemeProvider>
     </MockedProvider>,
   );
 });

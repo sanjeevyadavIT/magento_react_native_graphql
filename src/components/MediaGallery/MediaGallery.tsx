@@ -1,12 +1,6 @@
 import React, { useState } from 'react';
-import {
-  View,
-  FlatList,
-  Image,
-  StyleSheet,
-  Dimensions,
-  Text,
-} from 'react-native';
+import { View, FlatList, Image, StyleSheet, Dimensions } from 'react-native';
+import { Text } from 'react-native-elements';
 import { MediaGalleryItemType } from '../../apollo/queries/mediaGalleryFragment';
 import { SPACING } from '../../constants';
 

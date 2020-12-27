@@ -1,20 +1,14 @@
 import React from 'react';
-import { Text, View, ActivityIndicator, FlatList } from 'react-native';
+import { FlatList } from 'react-native';
 import { RouteProp } from '@react-navigation/native';
 import { StackNavigationProp } from '@react-navigation/stack';
-import { CategoryListItem } from '../../components';
+import { CategoryListItem, GenericTemplate } from '../../components';
 import { useCategories } from '../../logic';
-import {
-  StackParamList,
-  NAVIGATION_TO_CATEGORIES_SCREEN,
-} from '../../navigation';
+import { StackParamList } from '../../navigation';
 
 type Props = {
-  navigation: StackNavigationProp<
-    StackParamList,
-    NAVIGATION_TO_CATEGORIES_SCREEN
-  >;
-  route: RouteProp<StackParamList, NAVIGATION_TO_CATEGORIES_SCREEN>;
+  navigation: StackNavigationProp<StackParamList, 'CategoriesScreen'>;
+  route: RouteProp<StackParamList, 'CategoriesScreen'>;
 };
 
 const CategoriesScreen = ({
@@ -27,16 +21,8 @@ const CategoriesScreen = ({
     categoryId,
   });
 
-  if (loading) {
-    return <ActivityIndicator />;
-  }
-
-  if (error) {
-    return <Text>{error.message}</Text>;
-  }
-
   return (
-    <View>
+    <GenericTemplate loading={loading} errorMessage={error?.message}>
       <FlatList
         data={categories}
         keyExtractor={item => `categoryItem${item.id.toString()}`}
@@ -44,7 +30,7 @@ const CategoriesScreen = ({
           <CategoryListItem item={item} navigation={navigation} />
         )}
       />
-    </View>
+    </GenericTemplate>
   );
 };
 

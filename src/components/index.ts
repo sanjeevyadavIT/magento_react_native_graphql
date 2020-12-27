@@ -3,11 +3,13 @@ import {
   CustomHeaderButtons,
   CustomHeaderItem,
 } from './CustomHeaderButtons/CustomHeaderButtons';
+import GenericTemplate from './GenericTemplate/GenericTemplate';
 import MediaGallery from './MediaGallery/MediaGallery';
 
 export {
   CategoryListItem,
   CustomHeaderButtons,
   CustomHeaderItem,
+  GenericTemplate,
   MediaGallery,
 };

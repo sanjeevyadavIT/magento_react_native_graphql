@@ -1,7 +1,7 @@
 import React from 'react';
-import { Text, View, ActivityIndicator, FlatList } from 'react-native';
+import { FlatList } from 'react-native';
 import { DrawerContentComponentProps } from '@react-navigation/drawer';
-import { CategoryListItem } from '../../components';
+import { CategoryListItem, GenericTemplate } from '../../components';
 import { useCategories } from '../../logic';
 import { magentoConfig } from '../../../magento.config';
 
@@ -14,16 +14,8 @@ const DrawerScreen = ({ navigation }: Props): React.ReactElement => {
     categoryId: magentoConfig.baseCategoryId,
   });
 
-  if (loading) {
-    return <ActivityIndicator />;
-  }
-
-  if (error) {
-    return <Text>{error.message}</Text>;
-  }
-
   return (
-    <View>
+    <GenericTemplate loading={loading} errorMessage={error && error.message}>
       <FlatList
         data={categories}
         keyExtractor={item => `categoryItem${item.id.toString()}`}
@@ -31,7 +23,7 @@ const DrawerScreen = ({ navigation }: Props): React.ReactElement => {
           <CategoryListItem item={item} navigation={navigation} />
         )}
       />
-    </View>
+    </GenericTemplate>
   );
 };
 

@@ -10,20 +10,17 @@ import { RouteProp } from '@react-navigation/native';
 import { StackNavigationProp } from '@react-navigation/stack';
 import { useCategoryProducts } from '../../logic';
 import {
-  NAVIGATION_TO_PRODUCT_LIST_SCREEN,
   NAVIGATION_TO_PRODUCT_DETAILS_SCREEN,
   StackParamList,
 } from '../../navigation';
 import ProductListItem from './ProductListItem';
 import { CategoryProductType } from '../../apollo/queries/getCategoryProducts';
 import { SPACING } from '../../constants';
+import { GenericTemplate } from '../../components';
 
 interface Props {
-  navigation: StackNavigationProp<
-    StackParamList,
-    NAVIGATION_TO_PRODUCT_LIST_SCREEN
-  >;
-  route: RouteProp<StackParamList, NAVIGATION_TO_PRODUCT_LIST_SCREEN>;
+  navigation: StackNavigationProp<StackParamList, 'ProductListScreen'>;
+  route: RouteProp<StackParamList, 'ProductListScreen'>;
 }
 
 const ProductListScreen = ({
@@ -83,13 +80,12 @@ const ProductListScreen = ({
   };
 
   return (
-    <View>
+    <GenericTemplate errorMessage={error?.message}>
       <FlatList
         numColumns={2}
         data={products}
         renderItem={renderItem}
-        contentContainerStyle={styles.flatlist}
-        keyExtractor={item => `productListItem${item.id.toString()}`}
+        keyExtractor={item => `productListItem${item.sku}`}
         refreshControl={
           <RefreshControl
             refreshing={loading && currentPage === 1}
@@ -99,12 +95,11 @@ const ProductListScreen = ({
         onEndReached={loadMore}
         ListFooterComponent={renderFooter}
       />
-    </View>
+    </GenericTemplate>
   );
 };
 
 const styles = StyleSheet.create({
-  flatlist: {},
   footerContainer: {
     alignItems: 'center',
     marginVertical: SPACING.small,

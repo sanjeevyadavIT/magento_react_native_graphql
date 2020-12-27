@@ -1,4 +1,4 @@
-import { Dimensions } from 'react-native';
+import { Dimensions, StyleSheet } from 'react-native';
 import { moderateScale } from 'react-native-size-matters';
 
 const screenWidth = Dimensions.get('window').width;
@@ -14,6 +14,7 @@ const DIMENS = Object.freeze({
   common: {
     WINDOW_WIDTH: screenWidth,
     WINDOW_HEIGHT: screenHeight,
+    borderWidth: moderateScale(StyleSheet.hairlineWidth),
     appbarIconSize: moderateScale(23),
   },
   categoryListItem: {

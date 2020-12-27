@@ -1,15 +1,9 @@
-import React from 'react';
-import {
-  Dimensions,
-  View,
-  Text,
-  StyleSheet,
-  Image,
-  TouchableOpacity,
-} from 'react-native';
+import React, { useContext } from 'react';
+import { View, StyleSheet, TouchableOpacity } from 'react-native';
+import { Text, Image, ThemeContext } from 'react-native-elements';
 import { CategoryProductType } from '../../apollo/queries/getCategoryProducts';
 import { getPriceStringFromPriceRange } from '../../logic';
-import { SPACING } from '../../constants';
+import { DIMENS } from '../../constants';
 
 interface Props {
   item: CategoryProductType;
@@ -20,7 +14,7 @@ interface Props {
   };
 }
 
-const COLUMN_WIDTH = Dimensions.get('window').width / 2;
+const COLUMN_WIDTH = DIMENS.common.WINDOW_WIDTH / 2;
 
 // TODO: remove hard-coded color & dimension vaues
 const ProductListItem = ({
@@ -28,6 +22,7 @@ const ProductListItem = ({
   index,
   onPress,
 }: Props): React.ReactElement => {
+  const { theme } = useContext(ThemeContext);
   const renderImage = () => {
     const uri = `${item.small_image.url}?width=${COLUMN_WIDTH}`;
     return <Image source={{ uri }} style={styles.image} />;
@@ -35,7 +30,13 @@ const ProductListItem = ({
 
   return (
     <TouchableOpacity onPress={() => onPress(index)}>
-      <View style={[styles.container, index % 2 !== 0 && styles.leftBorder]}>
+      <View
+        style={[
+          styles.container,
+          { borderColor: theme.colors?.divider },
+          index % 2 !== 0 && styles.leftBorder,
+        ]}
+      >
         {renderImage()}
         <Text style={styles.name}>{item.name}</Text>
         <Text style={styles.price}>
@@ -50,13 +51,11 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     width: COLUMN_WIDTH,
-    backgroundColor: '#fff',
-    borderBottomWidth: StyleSheet.hairlineWidth,
-    borderColor: '#ccc',
+    borderBottomWidth: DIMENS.common.borderWidth,
+    backgroundColor: 'white',
   },
   leftBorder: {
-    borderLeftWidth: StyleSheet.hairlineWidth,
-    borderLeftColor: '#ccc',
+    borderLeftWidth: DIMENS.common.borderWidth,
   },
   image: {
     width: COLUMN_WIDTH,
@@ -64,12 +63,10 @@ const styles = StyleSheet.create({
   },
   name: {
     textAlign: 'center',
-    fontSize: 16,
   },
   price: {
     textAlign: 'center',
     fontWeight: 'bold',
-    marginBottom: SPACING.small,
   },
 });
 

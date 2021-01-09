@@ -5,12 +5,16 @@ export const magentoConfig = {
   baseCategoryId: '2',
 };
 
+interface CurrencySymbols {
+  [key: string]: string;
+}
+
 /**
  * Magento 2 REST API doesn't return currency symbol,
  * so manually specify all currency symbol(that your store support)
  * along side their currency code.
  */
-export const currencySymbols = Object.freeze({
+export const currencySymbols: CurrencySymbols = Object.freeze({
   USD: '$',
   EUR: '€',
   AUD: 'A$',

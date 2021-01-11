@@ -9,18 +9,18 @@ import {
 import { RouteProp } from '@react-navigation/native';
 import { StackNavigationProp } from '@react-navigation/stack';
 import { useCategoryProducts } from '../../logic';
-import {
-  NAVIGATION_TO_PRODUCT_DETAILS_SCREEN,
-  StackParamList,
-} from '../../navigation';
+import { Routes, StackParamList } from '../../navigation';
 import ProductListItem from './ProductListItem';
 import { CategoryProductType } from '../../apollo/queries/getCategoryProducts';
 import { SPACING } from '../../constants';
 import { GenericTemplate } from '../../components';
 
 interface Props {
-  navigation: StackNavigationProp<StackParamList, 'ProductListScreen'>;
-  route: RouteProp<StackParamList, 'ProductListScreen'>;
+  navigation: StackNavigationProp<
+    StackParamList,
+    Routes.NAVIGATION_TO_PRODUCT_LIST_SCREEN
+  >;
+  route: RouteProp<StackParamList, Routes.NAVIGATION_TO_PRODUCT_LIST_SCREEN>;
 }
 
 const ProductListScreen = ({
@@ -46,7 +46,7 @@ const ProductListScreen = ({
   }, []);
 
   const onProductItemClicked = (index: number) => {
-    navigation.navigate(NAVIGATION_TO_PRODUCT_DETAILS_SCREEN, {
+    navigation.navigate(Routes.NAVIGATION_TO_PRODUCT_DETAILS_SCREEN, {
       name: products[index].name,
       sku: products[index].sku,
     });

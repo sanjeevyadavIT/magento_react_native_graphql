@@ -1,6 +1,8 @@
-export const NAVIGATION_TO_HOME_SCREEN = 'HomeScreen';
-export const NAVIGATION_TO_CATEGORIES_SCREEN = 'CategoriesScreen';
-export const NAVIGATION_TO_CART_SCREEN = 'CartScreen';
-export const NAVIGATION_TO_PROFILE_SCREEN = 'ProfileScreen';
-export const NAVIGATION_TO_PRODUCT_LIST_SCREEN = 'ProductListScreen';
-export const NAVIGATION_TO_PRODUCT_DETAILS_SCREEN = 'ProductDetailsScreen';
+export enum Routes {
+  NAVIGATION_TO_HOME_SCREEN = 'HomeScreen',
+  NAVIGATION_TO_CATEGORIES_SCREEN = 'CategoriesScreen',
+  NAVIGATION_TO_CART_SCREEN = 'CartScreen',
+  NAVIGATION_TO_PROFILE_SCREEN = 'ProfileScreen',
+  NAVIGATION_TO_PRODUCT_LIST_SCREEN = 'ProductListScreen',
+  NAVIGATION_TO_PRODUCT_DETAILS_SCREEN = 'ProductDetailsScreen',
+}

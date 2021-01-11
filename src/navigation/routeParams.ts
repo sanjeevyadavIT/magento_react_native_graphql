@@ -1,21 +1,16 @@
-import {
-  NAVIGATION_TO_HOME_SCREEN,
-  NAVIGATION_TO_PRODUCT_LIST_SCREEN,
-  NAVIGATION_TO_PRODUCT_DETAILS_SCREEN,
-  NAVIGATION_TO_CATEGORIES_SCREEN,
-} from './routeNames';
+import { Routes } from './routeNames';
 
 export type StackParamList = {
-  [NAVIGATION_TO_HOME_SCREEN]: {};
-  [NAVIGATION_TO_CATEGORIES_SCREEN]: {
+  [Routes.NAVIGATION_TO_HOME_SCREEN]: {};
+  [Routes.NAVIGATION_TO_CATEGORIES_SCREEN]: {
     categoryId: string;
     name: string;
   };
-  [NAVIGATION_TO_PRODUCT_LIST_SCREEN]: {
+  [Routes.NAVIGATION_TO_PRODUCT_LIST_SCREEN]: {
     categoryId: string;
     name: string;
   };
-  [NAVIGATION_TO_PRODUCT_DETAILS_SCREEN]: {
+  [Routes.NAVIGATION_TO_PRODUCT_DETAILS_SCREEN]: {
     name: string;
     sku: string;
   };

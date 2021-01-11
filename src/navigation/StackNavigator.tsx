@@ -2,12 +2,7 @@ import React from 'react';
 import { createStackNavigator } from '@react-navigation/stack';
 import BottomTabNavigator from './BottomTabNavigator';
 import { CustomHeaderButtons, CustomHeaderItem } from '../components';
-import {
-  NAVIGATION_TO_HOME_SCREEN,
-  NAVIGATION_TO_PRODUCT_LIST_SCREEN,
-  NAVIGATION_TO_PRODUCT_DETAILS_SCREEN,
-  NAVIGATION_TO_CATEGORIES_SCREEN,
-} from './routeNames';
+import { Routes } from './routeNames';
 import { StackParamList } from './routeParams';
 import { translate } from '../i18n';
 import {
@@ -21,7 +16,7 @@ const Stack = createStackNavigator<StackParamList>();
 const StackNavigator = () => (
   <Stack.Navigator>
     <Stack.Screen
-      name={NAVIGATION_TO_HOME_SCREEN}
+      name={Routes.NAVIGATION_TO_HOME_SCREEN}
       component={BottomTabNavigator}
       options={({ navigation }) => ({
         title: translate('common.brand'),
@@ -37,7 +32,7 @@ const StackNavigator = () => (
       })}
     />
     <Stack.Screen
-      name={NAVIGATION_TO_CATEGORIES_SCREEN}
+      name={Routes.NAVIGATION_TO_CATEGORIES_SCREEN}
       component={CategoriesScreen}
       options={({ route }) => {
         const {
@@ -49,7 +44,7 @@ const StackNavigator = () => (
       }}
     />
     <Stack.Screen
-      name={NAVIGATION_TO_PRODUCT_LIST_SCREEN}
+      name={Routes.NAVIGATION_TO_PRODUCT_LIST_SCREEN}
       component={ProductListScreen}
       options={({ route }) => {
         const {
@@ -61,7 +56,7 @@ const StackNavigator = () => (
       }}
     />
     <Stack.Screen
-      name={NAVIGATION_TO_PRODUCT_DETAILS_SCREEN}
+      name={Routes.NAVIGATION_TO_PRODUCT_DETAILS_SCREEN}
       component={ProductDetailsScreen}
       options={({ route }) => {
         const {

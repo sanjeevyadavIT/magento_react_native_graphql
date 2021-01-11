@@ -1,12 +1,9 @@
 import React, { useState } from 'react';
 import { StyleSheet } from 'react-native';
 import { ListItem, Image } from 'react-native-elements';
-import { SPACING, DIMENS } from '../../constants';
+import { DIMENS } from '../../constants';
 import { CategoryType } from '../../apollo/queries/getCategories';
-import {
-  NAVIGATION_TO_CATEGORIES_SCREEN,
-  NAVIGATION_TO_PRODUCT_LIST_SCREEN,
-} from '../../navigation';
+import { Routes } from '../../navigation';
 
 interface Props {
   item: CategoryType;
@@ -21,13 +18,13 @@ const CategoryListItem = ({ item, navigation }: Props): React.ReactElement => {
   );
   const onCategoryPress = () => {
     if (+item.children_count > 0) {
-      navigation.navigate(NAVIGATION_TO_CATEGORIES_SCREEN, {
+      navigation.navigate(Routes.NAVIGATION_TO_CATEGORIES_SCREEN, {
         categoryId: item.id,
         name: item.name,
       });
       return;
     }
-    navigation.navigate(NAVIGATION_TO_PRODUCT_LIST_SCREEN, {
+    navigation.navigate(Routes.NAVIGATION_TO_PRODUCT_LIST_SCREEN, {
       categoryId: item.id,
       name: item.name,
     });

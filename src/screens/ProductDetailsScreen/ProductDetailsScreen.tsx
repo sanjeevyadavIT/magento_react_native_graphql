@@ -6,13 +6,16 @@ import { StackNavigationProp } from '@react-navigation/stack';
 import HTML from 'react-native-render-html';
 import { MediaGallery, GenericTemplate } from '../../components';
 import { SPACING } from '../../constants';
-import { StackParamList } from '../../navigation';
+import { StackParamList, Routes } from '../../navigation';
 import { useProductDetails } from '../../logic/products/useProductDetails';
 import { getPriceStringFromPriceRange } from '../../logic';
 
 type Props = {
-  navigation: StackNavigationProp<StackParamList, 'ProductDetailsScreen'>;
-  route: RouteProp<StackParamList, 'ProductDetailsScreen'>;
+  navigation: StackNavigationProp<
+    StackParamList,
+    Routes.NAVIGATION_TO_PRODUCT_DETAILS_SCREEN
+  >;
+  route: RouteProp<StackParamList, Routes.NAVIGATION_TO_PRODUCT_DETAILS_SCREEN>;
 };
 
 const ProductDetailsScreen = ({

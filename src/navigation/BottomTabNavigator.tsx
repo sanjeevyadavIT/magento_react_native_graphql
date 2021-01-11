@@ -3,11 +3,7 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { Icon } from 'react-native-elements';
 import { translate } from '../i18n';
 import { HomeScreen, CartScreen, ProfileScreen } from '../screens';
-import {
-  NAVIGATION_TO_HOME_SCREEN,
-  NAVIGATION_TO_CART_SCREEN,
-  NAVIGATION_TO_PROFILE_SCREEN,
-} from './routeNames';
+import { Routes } from './routeNames';
 
 const Tab = createBottomTabNavigator();
 
@@ -15,7 +11,7 @@ const BottomTabNavigator = () => {
   return (
     <Tab.Navigator>
       <Tab.Screen
-        name={NAVIGATION_TO_HOME_SCREEN}
+        name={Routes.NAVIGATION_TO_HOME_SCREEN}
         component={HomeScreen}
         options={{
           tabBarLabel: translate('homeScreen.appbarTitle'),
@@ -25,7 +21,7 @@ const BottomTabNavigator = () => {
         }}
       />
       <Tab.Screen
-        name={NAVIGATION_TO_PROFILE_SCREEN}
+        name={Routes.NAVIGATION_TO_PROFILE_SCREEN}
         component={ProfileScreen}
         options={{
           tabBarLabel: translate('profileScreen.appbarTitle'),
@@ -35,7 +31,7 @@ const BottomTabNavigator = () => {
         }}
       />
       <Tab.Screen
-        name={NAVIGATION_TO_CART_SCREEN}
+        name={Routes.NAVIGATION_TO_CART_SCREEN}
         component={CartScreen}
         options={{
           tabBarLabel: translate('cartScreen.appbarTitle'),

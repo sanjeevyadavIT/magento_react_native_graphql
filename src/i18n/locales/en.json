@@ -6,6 +6,9 @@
     "yes": "Yes",
     "no": "No",
     "menu": "Menu",
+    "dearUser": "Dear User",
+    "login": "Login",
+    "signup": "Signup",
     "pluralizationExample": {
       "one": "You have 1 item",
       "other": "You have %{count} items",
@@ -22,6 +25,10 @@
   "homeScreen": {
     "appbarTitle": "Home"
   },
+  "loginScreen": {
+    "appbarTitle": "Login",
+    "noAccount": "Don't have account? SignUp"
+  },
   "productDetailsScreen": {
     "appbarTitle": "Product Details"
   },
@@ -29,6 +36,10 @@
     "appbarTitle": "Products"
   },
   "profileScreen": {
-    "appbarTitle": "Profile"
+    "appbarTitle": "Profile",
+    "guestUserPromptMessage": "In order to view profile, please login or create new account"
+  },
+  "signupScreen": {
+    "appbarTitle": "Signup"
   }
 }

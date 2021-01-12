@@ -5,7 +5,7 @@ export interface CreateCartDataType {
 }
 
 export const CREATE_CART = gql`
-  mutation createCart {
+  mutation CreateCart {
     cartId: createEmptyCart
   }
 `;

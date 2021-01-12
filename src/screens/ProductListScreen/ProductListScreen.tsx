@@ -9,7 +9,7 @@ import {
 import { RouteProp } from '@react-navigation/native';
 import { StackNavigationProp } from '@react-navigation/stack';
 import { useCategoryProducts } from '../../logic';
-import { Routes, StackParamList } from '../../navigation';
+import { Routes, AppStackParamList } from '../../navigation';
 import ProductListItem from './ProductListItem';
 import { CategoryProductType } from '../../apollo/queries/getCategoryProducts';
 import { SPACING } from '../../constants';
@@ -17,10 +17,10 @@ import { GenericTemplate } from '../../components';
 
 interface Props {
   navigation: StackNavigationProp<
-    StackParamList,
+    AppStackParamList,
     Routes.NAVIGATION_TO_PRODUCT_LIST_SCREEN
   >;
-  route: RouteProp<StackParamList, Routes.NAVIGATION_TO_PRODUCT_LIST_SCREEN>;
+  route: RouteProp<AppStackParamList, Routes.NAVIGATION_TO_PRODUCT_LIST_SCREEN>;
 }
 
 const ProductListScreen = ({

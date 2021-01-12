@@ -1,4 +1,5 @@
 import React from 'react';
+import { Alert } from 'react-native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { Icon } from 'react-native-elements';
 import { translate } from '../i18n';
@@ -7,7 +8,35 @@ import { Routes } from './routeNames';
 
 const Tab = createBottomTabNavigator();
 
-const BottomTabNavigator = () => {
+const BottomTabNavigator = ({ navigation }) => {
+  const loggedIn = false;
+
+  const showLoginPrompt = (message: string): void => {
+    Alert.alert(
+      translate('common.dearUser'),
+      message,
+      [
+        {
+          text: translate('common.login'),
+          onPress: () =>
+            navigation.navigate(
+              Routes.NAVIGATION_TO_AUTHENTICATION_SPLASH_SCREEN,
+              { screen: Routes.NAVIGATION_TO_LOGIN_SCREEN },
+            ),
+        },
+        {
+          text: translate('common.signup'),
+          onPress: () =>
+            navigation.navigate(
+              Routes.NAVIGATION_TO_AUTHENTICATION_SPLASH_SCREEN,
+              { screen: Routes.NAVIGATION_TO_SIGNUP_SCREEN },
+            ),
+        },
+      ],
+      { cancelable: true },
+    );
+  };
+
   return (
     <Tab.Navigator>
       <Tab.Screen
@@ -28,6 +57,17 @@ const BottomTabNavigator = () => {
           tabBarIcon: ({ color, size }) => (
             <Icon name="person" color={color} size={size} />
           ),
+        }}
+        listeners={{
+          tabPress: e => {
+            if (!loggedIn) {
+              // Prevent default action
+              e.preventDefault();
+              showLoginPrompt(
+                translate('profileScreen.guestUserPromptMessage'),
+              );
+            }
+          },
         }}
       />
       <Tab.Screen

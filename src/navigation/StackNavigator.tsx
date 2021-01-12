@@ -1,9 +1,10 @@
 import React from 'react';
 import { createStackNavigator } from '@react-navigation/stack';
 import BottomTabNavigator from './BottomTabNavigator';
+import AuthenticationNavigator from './AuthenticationNavigator';
 import { CustomHeaderButtons, CustomHeaderItem } from '../components';
 import { Routes } from './routeNames';
-import { StackParamList } from './routeParams';
+import { AppStackParamList } from './routeParams';
 import { translate } from '../i18n';
 import {
   CategoriesScreen,
@@ -11,7 +12,7 @@ import {
   ProductDetailsScreen,
 } from '../screens';
 
-const Stack = createStackNavigator<StackParamList>();
+const Stack = createStackNavigator<AppStackParamList>();
 
 const StackNavigator = () => (
   <Stack.Navigator>
@@ -30,6 +31,13 @@ const StackNavigator = () => (
           </CustomHeaderButtons>
         ),
       })}
+    />
+    <Stack.Screen
+      name={Routes.NAVIGATION_TO_AUTHENTICATION_SPLASH_SCREEN}
+      component={AuthenticationNavigator}
+      options={{
+        headerShown: false,
+      }}
     />
     <Stack.Screen
       name={Routes.NAVIGATION_TO_CATEGORIES_SCREEN}

@@ -4,14 +4,14 @@ import { RouteProp } from '@react-navigation/native';
 import { StackNavigationProp } from '@react-navigation/stack';
 import { CategoryListItem, GenericTemplate } from '../../components';
 import { useCategories } from '../../logic';
-import { StackParamList, Routes } from '../../navigation';
+import { AppStackParamList, Routes } from '../../navigation';
 
 type Props = {
   navigation: StackNavigationProp<
-    StackParamList,
+    AppStackParamList,
     Routes.NAVIGATION_TO_CATEGORIES_SCREEN
   >;
-  route: RouteProp<StackParamList, Routes.NAVIGATION_TO_CATEGORIES_SCREEN>;
+  route: RouteProp<AppStackParamList, Routes.NAVIGATION_TO_CATEGORIES_SCREEN>;
 };
 
 const CategoriesScreen = ({

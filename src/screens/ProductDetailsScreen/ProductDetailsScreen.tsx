@@ -1,21 +1,24 @@
 import React, { useEffect } from 'react';
-import { View, StyleSheet, Dimensions } from 'react-native';
+import { View, StyleSheet, Dimensions, Button } from 'react-native';
 import { Text } from 'react-native-elements';
 import { RouteProp } from '@react-navigation/native';
 import { StackNavigationProp } from '@react-navigation/stack';
 import HTML from 'react-native-render-html';
 import { MediaGallery, GenericTemplate } from '../../components';
 import { SPACING } from '../../constants';
-import { StackParamList, Routes } from '../../navigation';
+import { AppStackParamList, Routes } from '../../navigation';
 import { useProductDetails } from '../../logic/products/useProductDetails';
 import { getPriceStringFromPriceRange } from '../../logic';
 
 type Props = {
   navigation: StackNavigationProp<
-    StackParamList,
+    AppStackParamList,
     Routes.NAVIGATION_TO_PRODUCT_DETAILS_SCREEN
   >;
-  route: RouteProp<StackParamList, Routes.NAVIGATION_TO_PRODUCT_DETAILS_SCREEN>;
+  route: RouteProp<
+    AppStackParamList,
+    Routes.NAVIGATION_TO_PRODUCT_DETAILS_SCREEN
+  >;
 };
 
 const ProductDetailsScreen = ({

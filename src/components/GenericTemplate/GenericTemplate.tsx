@@ -1,5 +1,11 @@
 import React, { useContext, ReactNode } from 'react';
-import { View, StyleSheet, ScrollView, ActivityIndicator } from 'react-native';
+import {
+  View,
+  StyleSheet,
+  ScrollView,
+  ActivityIndicator,
+  ViewStyle,
+} from 'react-native';
 import { ThemeContext } from 'react-native-elements';
 import { SPACING } from '../../constants';
 import { Text } from 'react-native-elements';
@@ -25,6 +31,10 @@ interface Props {
    * in case of status === Status.ERROR, the error message to be shown
    */
   errorMessage?: string;
+  /**
+   * Container style that wrap children except footer component
+   */
+  style: ViewStyle;
 }
 
 const GenericTemplate = ({
@@ -33,6 +43,7 @@ const GenericTemplate = ({
   scrollable = false,
   loading = false,
   errorMessage,
+  style = {},
 }: Props): React.ReactElement => {
   const { theme } = useContext(ThemeContext);
   const ViewGroup = scrollable ? ScrollView : View;
@@ -56,7 +67,7 @@ const GenericTemplate = ({
 
   return (
     <>
-      <ViewGroup style={styles.container}>
+      <ViewGroup style={[styles.container, style]}>
         {renderLoader()}
         {renderError()}
         {renderContent()}

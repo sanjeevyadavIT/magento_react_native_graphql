@@ -9,6 +9,11 @@
     "dearUser": "Dear User",
     "login": "Login",
     "signup": "Signup",
+    "email": "Email",
+    "password": "Password",
+    "firstName": "First Name",
+    "lastName": "Last Name",
+    "register": "Register",
     "pluralizationExample": {
       "one": "You have 1 item",
       "other": "You have %{count} items",
@@ -40,6 +45,7 @@
     "guestUserPromptMessage": "In order to view profile, please login or create new account"
   },
   "signupScreen": {
-    "appbarTitle": "Signup"
+    "appbarTitle": "Signup",
+    "haveAccount": "Aldready have an account? Login"
   }
 }

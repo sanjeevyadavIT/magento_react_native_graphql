@@ -20,7 +20,9 @@
       "zero": "You cart is empty"
     }
   },
-  "errors": {},
+  "errors": {
+    "genericError": "Something went wrong! Please try again."
+  },
   "cartScreen": {
     "appbarTitle": "Cart"
   },
@@ -46,6 +48,7 @@
   },
   "signupScreen": {
     "appbarTitle": "Signup",
-    "haveAccount": "Aldready have an account? Login"
+    "haveAccount": "Aldready have an account? Login",
+    "successMessage": "Account created successfully! Please Login to continue."
   }
 }

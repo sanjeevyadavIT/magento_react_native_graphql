@@ -2,7 +2,7 @@ import { NavigatorScreenParams } from '@react-navigation/native';
 import { Routes } from './routeNames';
 
 export type AppStackParamList = {
-  [Routes.NAVIGATION_TO_HOME_SCREEN]: {};
+  [Routes.NAVIGATION_TO_HOME_SCREEN]: undefined;
   [Routes.NAVIGATION_TO_AUTHENTICATION_SPLASH_SCREEN]: NavigatorScreenParams<AutheticationStackParamList>;
   [Routes.NAVIGATION_TO_CATEGORIES_SCREEN]: {
     categoryId: string;
@@ -19,6 +19,6 @@ export type AppStackParamList = {
 };
 
 export type AutheticationStackParamList = {
-  [Routes.NAVIGATION_TO_LOGIN_SCREEN]: {};
-  [Routes.NAVIGATION_TO_SIGNUP_SCREEN]: {};
+  [Routes.NAVIGATION_TO_LOGIN_SCREEN]: undefined;
+  [Routes.NAVIGATION_TO_SIGNUP_SCREEN]: undefined;
 };

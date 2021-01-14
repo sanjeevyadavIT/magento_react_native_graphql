@@ -1,12 +1,13 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { StyleSheet } from 'react-native';
 import { Button, Input } from 'react-native-elements';
 import { StackNavigationProp } from '@react-navigation/stack';
+import Toast from 'react-native-simple-toast';
 import { translate } from '../../i18n';
 import { AutheticationStackParamList, Routes } from '../../navigation';
 import { SPACING } from '../../constants';
 import { GenericTemplate } from '../../components';
-import { useForm } from '../../logic';
+import { useSignup } from '../../logic';
 
 type Props = {
   navigation: StackNavigationProp<
@@ -15,44 +16,48 @@ type Props = {
   >;
 };
 
-interface SignupForm {
-  firstName: string;
-  lastName: string;
-  email: string;
-  password: string;
-  secureTextEntry: boolean;
-}
-
 const SignupScreen = ({ navigation }: Props): React.ReactElement => {
-  const { values, handleChange, handleSubmit } = useForm<SignupForm>({
-    initialValues: {
-      firstName: '',
-      lastName: '',
-      email: '',
-      password: '',
-      secureTextEntry: true,
-    },
-    onSubmit: async _values => {
-      console.log(_values);
-    },
-  });
+  const {
+    values,
+    loading,
+    data,
+    error,
+    handleChange,
+    handleSubmit,
+  } = useSignup();
+
+  useEffect(() => {
+    if (data?.createCustomerV2?.customer?.email) {
+      Toast.show(translate('signupScreen.successMessage', Toast.LONG));
+      navigation.replace(Routes.NAVIGATION_TO_LOGIN_SCREEN);
+    }
+  }, [data]);
+
+  useEffect(() => {
+    if (error) {
+      Toast.show(error.message ?? translate('errors.genericError'), Toast.LONG);
+    }
+  }, [error]);
 
   return (
     <GenericTemplate scrollable style={styles.container}>
       <Input
         placeholder="Joe"
         value={values.firstName}
+        editable={!loading}
         label={translate('common.firstName')}
         onChangeText={handleChange('firstName')}
       />
       <Input
         placeholder="Ranger"
         value={values.lastName}
+        editable={!loading}
         label={translate('common.lastName')}
         onChangeText={handleChange('lastName')}
       />
       <Input
         value={values.email}
+        editable={!loading}
         leftIcon={{ name: 'email' }}
         placeholder="email@address.com"
         label={translate('common.email')}
@@ -60,6 +65,7 @@ const SignupScreen = ({ navigation }: Props): React.ReactElement => {
       />
       <Input
         secureTextEntry={values.secureTextEntry}
+        editable={!loading}
         value={values.password}
         leftIcon={{ name: 'lock' }}
         rightIcon={{
@@ -75,12 +81,14 @@ const SignupScreen = ({ navigation }: Props): React.ReactElement => {
         placeholder={translate('common.password')}
       />
       <Button
-        title={translate('common.register')}
+        loading={loading}
         onPress={handleSubmit}
+        title={translate('common.register')}
         containerStyle={styles.submitButton}
       />
       <Button
         type="clear"
+        disabled={loading}
         title={translate('signupScreen.haveAccount')}
         onPress={() => navigation.navigate(Routes.NAVIGATION_TO_LOGIN_SCREEN)}
       />

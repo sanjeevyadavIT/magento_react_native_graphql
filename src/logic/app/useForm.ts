@@ -12,7 +12,7 @@ interface FormConfig<Values> {
   onSubmit?: (values: Values) => void | Promise<any>;
 }
 
-interface Result<Values> {
+export interface FormResult<Values> {
   values: Values;
   handleChange(field1: string): (field2: any) => void;
   handleSubmit(event: any): Promise<any>;
@@ -58,7 +58,7 @@ function formReducer<Values>(state: FormState<Values>, action: FormAction) {
 
 export function useForm<Values extends FormValues = FormValues>(
   props: FormConfig<Values>,
-): Result<Values> {
+): FormResult<Values> {
   const [state, dispatch] = useReducer<
     React.Reducer<FormState<Values>, FormAction>
   >(formReducer, {

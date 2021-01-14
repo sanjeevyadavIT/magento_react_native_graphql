@@ -3,6 +3,7 @@ import { useLazyQuery, ApolloError } from '@apollo/client';
 import {
   GET_CATEGORIES,
   CategoryType,
+  GetCategoriesVars,
   CategoriesDataType,
 } from '../../apollo/queries/getCategories';
 
@@ -16,15 +17,11 @@ interface Result {
   error: ApolloError | undefined;
 }
 
-interface CategoriesVars {
-  id: string;
-}
-
 export const useCategories = ({ categoryId: id }: Props): Result => {
   const [categories, setCategories] = useState<Array<CategoryType>>([]);
   const [getCategories, { called, loading, data, error }] = useLazyQuery<
     CategoriesDataType,
-    CategoriesVars
+    GetCategoriesVars
   >(GET_CATEGORIES, {
     variables: {
       id,

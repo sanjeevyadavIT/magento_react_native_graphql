@@ -3,6 +3,7 @@ import { useLazyQuery, ApolloError } from '@apollo/client';
 import {
   GET_CATGEORY_PRODUCTS,
   CategoryProductType,
+  GetCategoryProductsVars,
   CategoryProductsDataType,
 } from '../../apollo/queries/getCategoryProducts';
 
@@ -20,12 +21,6 @@ interface Result {
   loadMore(): void;
 }
 
-interface CategoryProductsVars {
-  id: string;
-  pageSize: number;
-  currentPage: number;
-}
-
 const PAGE_SIZE = 10;
 
 export const useCategoryProducts = ({ categoryId: id }: Props): Result => {
@@ -34,7 +29,7 @@ export const useCategoryProducts = ({ categoryId: id }: Props): Result => {
 
   const [getCategoryProducts, { loading, error }] = useLazyQuery<
     CategoryProductsDataType,
-    CategoryProductsVars
+    GetCategoryProductsVars
   >(GET_CATGEORY_PRODUCTS, {
     variables: {
       id,

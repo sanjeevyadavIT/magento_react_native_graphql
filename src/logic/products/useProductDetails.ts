@@ -2,15 +2,12 @@ import { useState } from 'react';
 import { useLazyQuery, ApolloError } from '@apollo/client';
 import {
   GET_PRODUCT_DETAILS,
+  GetProductDetailsVars,
   ProductDetailsDataType,
   ProductDetailsType,
 } from '../../apollo/queries/getProductDetails';
 
 interface Props {
-  sku: string;
-}
-
-interface ProductDetailsVars {
   sku: string;
 }
 
@@ -27,7 +24,7 @@ export const useProductDetails = ({ sku }: Props): Result => {
   >(null);
   const [getProductDetails, { loading, error }] = useLazyQuery<
     ProductDetailsDataType,
-    ProductDetailsVars
+    GetProductDetailsVars
   >(GET_PRODUCT_DETAILS, {
     variables: {
       sku,

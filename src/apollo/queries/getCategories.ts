@@ -1,5 +1,9 @@
 import { gql } from '@apollo/client';
 
+export interface GetCategoriesVars {
+  id: string;
+}
+
 export interface CategoriesDataType {
   categoryList: CategoryListType[];
 }

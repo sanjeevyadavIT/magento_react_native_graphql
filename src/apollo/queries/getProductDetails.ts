@@ -5,6 +5,10 @@ import {
 } from './mediaGalleryFragment';
 import { PriceRangeType } from './getCategoryProducts';
 
+export interface GetProductDetailsVars {
+  sku: string;
+}
+
 export interface ProductDetailsDataType {
   products: {
     items: Array<ProductDetailsType>;

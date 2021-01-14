@@ -1,5 +1,11 @@
 import { gql } from '@apollo/client';
 
+export interface GetCategoryProductsVars {
+  id: string;
+  pageSize: number;
+  currentPage: number;
+}
+
 export interface CategoryProductsDataType {
   products: {
     total_count: number;

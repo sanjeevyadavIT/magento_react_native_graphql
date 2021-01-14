@@ -34,7 +34,8 @@
   },
   "loginScreen": {
     "appbarTitle": "Login",
-    "noAccount": "Don't have account? SignUp"
+    "noAccount": "Don't have account? SignUp",
+    "successMessage": "Login Successful"
   },
   "productDetailsScreen": {
     "appbarTitle": "Product Details"

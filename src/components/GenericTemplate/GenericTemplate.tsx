@@ -34,7 +34,7 @@ interface Props {
   /**
    * Container style that wrap children except footer component
    */
-  style: ViewStyle;
+  style?: ViewStyle;
 }
 
 const GenericTemplate = ({

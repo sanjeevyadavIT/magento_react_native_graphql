@@ -4,7 +4,10 @@ import {
   CreateCustomerTokenVars,
   CreateCustomerTokenDataType,
 } from '../../apollo/mutations/createCustomerToken';
+import { IS_LOGGED_IN } from '../../apollo/queries/isLoggedIn';
+import { AsyncStorageKeys } from '../../constants';
 import { useForm, FormResult } from '../app/useForm';
+import { storeData } from '../utils/asyncStorageHelper';
 
 interface LoginForm {
   email: string;
@@ -22,7 +25,22 @@ export const useLogin = (): Result<LoginForm> => {
   const [createCustomerToken, { loading, data, error }] = useMutation<
     CreateCustomerTokenDataType,
     CreateCustomerTokenVars
-  >(CREATE_CUSTOMER_TOKEN);
+  >(CREATE_CUSTOMER_TOKEN, {
+    async update(cache, { data: _data }) {
+      if (_data?.generateCustomerToken?.token) {
+        cache.writeQuery({
+          query: IS_LOGGED_IN,
+          data: {
+            isLoggedIn: true,
+          },
+        });
+        await storeData(
+          AsyncStorageKeys.CUSTOMER_TOKEN,
+          _data.generateCustomerToken.token,
+        );
+      }
+    },
+  });
   const { values, handleChange, handleSubmit } = useForm<LoginForm>({
     initialValues: {
       email: '',

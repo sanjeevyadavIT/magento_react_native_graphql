@@ -15,6 +15,7 @@
   },
   "dependencies": {
     "@apollo/client": "^3.3.6",
+    "@react-native-async-storage/async-storage": "^1.13.2",
     "@react-native-community/masked-view": "^0.1.10",
     "@react-navigation/bottom-tabs": "^5.11.2",
     "@react-navigation/drawer": "^5.11.4",

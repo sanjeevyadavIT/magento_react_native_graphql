@@ -29,6 +29,7 @@ export const useProductDetails = ({ sku }: Props): Result => {
     variables: {
       sku,
     },
+    fetchPolicy: 'no-cache',
     onCompleted: responseData => {
       console.log(responseData);
       setProductDetails(responseData?.products?.items?.[0]);

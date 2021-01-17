@@ -1,4 +1,5 @@
-import { ApolloClient, InMemoryCache } from '@apollo/client';
+import { ApolloClient, InMemoryCache, createHttpLink } from '@apollo/client';
+import { setContext } from '@apollo/client/link/context';
 import { magentoConfig } from '../../magento.config';
 import { AsyncStorageKeys } from '../constants';
 import { getData } from '../logic/utils/asyncStorageHelper';
@@ -24,8 +25,24 @@ export async function getApolloClient(): Promise<ApolloClient<any>> {
     });
   }
 
-  const client = new ApolloClient({
+  const httpLink = createHttpLink({
     uri: `${magentoConfig.url}/graphql`,
+  });
+
+  const authLink = setContext(async (_, { headers }) => {
+    // get the authentication token from local storage if it exists
+    const token = await getData(AsyncStorageKeys.CUSTOMER_TOKEN);
+    // return the headers to the context so httpLink can read them
+    return {
+      headers: {
+        ...headers,
+        authorization: token ? `Bearer ${token}` : '',
+      },
+    };
+  });
+
+  const client = new ApolloClient({
+    link: authLink.concat(httpLink),
     cache,
   });
 

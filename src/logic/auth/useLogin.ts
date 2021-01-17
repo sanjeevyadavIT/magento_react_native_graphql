@@ -28,16 +28,16 @@ export const useLogin = (): Result<LoginForm> => {
   >(CREATE_CUSTOMER_TOKEN, {
     async update(cache, { data: _data }) {
       if (_data?.generateCustomerToken?.token) {
+        await storeData(
+          AsyncStorageKeys.CUSTOMER_TOKEN,
+          _data.generateCustomerToken.token,
+        );
         cache.writeQuery({
           query: IS_LOGGED_IN,
           data: {
             isLoggedIn: true,
           },
         });
-        await storeData(
-          AsyncStorageKeys.CUSTOMER_TOKEN,
-          _data.generateCustomerToken.token,
-        );
       }
     },
   });

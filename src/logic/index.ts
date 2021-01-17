@@ -4,5 +4,6 @@ export * from './products/useCategoryProducts';
 export * from './auth/useLogin';
 export * from './auth/useLogout';
 export * from './auth/useSignup';
+export * from './profile/useCustomer';
 export * from './utils/price';
 export * from './utils/asyncStorageHelper';

@@ -6,6 +6,7 @@
     "yes": "Yes",
     "no": "No",
     "menu": "Menu",
+    "user": "User",
     "dearUser": "Dear User",
     "login": "Login",
     "signup": "Signup",
@@ -47,7 +48,8 @@
   },
   "profileScreen": {
     "appbarTitle": "Profile",
-    "guestUserPromptMessage": "In order to view profile, please login or create new account"
+    "guestUserPromptMessage": "In order to view profile, please login or create new account",
+    "greeting": "Welcome %{name}"
   },
   "signupScreen": {
     "appbarTitle": "Signup",

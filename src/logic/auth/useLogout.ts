@@ -11,6 +11,7 @@ export const useLogout = (): Result => {
   const logout = async () => {
     try {
       // clear apollo cache
+      await removeData(AsyncStorageKeys.CUSTOMER_TOKEN);
       const client = await getApolloClient();
       client.writeQuery({
         query: IS_LOGGED_IN,
@@ -18,7 +19,7 @@ export const useLogout = (): Result => {
           isLoggedIn: false,
         },
       });
-      await removeData(AsyncStorageKeys.CUSTOMER_TOKEN);
+      client.resetStore();
     } catch {}
   };
   return {

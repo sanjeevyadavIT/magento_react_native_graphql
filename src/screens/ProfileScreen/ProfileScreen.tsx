@@ -1,12 +1,20 @@
 import React, { useEffect } from 'react';
 import { View, Text } from 'react-native';
+import { BottomTabNavigationProp } from '@react-navigation/bottom-tabs';
 import { Button } from 'react-native-elements';
 import { GenericTemplate } from '../../components';
 import { translate } from '../../i18n';
 import { useCustomer, useLogout } from '../../logic';
-import { Routes } from '../../navigation';
+import { BottomTabNavigatorParamList, Routes } from '../../navigation';
 
-const ProfileScreen = ({ navigation }): React.ReactElement => {
+type Props = {
+  navigation: BottomTabNavigationProp<
+    BottomTabNavigatorParamList,
+    Routes.NAVIGATION_TO_PROFILE_SCREEN
+  >;
+};
+
+const ProfileScreen = ({ navigation }: Props): React.ReactElement => {
   const { getCustomer, data, loading, error } = useCustomer();
   const { logout } = useLogout();
 

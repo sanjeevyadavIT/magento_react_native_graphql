@@ -6,11 +6,20 @@ import { Icon } from 'react-native-elements';
 import { translate } from '../i18n';
 import { HomeScreen, CartScreen, ProfileScreen } from '../screens';
 import { Routes } from './routeNames';
+import { AppStackParamList, BottomTabNavigatorParamList } from './routeParams';
 import { IS_LOGGED_IN, IsLoggedInDataType } from '../apollo/queries/isLoggedIn';
+import { StackNavigationProp } from '@react-navigation/stack';
 
-const Tab = createBottomTabNavigator();
+const Tab = createBottomTabNavigator<BottomTabNavigatorParamList>();
 
-const BottomTabNavigator = ({ navigation }) => {
+type Props = {
+  navigation: StackNavigationProp<
+    AppStackParamList,
+    Routes.NAVIGATION_TO_HOME_SCREEN
+  >;
+};
+
+const BottomTabNavigator = ({ navigation }: Props) => {
   const { data } = useQuery<IsLoggedInDataType>(IS_LOGGED_IN);
   const showLoginPrompt = (message: string): void => {
     Alert.alert(

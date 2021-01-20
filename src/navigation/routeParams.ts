@@ -22,3 +22,9 @@ export type AutheticationStackParamList = {
   [Routes.NAVIGATION_TO_LOGIN_SCREEN]: undefined;
   [Routes.NAVIGATION_TO_SIGNUP_SCREEN]: undefined;
 };
+
+export type BottomTabNavigatorParamList = {
+  [Routes.NAVIGATION_TO_HOME_SCREEN]: undefined;
+  [Routes.NAVIGATION_TO_PROFILE_SCREEN]: undefined;
+  [Routes.NAVIGATION_TO_CART_SCREEN]: undefined;
+};

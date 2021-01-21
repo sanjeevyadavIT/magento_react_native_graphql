@@ -1,12 +1,12 @@
 import React, { useContext } from 'react';
 import { View, StyleSheet, TouchableOpacity } from 'react-native';
 import { Text, Image, ThemeContext } from 'react-native-elements';
-import { CategoryProductType } from '../../apollo/queries/getCategoryProducts';
+import { ProductInListType } from '../../apollo/queries/productsFragment';
 import { getPriceStringFromPriceRange } from '../../logic';
 import { DIMENS } from '../../constants';
 
 interface Props {
-  item: CategoryProductType;
+  item: ProductInListType;
   index: number;
   onPress(arg0: number): void;
   navigation?: {

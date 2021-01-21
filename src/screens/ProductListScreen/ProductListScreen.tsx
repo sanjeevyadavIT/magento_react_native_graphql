@@ -11,7 +11,7 @@ import { StackNavigationProp } from '@react-navigation/stack';
 import { useCategoryProducts } from '../../logic';
 import { Routes, AppStackParamList } from '../../navigation';
 import ProductListItem from './ProductListItem';
-import { CategoryProductType } from '../../apollo/queries/getCategoryProducts';
+import { ProductInListType } from '../../apollo/queries/productsFragment';
 import { SPACING } from '../../constants';
 import { GenericTemplate } from '../../components';
 
@@ -56,7 +56,7 @@ const ProductListScreen = ({
     item,
     index,
   }: {
-    item: CategoryProductType;
+    item: ProductInListType;
     index: number;
   }) => {
     return (

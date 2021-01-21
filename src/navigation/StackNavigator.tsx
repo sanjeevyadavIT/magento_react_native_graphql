@@ -7,6 +7,7 @@ import { Routes } from './routeNames';
 import { AppStackParamList } from './routeParams';
 import { translate } from '../i18n';
 import {
+  SearchScreen,
   CategoriesScreen,
   ProductListScreen,
   ProductDetailsScreen,
@@ -27,6 +28,17 @@ const StackNavigator = () => (
               title={translate('common.menu')}
               iconName="menu"
               onPress={navigation.toggleDrawer}
+            />
+          </CustomHeaderButtons>
+        ),
+        headerRight: () => (
+          <CustomHeaderButtons>
+            <CustomHeaderItem
+              title={translate('common.search')}
+              iconName="search"
+              onPress={() =>
+                navigation.navigate(Routes.NAVIGATION_TO_SEARCH_SCREEN)
+              }
             />
           </CustomHeaderButtons>
         ),
@@ -73,6 +85,13 @@ const StackNavigator = () => (
         return {
           title: name ?? translate('productDetailsScreen.appbarTitle'),
         };
+      }}
+    />
+    <Stack.Screen
+      name={Routes.NAVIGATION_TO_SEARCH_SCREEN}
+      component={SearchScreen}
+      options={{
+        headerShown: false,
       }}
     />
   </Stack.Navigator>

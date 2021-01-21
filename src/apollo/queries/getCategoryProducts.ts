@@ -1,4 +1,5 @@
 import { gql } from '@apollo/client';
+import { ProductInListType, PRODUCTS_FRAGMENT } from './productsFragment';
 
 export interface GetCategoryProductsVars {
   id: string;
@@ -9,26 +10,7 @@ export interface GetCategoryProductsVars {
 export interface CategoryProductsDataType {
   products: {
     total_count: number;
-    items: Array<CategoryProductType>;
-  };
-}
-
-export interface CategoryProductType {
-  id: number;
-  sku: string;
-  name: string;
-  small_image: {
-    url: String;
-  };
-  price_range: PriceRangeType;
-}
-
-export interface PriceRangeType {
-  maximum_price: {
-    final_price: {
-      currency: string;
-      value: number;
-    };
+    items: Array<ProductInListType>;
   };
 }
 
@@ -40,22 +22,8 @@ export const GET_CATGEORY_PRODUCTS = gql`
       currentPage: $currentPage
     ) {
       total_count
-      items {
-        id
-        sku
-        name
-        small_image {
-          url
-        }
-        price_range {
-          maximum_price {
-            final_price {
-              currency
-              value
-            }
-          }
-        }
-      }
+      ...ProductListFragment
     }
   }
+  ${PRODUCTS_FRAGMENT}
 `;

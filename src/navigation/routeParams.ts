@@ -16,6 +16,7 @@ export type AppStackParamList = {
     name: string;
     sku: string;
   };
+  [Routes.NAVIGATION_TO_SEARCH_SCREEN]: undefined;
 };
 
 export type AutheticationStackParamList = {

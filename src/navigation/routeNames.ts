@@ -8,4 +8,5 @@ export enum Routes {
   NAVIGATION_TO_AUTHENTICATION_SPLASH_SCREEN = 'AuthenticationSplashScreen',
   NAVIGATION_TO_LOGIN_SCREEN = 'LoginScreen',
   NAVIGATION_TO_SIGNUP_SCREEN = 'SignupScreen',
+  NAVIGATION_TO_SEARCH_SCREEN = 'SearchScreen',
 }

@@ -2,17 +2,17 @@ import { useEffect, useState } from 'react';
 import { useLazyQuery, ApolloError } from '@apollo/client';
 import {
   GET_CATGEORY_PRODUCTS,
-  CategoryProductType,
   GetCategoryProductsVars,
   CategoryProductsDataType,
 } from '../../apollo/queries/getCategoryProducts';
+import { ProductInListType } from '../../apollo/queries/productsFragment';
 
 interface Props {
   categoryId: string;
 }
 
 interface Result {
-  products: Array<CategoryProductType>;
+  products: Array<ProductInListType>;
   getCategoryProducts(): void;
   loading: boolean;
   error: ApolloError | undefined;
@@ -24,7 +24,7 @@ interface Result {
 const PAGE_SIZE = 10;
 
 export const useCategoryProducts = ({ categoryId: id }: Props): Result => {
-  const [products, setProducts] = useState<Array<CategoryProductType>>([]);
+  const [products, setProducts] = useState<Array<ProductInListType>>([]);
   const [currentPage, setCurrentPage] = useState<number>(1);
 
   const [getCategoryProducts, { loading, error }] = useLazyQuery<

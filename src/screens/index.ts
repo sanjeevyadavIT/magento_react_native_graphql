@@ -6,6 +6,7 @@ import LoginScreen from './LoginScreen/LoginScreen';
 import ProductDetailsScreen from './ProductDetailsScreen/ProductDetailsScreen';
 import ProductListScreen from './ProductListScreen/ProductListScreen';
 import ProfileScreen from './ProfileScreen/ProfileScreen';
+import SearchScreen from './SearchScreen/SearchScreen';
 import SignupScreen from './SignupScreen/SignupScreen';
 
 export {
@@ -17,5 +18,6 @@ export {
   ProductDetailsScreen,
   ProductListScreen,
   ProfileScreen,
+  SearchScreen,
   SignupScreen,
 };

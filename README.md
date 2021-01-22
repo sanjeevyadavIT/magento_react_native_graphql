@@ -19,6 +19,10 @@ E-Commerce App written in React Native which consumes [Magento 2 GraphQL api](ht
   <img src=".github/screenshots/5.png" style="margin-left:10px;" width="19%" >
 </div>
 
+<div style="display:flex;" >
+  <img src=".github/screenshots/6.png" width="19%" >
+</div>
+
 ## 🚀 Getting Started:
 
 1. Clone the repository, by tying this command in terminal

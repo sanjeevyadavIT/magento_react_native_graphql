@@ -52,6 +52,10 @@
     "guestUserPromptMessage": "In order to view profile, please login or create new account",
     "greeting": "Welcome %{name}"
   },
+  "searchScreen": {
+    "searchBarHint": "Search product by name...",
+    "noProductsFound": "We couldn't found any products matching %{searchText}"
+  },
   "signupScreen": {
     "appbarTitle": "Signup",
     "haveAccount": "Aldready have an account? Login",

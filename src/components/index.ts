@@ -5,6 +5,7 @@ import {
 } from './CustomHeaderButtons/CustomHeaderButtons';
 import GenericTemplate from './GenericTemplate/GenericTemplate';
 import MediaGallery from './MediaGallery/MediaGallery';
+import ProductListItem from './ProductListItem/ProductListItem';
 
 export {
   CategoryListItem,
@@ -12,4 +13,5 @@ export {
   CustomHeaderItem,
   GenericTemplate,
   MediaGallery,
+  ProductListItem,
 };

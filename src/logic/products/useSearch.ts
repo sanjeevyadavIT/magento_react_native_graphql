@@ -5,21 +5,28 @@ import {
   GET_SEARCH_PRODUCTS,
   SearchProductsDataType,
 } from '../../apollo/queries/getSearchProducts';
+import { LIMITS } from '../../constants';
 
-const PAGE_SIZE = 10;
-const AUTO_SUGGESTION_API_TIME_DELAY = 1000;
+interface Result {
+  data: SearchProductsDataType | undefined;
+  loading: boolean;
+  called: boolean;
+  searchText: string;
+  handleChange(arg1: string): void;
+  getSearchProducts(): void;
+}
 
-export const useSearch = () => {
+export const useSearch = (): Result => {
   const [searchText, handleChange] = useState<string>('');
   const [currentPage, setCurrentPage] = useState<number>(1);
-  const [getSearchProducts, { loading, error, data }] = useLazyQuery<
+  const [getSearchProducts, { called, loading, error, data }] = useLazyQuery<
     SearchProductsDataType,
     GetSearchProductsVars
   >(GET_SEARCH_PRODUCTS);
 
   useEffect(() => {
-    if (searchText.trim() === '' || searchText.trim().length < 3) {
-      // can do something
+    if (searchText.trim().length < LIMITS.searchTextMinLength) {
+      // Don't do anything
       return;
     }
     const task = setTimeout(
@@ -27,11 +34,11 @@ export const useSearch = () => {
         getSearchProducts({
           variables: {
             searchText,
-            pageSize: PAGE_SIZE,
+            pageSize: LIMITS.searchScreenPageSize,
             currentPage,
           },
         }),
-      AUTO_SUGGESTION_API_TIME_DELAY,
+      LIMITS.autoSearchApiTimeDelay,
     );
 
     // eslint-disable-next-line consistent-return
@@ -44,6 +51,7 @@ export const useSearch = () => {
   return {
     data,
     loading,
+    called,
     searchText,
     handleChange,
     getSearchProducts,

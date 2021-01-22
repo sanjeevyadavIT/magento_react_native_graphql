@@ -10,10 +10,9 @@ import { RouteProp } from '@react-navigation/native';
 import { StackNavigationProp } from '@react-navigation/stack';
 import { useCategoryProducts } from '../../logic';
 import { Routes, AppStackParamList } from '../../navigation';
-import ProductListItem from './ProductListItem';
 import { ProductInListType } from '../../apollo/queries/productsFragment';
 import { SPACING } from '../../constants';
-import { GenericTemplate } from '../../components';
+import { GenericTemplate, ProductListItem } from '../../components';
 
 interface Props {
   navigation: StackNavigationProp<

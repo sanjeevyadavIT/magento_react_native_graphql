@@ -1,13 +1,29 @@
 import React from 'react';
-import { View, Text } from 'react-native';
-import { translate } from '../../i18n';
+import { BottomTabNavigationProp } from '@react-navigation/bottom-tabs';
+import { BottomTabNavigatorParamList, Routes } from '../../navigation';
+import { GenericTemplate, MediaGallery } from '../../components';
+import { magentoConfig } from '../../../magento.config';
+import { DIMENS } from '../../constants';
+import { Button } from 'react-native-elements';
 
-const HomeScreen = (): React.ReactElement => (
-  <View>
-    <Text>{translate('common.pluralizationExample', { count: 0 })}</Text>
-    <Text>{translate('common.pluralizationExample', { count: 10 })}</Text>
-    <Text>{translate('common.pluralizationExample', { count: 1 })}</Text>
-  </View>
-);
+type Props = {
+  navigation: BottomTabNavigationProp<
+    BottomTabNavigatorParamList,
+    Routes.NAVIGATION_TO_HOME_SCREEN
+  >;
+};
+
+const HomeScreen = ({ navigation }: Props): React.ReactElement => {
+  return (
+    <GenericTemplate>
+      <MediaGallery
+        resizeMode="cover"
+        items={magentoConfig.homeCarousel}
+        height={DIMENS.homeScreen.carouselHeight}
+      />
+      <Button title="Shop Now" onPress={navigation.openDrawer} />
+    </GenericTemplate>
+  );
+};
 
 export default HomeScreen;

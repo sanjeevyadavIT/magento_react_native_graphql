@@ -3,6 +3,30 @@ export const magentoConfig = {
   url: 'https://master-7rqtwti-mfwmkrjfqvbjk.us-4.magentosite.cloud/',
   // Id of the category that host first level categories
   baseCategoryId: '2',
+  // Home Screen carousel images (Temp solution)
+  homeCarousel: [
+    {
+      disabled: false,
+      label: '',
+      position: 0,
+      url:
+        'https://master-7rqtwti-mfwmkrjfqvbjk.us-4.magentosite.cloud/media/shallow-focus-photography-of-man-wearing-eyeglasses-837306_sm.jpg?auto=webp&format=pjpg&quality=85',
+    },
+    {
+      disabled: false,
+      label: '',
+      position: 1,
+      url:
+        'https://master-7rqtwti-mfwmkrjfqvbjk.us-4.magentosite.cloud/media/venia-hero1.jpg?auto=webp&format=pjpg&quality=85',
+    },
+    {
+      disabled: false,
+      label: '',
+      position: 2,
+      url:
+        'https://master-7rqtwti-mfwmkrjfqvbjk.us-4.magentosite.cloud/media/woman-wearing-orange-dress-3503488_sm.jpg?auto=webp&format=pjpg&quality=85',
+    },
+  ],
 };
 
 interface CurrencySymbols {

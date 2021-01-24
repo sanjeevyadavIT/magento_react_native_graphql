@@ -21,6 +21,9 @@ const DIMENS = Object.freeze({
     imageWidth: moderateScale(70),
     imageHeight: moderateScale(70),
   },
+  homeScreen: {
+    carouselHeight: moderateScale(200),
+  },
 });
 
 export default DIMENS;

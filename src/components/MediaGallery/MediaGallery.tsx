@@ -1,16 +1,33 @@
-import React, { useState } from 'react';
-import { View, FlatList, Image, StyleSheet, Dimensions } from 'react-native';
+import React, { useMemo, useState } from 'react';
+import {
+  View,
+  FlatList,
+  Image,
+  StyleSheet,
+  ImageResizeMode,
+  ViewStyle,
+} from 'react-native';
 import { Text } from 'react-native-elements';
 import { MediaGalleryItemType } from '../../apollo/queries/mediaGalleryFragment';
-import { SPACING } from '../../constants';
+import { SPACING, DIMENS } from '../../constants';
 
 interface Props {
   items: Array<MediaGalleryItemType>;
+  resizeMode?: ImageResizeMode;
+  containerStyle?: ViewStyle;
+  width?: number;
+  height?: number;
 }
 
-// TODO: Extract hard coded color value
-const MediaGallery = ({ items }: Props): React.ReactElement => {
+const MediaGallery = ({
+  items,
+  resizeMode = 'contain',
+  containerStyle = {},
+  width = DIMENS.common.WINDOW_WIDTH,
+  height = DIMENS.common.WINDOW_WIDTH,
+}: Props): React.ReactElement => {
   const [currentPage, setCurrentPage] = useState<number>(1);
+  const imageDimension = useMemo(() => ({ width, height }), [width, height]);
 
   const onMomentumScrollEnd = event => {
     const contentOffset = event.nativeEvent.contentOffset.x;
@@ -25,15 +42,15 @@ const MediaGallery = ({ items }: Props): React.ReactElement => {
       <View>
         <Image
           source={{ uri: item.url }}
-          resizeMode="contain"
-          style={styles.image}
+          resizeMode={resizeMode}
+          style={imageDimension}
         />
       </View>
     );
   };
 
   return (
-    <View style={styles.container}>
+    <View style={[styles.container, containerStyle]}>
       <FlatList
         horizontal
         pagingEnabled
@@ -51,10 +68,6 @@ const MediaGallery = ({ items }: Props): React.ReactElement => {
 const styles = StyleSheet.create({
   container: {
     backgroundColor: '#fff',
-  },
-  image: {
-    width: Dimensions.get('window').width,
-    height: Dimensions.get('window').width,
   },
   pagination: {
     position: 'absolute',

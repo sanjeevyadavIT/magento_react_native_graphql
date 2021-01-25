@@ -8,6 +8,7 @@ import { DIMENS } from '../../constants';
 interface Props {
   item: ProductInListType;
   index: number;
+  horizontalMode?: boolean;
   onPress(arg0: number): void;
   navigation?: {
     navigate: (arg0: string, arg1: object) => {};
@@ -20,6 +21,7 @@ const COLUMN_WIDTH = DIMENS.common.WINDOW_WIDTH / 2;
 const ProductListItem = ({
   item,
   index,
+  horizontalMode = false,
   onPress,
 }: Props): React.ReactElement => {
   const { theme } = useContext(ThemeContext);
@@ -34,7 +36,8 @@ const ProductListItem = ({
         style={[
           styles.container,
           { borderColor: theme.colors?.divider },
-          index % 2 !== 0 && styles.leftBorder,
+          horizontalMode && styles.topBorder,
+          (horizontalMode || index % 2 !== 0) && styles.leftBorder,
         ]}
       >
         {renderImage()}
@@ -53,9 +56,13 @@ const styles = StyleSheet.create({
     width: COLUMN_WIDTH,
     borderBottomWidth: DIMENS.common.borderWidth,
     backgroundColor: 'white',
+    overflow: 'hidden',
   },
   leftBorder: {
     borderLeftWidth: DIMENS.common.borderWidth,
+  },
+  topBorder: {
+    borderTopWidth: DIMENS.common.borderWidth,
   },
   image: {
     width: COLUMN_WIDTH,

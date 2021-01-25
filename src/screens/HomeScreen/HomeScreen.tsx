@@ -3,8 +3,9 @@ import { BottomTabNavigationProp } from '@react-navigation/bottom-tabs';
 import { BottomTabNavigatorParamList, Routes } from '../../navigation';
 import { GenericTemplate, MediaGallery } from '../../components';
 import { magentoConfig } from '../../../magento.config';
-import { DIMENS } from '../../constants';
-import { Button } from 'react-native-elements';
+import { DIMENS, SPACING } from '../../constants';
+import FeaturedProductList from './FeaturedProductList';
+import { StyleSheet } from 'react-native';
 
 type Props = {
   navigation: BottomTabNavigationProp<
@@ -13,17 +14,29 @@ type Props = {
   >;
 };
 
-const HomeScreen = ({ navigation }: Props): React.ReactElement => {
+const HomeScreen = ({}: Props): React.ReactElement => {
   return (
-    <GenericTemplate>
+    <GenericTemplate scrollable>
       <MediaGallery
         resizeMode="cover"
         items={magentoConfig.homeCarousel}
         height={DIMENS.homeScreen.carouselHeight}
+        containerStyle={styles.mediaContainer}
       />
-      <Button title="Shop Now" onPress={navigation.openDrawer} />
+      {magentoConfig.homeFeaturedCategories.map(featuredCategory => (
+        <FeaturedProductList
+          name={featuredCategory.name}
+          categoryId={featuredCategory.id}
+        />
+      ))}
     </GenericTemplate>
   );
 };
+
+const styles = StyleSheet.create({
+  mediaContainer: {
+    marginBottom: SPACING.large,
+  },
+});
 
 export default HomeScreen;

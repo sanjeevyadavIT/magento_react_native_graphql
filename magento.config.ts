@@ -27,6 +27,14 @@ export const magentoConfig = {
         'https://master-7rqtwti-mfwmkrjfqvbjk.us-4.magentosite.cloud/media/woman-wearing-orange-dress-3503488_sm.jpg?auto=webp&format=pjpg&quality=85',
     },
   ],
+  // featured Catgeory products to be shown on HomeScreen, add as many as you want
+  homeFeaturedCategories: [
+    {
+      id: '12',
+      name: 'Skirts',
+    },
+    { id: '11', name: 'Pants & Shorts' },
+  ],
 };
 
 interface CurrencySymbols {

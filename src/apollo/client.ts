@@ -12,7 +12,33 @@ export async function getApolloClient(): Promise<ApolloClient<any>> {
     return _client;
   }
 
-  const cache = new InMemoryCache();
+  const cache = new InMemoryCache({
+    typePolicies: {
+      Query: {
+        fields: {
+          products: {
+            // Don't cache separate results based on
+            // any of this field's arguments.
+            keyArgs: ['search'],
+            // Concatenate the incoming list items with
+            // the existing list items.
+            merge(existing, incoming, { args: { search, currentPage } }) {
+              if (currentPage === 1 || !search) {
+                return incoming;
+              }
+              const _existing = existing ?? { items: [] };
+              const _incoming = incoming ?? { items: [] };
+              return {
+                ..._existing,
+                ..._incoming,
+                items: [..._existing.items, ..._incoming.items],
+              };
+            },
+          },
+        },
+      },
+    },
+  });
 
   const customerToken = await getData(AsyncStorageKeys.CUSTOMER_TOKEN);
 

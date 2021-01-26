@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, FlatList, View } from 'react-native';
+import { StyleSheet, FlatList, View, ActivityIndicator } from 'react-native';
 import { Text, SearchBar } from 'react-native-elements';
 import { StackNavigationProp } from '@react-navigation/stack';
 import { GenericTemplate, ProductListItem } from '../../components';
@@ -23,6 +23,7 @@ const SearchScreen = ({ navigation }: Props): React.ReactElement => {
     handleChange,
     loading,
     called,
+    loadMore,
     data: { products: { items: products = [] } = {} } = {},
   } = useSearch();
 
@@ -85,6 +86,7 @@ const SearchScreen = ({ navigation }: Props): React.ReactElement => {
         renderItem={renderItem}
         keyExtractor={item => `productListItem${item.sku}`}
         ListEmptyComponent={renderEmptyComponent}
+        onEndReached={loadMore}
       />
     </GenericTemplate>
   );
@@ -99,6 +101,19 @@ const styles = StyleSheet.create({
   },
   searchBarContainer: {
     padding: 0,
+    borderTopWidth: 0,
+    borderBottomWidth: StyleSheet.hairlineWidth,
+    borderBottomColor: 'rgba(0,0,0,.1)',
+    borderLeftWidth: 0,
+    borderRightWidth: 0,
+    shadowColor: 'black',
+    shadowOffset: {
+      width: 0,
+      height: 2,
+    },
+    shadowOpacity: 0.1,
+    shadowRadius: 2,
+    elevation: 1,
   },
   searchBarInputContainer: {
     borderRadius: 0,

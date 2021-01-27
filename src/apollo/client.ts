@@ -17,13 +17,13 @@ export async function getApolloClient(): Promise<ApolloClient<any>> {
       Query: {
         fields: {
           products: {
-            // Don't cache separate results based on
+            // Cache separate results based on
             // any of this field's arguments.
-            keyArgs: ['search'],
+            keyArgs: ['search', 'filter'],
             // Concatenate the incoming list items with
             // the existing list items.
-            merge(existing, incoming, { args: { search, currentPage } }) {
-              if (currentPage === 1 || !search) {
+            merge(existing, incoming, { args: { currentPage } }) {
+              if (currentPage === 1) {
                 return incoming;
               }
               const _existing = existing ?? { items: [] };

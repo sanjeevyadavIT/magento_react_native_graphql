@@ -22,7 +22,7 @@ export const useSearch = (): Result => {
   const [currentPage, setCurrentPage] = useState<number>(1);
   const [
     getSearchProducts,
-    { called, loading, error, fetchMore, refetch, data },
+    { called, loading, error, fetchMore, data },
   ] = useLazyQuery<SearchProductsDataType, GetSearchProductsVars>(
     GET_SEARCH_PRODUCTS,
   );
@@ -63,7 +63,11 @@ export const useSearch = (): Result => {
       return;
     }
 
-    if (data && data?.products?.items?.length < data?.products?.total_count) {
+    if (
+      currentPage * LIMITS.searchScreenPageSize ===
+        data?.products?.items?.length &&
+      data?.products?.items.length < data?.products?.total_count
+    ) {
       setCurrentPage(prevPage => prevPage + 1);
     }
   };

@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import {
   View,
   RefreshControl,
@@ -29,8 +29,7 @@ const ProductListScreen = ({
   },
 }: Props): React.ReactElement => {
   const {
-    getCategoryProducts,
-    products,
+    data,
     loading,
     currentPage,
     error,
@@ -40,15 +39,13 @@ const ProductListScreen = ({
     categoryId,
   });
 
-  useEffect(() => {
-    getCategoryProducts();
-  }, []);
-
   const onProductItemClicked = (index: number) => {
-    navigation.navigate(Routes.NAVIGATION_TO_PRODUCT_DETAILS_SCREEN, {
-      name: products[index].name,
-      sku: products[index].sku,
-    });
+    if (data?.products?.items) {
+      navigation.navigate(Routes.NAVIGATION_TO_PRODUCT_DETAILS_SCREEN, {
+        name: data.products.items[index].name,
+        sku: data.products.items[index].sku,
+      });
+    }
   };
 
   const renderItem = ({
@@ -67,22 +64,18 @@ const ProductListScreen = ({
     );
   };
 
-  const renderFooter = () => {
-    if (loading && products.length !== 0) {
-      return (
-        <View style={styles.footerContainer}>
-          <ActivityIndicator size="large" />
-        </View>
-      );
-    }
-    return null;
-  };
+  const renderFooterComponent = () =>
+    (loading && data?.products?.items?.length !== 0 && (
+      <View style={styles.footerContainer}>
+        <ActivityIndicator size="large" />
+      </View>
+    )) || <></>;
 
   return (
     <GenericTemplate errorMessage={error?.message}>
       <FlatList
         numColumns={2}
-        data={products}
+        data={data?.products?.items ?? []}
         renderItem={renderItem}
         keyExtractor={item => `productListItem${item.sku}`}
         refreshControl={
@@ -92,7 +85,7 @@ const ProductListScreen = ({
           />
         }
         onEndReached={loadMore}
-        ListFooterComponent={renderFooter}
+        ListFooterComponent={renderFooterComponent}
       />
     </GenericTemplate>
   );

@@ -1,19 +1,18 @@
 import { useEffect, useState } from 'react';
-import { useLazyQuery, ApolloError } from '@apollo/client';
+import { useQuery, ApolloError } from '@apollo/client';
 import {
   GET_CATGEORY_PRODUCTS,
   GetCategoryProductsVars,
   CategoryProductsDataType,
 } from '../../apollo/queries/getCategoryProducts';
-import { ProductInListType } from '../../apollo/queries/productsFragment';
+import { LIMITS } from '../../constants';
 
 interface Props {
   categoryId: string;
 }
 
 interface Result {
-  products: Array<ProductInListType>;
-  getCategoryProducts(): void;
+  data: CategoryProductsDataType | undefined;
   loading: boolean;
   error: ApolloError | undefined;
   currentPage: number;
@@ -21,67 +20,53 @@ interface Result {
   loadMore(): void;
 }
 
-const PAGE_SIZE = 10;
-
 export const useCategoryProducts = ({ categoryId: id }: Props): Result => {
-  const [products, setProducts] = useState<Array<ProductInListType>>([]);
   const [currentPage, setCurrentPage] = useState<number>(1);
 
-  const [getCategoryProducts, { loading, error }] = useLazyQuery<
+  const { refetch, data, loading, error, fetchMore } = useQuery<
     CategoryProductsDataType,
     GetCategoryProductsVars
   >(GET_CATGEORY_PRODUCTS, {
     variables: {
       id,
-      pageSize: PAGE_SIZE,
-      currentPage,
-    },
-    fetchPolicy: 'no-cache',
-    onCompleted: responseData => {
-      if (responseData?.products?.items && currentPage === 1) {
-        setProducts(responseData.products.items);
-      } else if (
-        responseData?.products?.items &&
-        products.length < responseData.products.total_count &&
-        products.length < currentPage * PAGE_SIZE
-      ) {
-        setProducts(prevState => [
-          ...prevState,
-          ...responseData?.products?.items,
-        ]);
-      }
+      pageSize: LIMITS.categoryProductsPageSize,
+      currentPage: 1,
     },
   });
 
   useEffect(() => {
-    if (!loading) {
-      getCategoryProducts();
+    if (!loading && currentPage !== 1) {
+      fetchMore({
+        variables: {
+          currentPage,
+        },
+      });
     }
-  }, [currentPage, getCategoryProducts]);
+  }, [currentPage]);
 
   const loadMore = () => {
     if (loading) {
       return;
     }
 
-    if (currentPage * PAGE_SIZE === products.length) {
+    if (
+      currentPage * LIMITS.categoryProductsPageSize ===
+        data?.products?.items?.length &&
+      data?.products?.items.length < data?.products?.total_count
+    ) {
       setCurrentPage(prevState => prevState + 1);
     }
   };
 
   const refresh = () => {
-    if (currentPage !== 1) {
-      setCurrentPage(1);
-    } else {
-      getCategoryProducts();
-    }
+    refetch();
+    setCurrentPage(1);
   };
 
   return {
-    products,
+    data,
     loading,
     error,
-    getCategoryProducts,
     currentPage,
     refresh,
     loadMore,

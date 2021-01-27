@@ -16,7 +16,6 @@ type Props = {
   >;
 };
 
-// TODO: Implement pagination
 const SearchScreen = ({ navigation }: Props): React.ReactElement => {
   const {
     searchText,
@@ -66,6 +65,13 @@ const SearchScreen = ({ navigation }: Props): React.ReactElement => {
         </View>
       )) || <></>;
 
+  const renderFooterComponent = () =>
+    (loading && products.length !== 0 && (
+      <View style={styles.footerContainer}>
+        <ActivityIndicator size="large" />
+      </View>
+    )) || <></>;
+
   return (
     <GenericTemplate>
       <SearchBar
@@ -77,6 +83,7 @@ const SearchScreen = ({ navigation }: Props): React.ReactElement => {
           name: 'arrow-back',
           onPress: handleBackPress,
         }}
+        loadingProps={styles.searchBarLoading}
         containerStyle={styles.searchBarContainer}
         inputContainerStyle={styles.searchBarInputContainer}
       />
@@ -86,12 +93,14 @@ const SearchScreen = ({ navigation }: Props): React.ReactElement => {
         renderItem={renderItem}
         keyExtractor={item => `productListItem${item.sku}`}
         ListEmptyComponent={renderEmptyComponent}
+        ListFooterComponent={renderFooterComponent}
         onEndReached={loadMore}
       />
     </GenericTemplate>
   );
 };
 
+// TODO: Remove hard-coded values
 const styles = StyleSheet.create({
   center: {
     flex: 1,
@@ -118,6 +127,13 @@ const styles = StyleSheet.create({
   searchBarInputContainer: {
     borderRadius: 0,
     backgroundColor: 'white',
+  },
+  searchBarLoading: {
+    color: 'black',
+  },
+  footerContainer: {
+    alignItems: 'center',
+    marginVertical: SPACING.small,
   },
 });
 

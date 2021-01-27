@@ -1,5 +1,5 @@
+import React from 'react';
 import { useNavigation } from '@react-navigation/native';
-import React, { useEffect } from 'react';
 import { ActivityIndicator, View, FlatList, StyleSheet } from 'react-native';
 import { Text } from 'react-native-elements';
 import { ProductInListType } from '../../apollo/queries/productsFragment';
@@ -17,23 +17,16 @@ const FeaturedProductList = ({
   name,
   categoryId,
 }: Props): React.ReactElement => {
-  const {
-    getCategoryProducts,
-    loading,
-    products,
-    error,
-  } = useCategoryProducts({ categoryId });
+  const { data, loading, error } = useCategoryProducts({ categoryId });
   const navigation = useNavigation();
 
-  useEffect(() => {
-    getCategoryProducts();
-  }, []);
-
   const onProductItemClicked = (index: number) => {
-    navigation.navigate(Routes.NAVIGATION_TO_PRODUCT_DETAILS_SCREEN, {
-      name: products[index].name,
-      sku: products[index].sku,
-    });
+    if (data?.products?.items) {
+      navigation.navigate(Routes.NAVIGATION_TO_PRODUCT_DETAILS_SCREEN, {
+        name: data.products.items[index].name,
+        sku: data.products.items[index].sku,
+      });
+    }
   };
 
   const renderItem = ({
@@ -75,7 +68,7 @@ const FeaturedProductList = ({
       <FlatList
         horizontal
         showsHorizontalScrollIndicator={false}
-        data={products}
+        data={data?.products?.items ?? []}
         renderItem={renderItem}
         keyExtractor={item => `productListItem${item.sku}`}
       />

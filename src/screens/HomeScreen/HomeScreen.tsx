@@ -25,6 +25,7 @@ const HomeScreen = ({}: Props): React.ReactElement => {
       />
       {magentoConfig.homeFeaturedCategories.map(featuredCategory => (
         <FeaturedProductList
+          key={String(featuredCategory.id)}
           name={featuredCategory.name}
           categoryId={featuredCategory.id}
         />

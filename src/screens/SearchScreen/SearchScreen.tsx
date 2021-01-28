@@ -1,8 +1,8 @@
-import React from 'react';
-import { StyleSheet, FlatList, View, ActivityIndicator } from 'react-native';
-import { Text, SearchBar } from 'react-native-elements';
+import React, { useContext, useMemo } from 'react';
+import { StyleSheet, FlatList, View } from 'react-native';
+import { Text, SearchBar, ThemeContext } from 'react-native-elements';
 import { StackNavigationProp } from '@react-navigation/stack';
-import { GenericTemplate, ProductListItem } from '../../components';
+import { GenericTemplate, ProductListItem, Spinner } from '../../components';
 import { useSearch } from '../../logic';
 import { AppStackParamList, Routes } from '../../navigation';
 import { ProductInListType } from '../../apollo/queries/productsFragment';
@@ -26,6 +26,10 @@ const SearchScreen = ({ navigation }: Props): React.ReactElement => {
     loadMore,
     data: { products: { items: products = [] } = {} } = {},
   } = useSearch();
+  const { theme } = useContext(ThemeContext);
+  const loadingProps = useMemo(() => ({ color: theme.colors?.primary }), [
+    theme,
+  ]);
 
   const handleBackPress = () => navigation.pop();
 
@@ -66,11 +70,10 @@ const SearchScreen = ({ navigation }: Props): React.ReactElement => {
         </View>
       )) || <></>;
 
-  // TODO: Remove hard-coded values
   const renderFooterComponent = () =>
     (networkStatus === NetworkStatus.fetchMore && (
       <View style={styles.footerContainer}>
-        <ActivityIndicator color="black" size="large" />
+        <Spinner />
       </View>
     )) || <></>;
 
@@ -85,7 +88,7 @@ const SearchScreen = ({ navigation }: Props): React.ReactElement => {
           name: 'arrow-back',
           onPress: handleBackPress,
         }}
-        loadingProps={styles.searchBarLoading}
+        loadingProps={loadingProps}
         containerStyle={styles.searchBarContainer}
         inputContainerStyle={styles.searchBarInputContainer}
       />
@@ -129,9 +132,6 @@ const styles = StyleSheet.create({
   searchBarInputContainer: {
     borderRadius: 0,
     backgroundColor: 'white',
-  },
-  searchBarLoading: {
-    color: 'black',
   },
   footerContainer: {
     alignItems: 'center',

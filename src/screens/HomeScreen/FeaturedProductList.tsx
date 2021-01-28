@@ -1,9 +1,9 @@
 import React from 'react';
 import { useNavigation } from '@react-navigation/native';
-import { ActivityIndicator, View, FlatList, StyleSheet } from 'react-native';
+import { View, FlatList, StyleSheet } from 'react-native';
 import { Text } from 'react-native-elements';
 import { ProductInListType } from '../../apollo/queries/productsFragment';
-import { ProductListItem } from '../../components';
+import { ProductListItem, Spinner } from '../../components';
 import { DIMENS, SPACING } from '../../constants';
 import { useCategoryProducts } from '../../logic';
 import { Routes } from '../../navigation';
@@ -55,11 +55,10 @@ const FeaturedProductList = ({
     );
   }
 
-  // TODO: Remove hard-coded values
   if (networkStatus === NetworkStatus.loading) {
     return (
       <View style={styles.loadingBox}>
-        <ActivityIndicator color="black" size="large" />
+        <Spinner />
       </View>
     );
   }

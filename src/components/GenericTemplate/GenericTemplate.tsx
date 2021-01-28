@@ -1,14 +1,8 @@
-import React, { useContext, ReactNode } from 'react';
-import {
-  View,
-  StyleSheet,
-  ScrollView,
-  ActivityIndicator,
-  ViewStyle,
-} from 'react-native';
-import { ThemeContext } from 'react-native-elements';
-import { SPACING } from '../../constants';
+import React, { ReactNode } from 'react';
+import { View, StyleSheet, ScrollView, ViewStyle } from 'react-native';
 import { Text } from 'react-native-elements';
+import { SPACING } from '../../constants';
+import Spinner from '../Spinner/Spinner';
 
 interface Props {
   /**
@@ -45,13 +39,12 @@ const GenericTemplate = ({
   errorMessage,
   style = {},
 }: Props): React.ReactElement => {
-  const { theme } = useContext(ThemeContext);
   const ViewGroup = scrollable ? ScrollView : View;
 
   const renderLoader = () =>
     loading && (
       <View style={styles.center}>
-        <ActivityIndicator size="large" color={theme.colors?.primary} />
+        <Spinner />
       </View>
     );
 

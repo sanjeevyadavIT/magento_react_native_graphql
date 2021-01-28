@@ -5,7 +5,7 @@ import Navigator from './navigation';
 import { ApolloClient, ApolloProvider } from '@apollo/client';
 import { getApolloClient } from './apollo/client';
 import { theme } from './theme';
-import { ActivityIndicator } from 'react-native';
+import { Spinner } from './components';
 
 const App = (): React.ReactElement => {
   const [client, setClient] = useState<ApolloClient<any>>();
@@ -29,7 +29,7 @@ const App = (): React.ReactElement => {
   }
 
   // TODO: SplashScreen logic
-  return <ActivityIndicator color="black" size="large" />;
+  return <Spinner />;
 };
 
 export default App;

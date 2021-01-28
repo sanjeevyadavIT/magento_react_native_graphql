@@ -6,6 +6,7 @@ import {
 import GenericTemplate from './GenericTemplate/GenericTemplate';
 import MediaGallery from './MediaGallery/MediaGallery';
 import ProductListItem from './ProductListItem/ProductListItem';
+import Spinner from './Spinner/Spinner';
 
 export {
   CategoryListItem,
@@ -14,4 +15,5 @@ export {
   GenericTemplate,
   MediaGallery,
   ProductListItem,
+  Spinner,
 };

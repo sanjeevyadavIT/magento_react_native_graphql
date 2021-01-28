@@ -1,18 +1,12 @@
 import React from 'react';
-import {
-  View,
-  RefreshControl,
-  StyleSheet,
-  ActivityIndicator,
-  FlatList,
-} from 'react-native';
+import { View, RefreshControl, StyleSheet, FlatList } from 'react-native';
 import { RouteProp } from '@react-navigation/native';
 import { StackNavigationProp } from '@react-navigation/stack';
 import { useCategoryProducts } from '../../logic';
 import { Routes, AppStackParamList } from '../../navigation';
 import { ProductInListType } from '../../apollo/queries/productsFragment';
 import { SPACING } from '../../constants';
-import { GenericTemplate, ProductListItem } from '../../components';
+import { GenericTemplate, ProductListItem, Spinner } from '../../components';
 import { NetworkStatus } from '@apollo/client';
 
 interface Props {
@@ -60,11 +54,10 @@ const ProductListScreen = ({
     );
   };
 
-  // TODO: remove hard-coded values
   const renderFooterComponent = () =>
     (networkStatus === NetworkStatus.fetchMore && (
       <View style={styles.footerContainer}>
-        <ActivityIndicator color="black" size="large" />
+        <Spinner />
       </View>
     )) || <></>;
 

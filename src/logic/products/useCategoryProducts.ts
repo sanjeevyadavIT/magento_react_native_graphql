@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { useQuery, ApolloError } from '@apollo/client';
+import { useQuery, ApolloError, NetworkStatus } from '@apollo/client';
 import {
   GET_CATGEORY_PRODUCTS,
   GetCategoryProductsVars,
@@ -13,9 +13,8 @@ interface Props {
 
 interface Result {
   data: CategoryProductsDataType | undefined;
-  loading: boolean;
+  networkStatus: NetworkStatus;
   error: ApolloError | undefined;
-  currentPage: number;
   refresh(): void;
   loadMore(): void;
 }
@@ -23,7 +22,7 @@ interface Result {
 export const useCategoryProducts = ({ categoryId: id }: Props): Result => {
   const [currentPage, setCurrentPage] = useState<number>(1);
 
-  const { refetch, data, loading, error, fetchMore } = useQuery<
+  const { refetch, loading, data, error, fetchMore, networkStatus } = useQuery<
     CategoryProductsDataType,
     GetCategoryProductsVars
   >(GET_CATGEORY_PRODUCTS, {
@@ -32,6 +31,7 @@ export const useCategoryProducts = ({ categoryId: id }: Props): Result => {
       pageSize: LIMITS.categoryProductsPageSize,
       currentPage: 1,
     },
+    notifyOnNetworkStatusChange: true,
   });
 
   useEffect(() => {
@@ -65,9 +65,8 @@ export const useCategoryProducts = ({ categoryId: id }: Props): Result => {
 
   return {
     data,
-    loading,
+    networkStatus,
     error,
-    currentPage,
     refresh,
     loadMore,
   };

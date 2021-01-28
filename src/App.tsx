@@ -29,7 +29,7 @@ const App = (): React.ReactElement => {
   }
 
   // TODO: SplashScreen logic
-  return <ActivityIndicator size="large" />;
+  return <ActivityIndicator color="black" size="large" />;
 };
 
 export default App;

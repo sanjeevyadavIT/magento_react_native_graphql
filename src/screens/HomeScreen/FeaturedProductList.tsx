@@ -4,9 +4,10 @@ import { ActivityIndicator, View, FlatList, StyleSheet } from 'react-native';
 import { Text } from 'react-native-elements';
 import { ProductInListType } from '../../apollo/queries/productsFragment';
 import { ProductListItem } from '../../components';
-import { SPACING } from '../../constants';
+import { DIMENS, SPACING } from '../../constants';
 import { useCategoryProducts } from '../../logic';
 import { Routes } from '../../navigation';
+import { NetworkStatus } from '@apollo/client';
 
 type Props = {
   name?: string;
@@ -17,7 +18,7 @@ const FeaturedProductList = ({
   name,
   categoryId,
 }: Props): React.ReactElement => {
-  const { data, loading, error } = useCategoryProducts({ categoryId });
+  const { data, networkStatus, error } = useCategoryProducts({ categoryId });
   const navigation = useNavigation();
 
   const onProductItemClicked = (index: number) => {
@@ -54,8 +55,13 @@ const FeaturedProductList = ({
     );
   }
 
-  if (loading) {
-    return <ActivityIndicator size="large" />;
+  // TODO: Remove hard-coded values
+  if (networkStatus === NetworkStatus.loading) {
+    return (
+      <View style={styles.loadingBox}>
+        <ActivityIndicator color="black" size="large" />
+      </View>
+    );
   }
 
   return (
@@ -86,6 +92,14 @@ const styles = StyleSheet.create({
     marginStart: SPACING.large,
     paddingVertical: SPACING.small,
     fontSize: 16,
+  },
+  loadingBox: {
+    alignContent: 'center',
+    justifyContent: 'center',
+    width: '100%',
+    backgroundColor: '#fff',
+    marginBottom: SPACING.large,
+    height: (DIMENS.common.WINDOW_WIDTH / 3) * 2, // This is linked to ProductListItem height
   },
 });
 

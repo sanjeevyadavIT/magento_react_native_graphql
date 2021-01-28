@@ -13,6 +13,7 @@ import { Routes, AppStackParamList } from '../../navigation';
 import { ProductInListType } from '../../apollo/queries/productsFragment';
 import { SPACING } from '../../constants';
 import { GenericTemplate, ProductListItem } from '../../components';
+import { NetworkStatus } from '@apollo/client';
 
 interface Props {
   navigation: StackNavigationProp<
@@ -28,16 +29,11 @@ const ProductListScreen = ({
     params: { categoryId },
   },
 }: Props): React.ReactElement => {
-  const {
-    data,
-    loading,
-    currentPage,
-    error,
-    refresh,
-    loadMore,
-  } = useCategoryProducts({
-    categoryId,
-  });
+  const { data, networkStatus, error, refresh, loadMore } = useCategoryProducts(
+    {
+      categoryId,
+    },
+  );
 
   const onProductItemClicked = (index: number) => {
     if (data?.products?.items) {
@@ -64,10 +60,11 @@ const ProductListScreen = ({
     );
   };
 
+  // TODO: remove hard-coded values
   const renderFooterComponent = () =>
-    (loading && data?.products?.items?.length !== 0 && (
+    (networkStatus === NetworkStatus.fetchMore && (
       <View style={styles.footerContainer}>
-        <ActivityIndicator size="large" />
+        <ActivityIndicator color="black" size="large" />
       </View>
     )) || <></>;
 
@@ -80,7 +77,10 @@ const ProductListScreen = ({
         keyExtractor={item => `productListItem${item.sku}`}
         refreshControl={
           <RefreshControl
-            refreshing={loading && currentPage === 1}
+            refreshing={
+              networkStatus === NetworkStatus.refetch ||
+              networkStatus === NetworkStatus.loading
+            }
             onRefresh={refresh}
           />
         }

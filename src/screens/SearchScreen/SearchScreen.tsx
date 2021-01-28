@@ -8,6 +8,7 @@ import { AppStackParamList, Routes } from '../../navigation';
 import { ProductInListType } from '../../apollo/queries/productsFragment';
 import { translate } from '../../i18n';
 import { LIMITS, SPACING } from '../../constants';
+import { NetworkStatus } from '@apollo/client';
 
 type Props = {
   navigation: StackNavigationProp<
@@ -20,7 +21,7 @@ const SearchScreen = ({ navigation }: Props): React.ReactElement => {
   const {
     searchText,
     handleChange,
-    loading,
+    networkStatus,
     called,
     loadMore,
     data: { products: { items: products = [] } = {} } = {},
@@ -57,7 +58,7 @@ const SearchScreen = ({ navigation }: Props): React.ReactElement => {
     (searchText.length >= LIMITS.searchTextMinLength &&
       products.length === 0 &&
       called &&
-      !loading && (
+      networkStatus !== NetworkStatus.loading && (
         <View style={styles.center}>
           <Text>
             {translate('searchScreen.noProductsFound', { searchText })}
@@ -65,10 +66,11 @@ const SearchScreen = ({ navigation }: Props): React.ReactElement => {
         </View>
       )) || <></>;
 
+  // TODO: Remove hard-coded values
   const renderFooterComponent = () =>
-    (loading && products.length !== 0 && (
+    (networkStatus === NetworkStatus.fetchMore && (
       <View style={styles.footerContainer}>
-        <ActivityIndicator size="large" />
+        <ActivityIndicator color="black" size="large" />
       </View>
     )) || <></>;
 
@@ -78,7 +80,7 @@ const SearchScreen = ({ navigation }: Props): React.ReactElement => {
         placeholder={translate('searchScreen.searchBarHint')}
         onChangeText={handleChange}
         value={searchText}
-        showLoading={loading}
+        showLoading={networkStatus === NetworkStatus.loading}
         searchIcon={{
           name: 'arrow-back',
           onPress: handleBackPress,

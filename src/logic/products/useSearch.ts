@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { useLazyQuery } from '@apollo/client';
+import { NetworkStatus, useLazyQuery } from '@apollo/client';
 import {
   GetSearchProductsVars,
   GET_SEARCH_PRODUCTS,
@@ -9,7 +9,7 @@ import { LIMITS } from '../../constants';
 
 interface Result {
   data: SearchProductsDataType | undefined;
-  loading: boolean;
+  networkStatus: NetworkStatus;
   called: boolean;
   searchText: string;
   handleChange(arg1: string): void;
@@ -22,9 +22,12 @@ export const useSearch = (): Result => {
   const [currentPage, setCurrentPage] = useState<number>(1);
   const [
     getSearchProducts,
-    { called, loading, error, fetchMore, data },
+    { called, loading, error, networkStatus, fetchMore, data },
   ] = useLazyQuery<SearchProductsDataType, GetSearchProductsVars>(
     GET_SEARCH_PRODUCTS,
+    {
+      notifyOnNetworkStatusChange: true,
+    },
   );
 
   useEffect(() => {
@@ -74,7 +77,7 @@ export const useSearch = (): Result => {
 
   return {
     data,
-    loading,
+    networkStatus,
     called,
     searchText,
     loadMore,

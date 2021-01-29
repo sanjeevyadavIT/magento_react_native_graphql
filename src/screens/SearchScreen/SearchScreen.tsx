@@ -90,7 +90,6 @@ const SearchScreen = ({ navigation }: Props): React.ReactElement => {
         }}
         loadingProps={loadingProps}
         containerStyle={styles.searchBarContainer}
-        inputContainerStyle={styles.searchBarInputContainer}
       />
       <FlatList
         numColumns={2}
@@ -105,7 +104,6 @@ const SearchScreen = ({ navigation }: Props): React.ReactElement => {
   );
 };
 
-// TODO: Remove hard-coded values
 const styles = StyleSheet.create({
   center: {
     flex: 1,
@@ -114,7 +112,6 @@ const styles = StyleSheet.create({
     padding: SPACING.large,
   },
   searchBarContainer: {
-    padding: 0,
     borderTopWidth: 0,
     borderBottomWidth: StyleSheet.hairlineWidth,
     borderBottomColor: 'rgba(0,0,0,.1)',
@@ -128,10 +125,6 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.1,
     shadowRadius: 2,
     elevation: 1,
-  },
-  searchBarInputContainer: {
-    borderRadius: 0,
-    backgroundColor: 'white',
   },
   footerContainer: {
     alignItems: 'center',

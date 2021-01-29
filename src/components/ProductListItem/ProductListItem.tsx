@@ -17,7 +17,6 @@ interface Props {
 
 const COLUMN_WIDTH = DIMENS.common.WINDOW_WIDTH / 2;
 
-// TODO: remove hard-coded color & dimension vaues
 const ProductListItem = ({
   item,
   index,
@@ -35,7 +34,10 @@ const ProductListItem = ({
       <View
         style={[
           styles.container,
-          { borderColor: theme.colors?.divider },
+          {
+            borderColor: theme.colors?.divider,
+            backgroundColor: theme.colors?.white,
+          },
           horizontalMode && styles.topBorder,
           (horizontalMode || index % 2 !== 0) && styles.leftBorder,
         ]}
@@ -55,7 +57,6 @@ const styles = StyleSheet.create({
     flex: 1,
     width: COLUMN_WIDTH,
     borderBottomWidth: DIMENS.common.borderWidth,
-    backgroundColor: 'white',
     overflow: 'hidden',
   },
   leftBorder: {

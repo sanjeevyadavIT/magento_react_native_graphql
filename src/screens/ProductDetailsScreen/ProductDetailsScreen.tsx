@@ -1,6 +1,6 @@
-import React, { useEffect } from 'react';
+import React, { useContext, useEffect } from 'react';
 import { View, StyleSheet, Dimensions } from 'react-native';
-import { Text } from 'react-native-elements';
+import { Text, ThemeContext } from 'react-native-elements';
 import { RouteProp } from '@react-navigation/native';
 import { StackNavigationProp } from '@react-navigation/stack';
 import HTML from 'react-native-render-html';
@@ -35,6 +35,7 @@ const ProductDetailsScreen = ({
   } = useProductDetails({
     sku,
   });
+  const { theme } = useContext(ThemeContext);
 
   useEffect(() => {
     getProductDetails();
@@ -57,6 +58,7 @@ const ProductDetailsScreen = ({
             source={{ html: productDetails.description.html }}
             contentWidth={Dimensions.get('window').width}
             containerStyle={styles.description}
+            baseFontStyle={{ color: theme.colors?.black }}
           />
         )}
       </View>

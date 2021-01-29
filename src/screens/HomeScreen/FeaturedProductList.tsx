@@ -1,7 +1,7 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { useNavigation } from '@react-navigation/native';
 import { View, FlatList, StyleSheet } from 'react-native';
-import { Text } from 'react-native-elements';
+import { Text, ThemeContext } from 'react-native-elements';
 import { ProductInListType } from '../../apollo/queries/productsFragment';
 import { ProductListItem, Spinner } from '../../components';
 import { DIMENS, SPACING } from '../../constants';
@@ -19,6 +19,7 @@ const FeaturedProductList = ({
   categoryId,
 }: Props): React.ReactElement => {
   const { data, networkStatus, error } = useCategoryProducts({ categoryId });
+  const { theme } = useContext(ThemeContext);
   const navigation = useNavigation();
 
   const onProductItemClicked = (index: number) => {
@@ -57,14 +58,14 @@ const FeaturedProductList = ({
 
   if (networkStatus === NetworkStatus.loading) {
     return (
-      <View style={styles.loadingBox}>
+      <View style={styles.loadingBox(theme)}>
         <Spinner />
       </View>
     );
   }
 
   return (
-    <View style={styles.container}>
+    <View style={styles.container(theme)}>
       {name && (
         <Text h4 h4Style={styles.title}>
           {name}
@@ -81,25 +82,24 @@ const FeaturedProductList = ({
   );
 };
 
-// TODO: Extract hard coded values
 const styles = StyleSheet.create({
-  container: {
+  container: theme => ({
     marginBottom: SPACING.large,
-    backgroundColor: '#fff',
-  },
+    backgroundColor: theme.colors?.white,
+  }),
   title: {
     marginStart: SPACING.large,
     paddingVertical: SPACING.small,
-    fontSize: 16,
+    fontSize: DIMENS.featuredProductList.titleFontSize,
   },
-  loadingBox: {
+  loadingBox: theme => ({
     alignContent: 'center',
     justifyContent: 'center',
     width: '100%',
-    backgroundColor: '#fff',
+    backgroundColor: theme.colors?.white,
     marginBottom: SPACING.large,
     height: (DIMENS.common.WINDOW_WIDTH / 3) * 2, // This is linked to ProductListItem height
-  },
+  }),
 });
 
 export default FeaturedProductList;

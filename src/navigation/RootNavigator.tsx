@@ -1,14 +1,11 @@
 import React from 'react';
-import {
-  DarkTheme,
-  DefaultTheme,
-  NavigationContainer,
-} from '@react-navigation/native';
+import { NavigationContainer } from '@react-navigation/native';
 import { createDrawerNavigator } from '@react-navigation/drawer';
 import { useColorScheme } from 'react-native-appearance';
 import StackNavigator from './StackNavigator';
 import { DrawerScreen } from '../screens';
 import { useCart } from '../logic/cart/useCart';
+import { navigationLightTheme, navigationDarkTheme } from '../theme';
 
 const Drawer = createDrawerNavigator();
 
@@ -16,7 +13,9 @@ const RootNavigator = () => {
   const scheme = useColorScheme();
   const { cartId } = useCart();
   return (
-    <NavigationContainer theme={scheme === 'dark' ? DarkTheme : DefaultTheme}>
+    <NavigationContainer
+      theme={scheme === 'dark' ? navigationDarkTheme : navigationLightTheme}
+    >
       <Drawer.Navigator drawerContent={props => <DrawerScreen {...props} />}>
         <Drawer.Screen
           name="drawer"

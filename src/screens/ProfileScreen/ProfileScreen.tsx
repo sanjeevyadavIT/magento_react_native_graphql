@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
-import { View, Text } from 'react-native';
+import { View } from 'react-native';
 import { BottomTabNavigationProp } from '@react-navigation/bottom-tabs';
-import { Button } from 'react-native-elements';
+import { Button, Text } from 'react-native-elements';
 import { GenericTemplate } from '../../components';
 import { translate } from '../../i18n';
 import { useCustomer, useLogout } from '../../logic';

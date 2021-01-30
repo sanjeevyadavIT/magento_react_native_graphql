@@ -4,6 +4,7 @@ import {
   GET_CATGEORY_PRODUCTS,
   GetCategoryProductsVars,
   CategoryProductsDataType,
+  SortEnum,
 } from '../../apollo/queries/getCategoryProducts';
 import { LIMITS } from '../../constants';
 
@@ -15,7 +16,7 @@ interface Result {
   data: CategoryProductsDataType | undefined;
   networkStatus: NetworkStatus;
   error: ApolloError | undefined;
-  refresh(): void;
+  refresh: (arg0?: { name?: SortEnum; price?: SortEnum }) => void;
   loadMore(): void;
 }
 
@@ -58,8 +59,14 @@ export const useCategoryProducts = ({ categoryId: id }: Props): Result => {
     }
   };
 
-  const refresh = () => {
-    refetch();
+  const refresh = ({
+    price,
+    name,
+  }: { price?: SortEnum; name?: SortEnum } = {}) => {
+    refetch({
+      price,
+      name,
+    });
     setCurrentPage(1);
   };
 

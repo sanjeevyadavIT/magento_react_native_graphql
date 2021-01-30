@@ -5,6 +5,7 @@ import {
   ColorSchemeName,
 } from 'react-native-appearance';
 import { ThemeProvider } from 'react-native-elements';
+import { SafeAreaProvider } from 'react-native-safe-area-context';
 import { OverflowMenuProvider } from 'react-navigation-header-buttons';
 import Navigator from './navigation';
 import { ApolloClient, ApolloProvider } from '@apollo/client';
@@ -41,14 +42,16 @@ const App = (): React.ReactElement => {
     return (
       <ApolloProvider client={client}>
         <AppearanceProvider>
-          <ThemeProvider
-            useDark={colorScheme === 'dark'}
-            theme={colorScheme === 'dark' ? darkTheme : lightTheme}
-          >
-            <OverflowMenuProvider>
-              <Navigator />
-            </OverflowMenuProvider>
-          </ThemeProvider>
+          <SafeAreaProvider>
+            <ThemeProvider
+              useDark={colorScheme === 'dark'}
+              theme={colorScheme === 'dark' ? darkTheme : lightTheme}
+            >
+              <OverflowMenuProvider>
+                <Navigator />
+              </OverflowMenuProvider>
+            </ThemeProvider>
+          </SafeAreaProvider>
         </AppearanceProvider>
       </ApolloProvider>
     );

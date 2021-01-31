@@ -19,11 +19,16 @@ export interface ProductDetailsType {
   id: number;
   sku: string;
   name: string;
+  type: ProductTypeEnum;
   description: {
     html: string;
   };
   price_range: PriceRangeType;
   media_gallery: Array<MediaGalleryItemType>;
+}
+
+export enum ProductTypeEnum {
+  SIMPLE = 'SimpleProduct',
 }
 
 export const GET_PRODUCT_DETAILS = gql`
@@ -36,6 +41,7 @@ export const GET_PRODUCT_DETAILS = gql`
         description {
           html
         }
+        type: __typename
         price_range {
           maximum_price {
             final_price {

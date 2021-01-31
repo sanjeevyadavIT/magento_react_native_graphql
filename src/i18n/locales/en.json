@@ -49,7 +49,10 @@
   "productDetailsScreen": {
     "appbarTitle": "Product Details",
     "addToCart": "Add To Cart",
-    "guestUserPromptMessage": "In order to add product to cart, please login or create new account"
+    "guestUserPromptMessage": "In order to add product to cart, please login or create new account",
+    "productTypeNotSupported": "Currently only Simple products are supported",
+    "addToCartSuccessful": "Product added to cart",
+    "addToCartError": "Unable to add product to cart, something went wrong."
   },
   "productListScreen": {
     "appbarTitle": "Products"

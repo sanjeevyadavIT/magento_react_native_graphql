@@ -4,17 +4,15 @@ import { Text, ThemeContext, Button } from 'react-native-elements';
 import { RouteProp } from '@react-navigation/native';
 import { StackNavigationProp } from '@react-navigation/stack';
 import HTML from 'react-native-render-html';
-import { useQuery } from '@apollo/client';
+import Toast from 'react-native-simple-toast';
 import { MediaGallery, GenericTemplate } from '../../components';
 import { SPACING } from '../../constants';
 import { AppStackParamList, Routes } from '../../navigation';
 import { useProductDetails } from '../../logic/products/useProductDetails';
 import { getPriceStringFromPriceRange, showLoginPrompt } from '../../logic';
 import { translate } from '../../i18n';
-import {
-  IsLoggedInDataType,
-  IS_LOGGED_IN,
-} from '../../apollo/queries/isLoggedIn';
+import { useCart } from '../../logic/cart/useCart';
+import { ProductTypeEnum } from '../../apollo/queries/getProductDetails';
 
 type Props = {
   navigation: StackNavigationProp<
@@ -34,14 +32,18 @@ const ProductDetailsScreen = ({
   },
 }: Props): React.ReactElement => {
   const {
-    getProductDetails,
-    productDetails,
-    loading,
     error,
+    loading,
+    productDetails,
+    getProductDetails,
   } = useProductDetails({
     sku,
   });
-  const { data } = useQuery<IsLoggedInDataType>(IS_LOGGED_IN);
+  const {
+    isLoggedIn,
+    addProductsToCart,
+    loading: addProductsToCartLoading,
+  } = useCart();
   const { theme } = useContext(ThemeContext);
 
   useEffect(() => {
@@ -49,12 +51,23 @@ const ProductDetailsScreen = ({
   }, []);
 
   const handleAddToCart = () => {
-    if (!data?.isLoggedIn) {
+    if (!isLoggedIn) {
       showLoginPrompt(
         translate('productDetailsScreen.guestUserPromptMessage'),
         navigation,
       );
       return;
+    }
+
+    if (productDetails?.type === ProductTypeEnum.SIMPLE) {
+      addProductsToCart({
+        quantity: 1,
+        sku: productDetails.sku,
+      });
+    } else {
+      Toast.show(
+        translate('productDetailsScreen.productTypeNotSupported', Toast.LONG),
+      );
     }
   };
 
@@ -65,6 +78,7 @@ const ProductDetailsScreen = ({
       errorMessage={error?.message}
       footer={
         <Button
+          loading={addProductsToCartLoading}
           containerStyle={styles.noBorderRadius}
           buttonStyle={styles.noBorderRadius}
           title={translate('productDetailsScreen.addToCart')}

@@ -11,7 +11,7 @@ const Drawer = createDrawerNavigator();
 
 const RootNavigator = () => {
   const scheme = useColorScheme();
-  const { cartId } = useCart();
+  useCart();
   return (
     <NavigationContainer
       theme={scheme === 'dark' ? navigationDarkTheme : navigationLightTheme}

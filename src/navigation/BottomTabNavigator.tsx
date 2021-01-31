@@ -1,14 +1,14 @@
 import React from 'react';
-import { Alert } from 'react-native';
 import { useQuery } from '@apollo/client';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import { StackNavigationProp } from '@react-navigation/stack';
 import { Icon } from 'react-native-elements';
 import { translate } from '../i18n';
 import { HomeScreen, CartScreen, ProfileScreen } from '../screens';
 import { Routes } from './routeNames';
 import { AppStackParamList, BottomTabNavigatorParamList } from './routeParams';
 import { IS_LOGGED_IN, IsLoggedInDataType } from '../apollo/queries/isLoggedIn';
-import { StackNavigationProp } from '@react-navigation/stack';
+import { showLoginPrompt } from '../logic';
 
 const Tab = createBottomTabNavigator<BottomTabNavigatorParamList>();
 
@@ -21,31 +21,6 @@ type Props = {
 
 const BottomTabNavigator = ({ navigation }: Props) => {
   const { data } = useQuery<IsLoggedInDataType>(IS_LOGGED_IN);
-  const showLoginPrompt = (message: string): void => {
-    Alert.alert(
-      translate('common.dearUser'),
-      message,
-      [
-        {
-          text: translate('common.login'),
-          onPress: () =>
-            navigation.navigate(
-              Routes.NAVIGATION_TO_AUTHENTICATION_SPLASH_SCREEN,
-              { screen: Routes.NAVIGATION_TO_LOGIN_SCREEN },
-            ),
-        },
-        {
-          text: translate('common.signup'),
-          onPress: () =>
-            navigation.navigate(
-              Routes.NAVIGATION_TO_AUTHENTICATION_SPLASH_SCREEN,
-              { screen: Routes.NAVIGATION_TO_SIGNUP_SCREEN },
-            ),
-        },
-      ],
-      { cancelable: true },
-    );
-  };
 
   return (
     <Tab.Navigator>
@@ -75,6 +50,7 @@ const BottomTabNavigator = ({ navigation }: Props) => {
               e.preventDefault();
               showLoginPrompt(
                 translate('profileScreen.guestUserPromptMessage'),
+                navigation,
               );
             }
           },
@@ -94,7 +70,10 @@ const BottomTabNavigator = ({ navigation }: Props) => {
             if (!data?.isLoggedIn) {
               // Prevent default action
               e.preventDefault();
-              showLoginPrompt(translate('cartScreen.guestUserPromptMessage'));
+              showLoginPrompt(
+                translate('cartScreen.guestUserPromptMessage'),
+                navigation,
+              );
             }
           },
         }}

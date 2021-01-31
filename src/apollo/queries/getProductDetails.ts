@@ -3,7 +3,7 @@ import {
   MEDIA_GALLERY_FRAGMENT,
   MediaGalleryItemType,
 } from './mediaGalleryFragment';
-import { PriceRangeType } from './getCategoryProducts';
+import { PriceRangeType } from './productsFragment';
 
 export interface GetProductDetailsVars {
   sku: string;

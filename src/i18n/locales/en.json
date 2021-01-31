@@ -47,7 +47,9 @@
     "successMessage": "Login Successful"
   },
   "productDetailsScreen": {
-    "appbarTitle": "Product Details"
+    "appbarTitle": "Product Details",
+    "addToCart": "Add To Cart",
+    "guestUserPromptMessage": "In order to add product to cart, please login or create new account"
   },
   "productListScreen": {
     "appbarTitle": "Products"

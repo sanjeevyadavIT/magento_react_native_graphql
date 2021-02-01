@@ -17,6 +17,10 @@ const DIMENS = Object.freeze({
     borderWidth: moderateScale(StyleSheet.hairlineWidth),
     appbarIconSize: moderateScale(23),
   },
+  cartScreen: {
+    imageSize: moderateScale(100),
+    totalPriceFontSize: moderateScale(16),
+  },
   categoryListItem: {
     imageWidth: moderateScale(70),
     imageHeight: moderateScale(70),

@@ -1,7 +1,4 @@
-import {
-  getCurrencySymbolFromCode,
-  getPriceStringFromPriceRange,
-} from './price';
+import { getCurrencySymbolFromCode, formatPrice } from './price';
 import { currencySymbols } from '../../../magento.config';
 
 describe('price.js', () => {
@@ -31,23 +28,19 @@ describe('price.js', () => {
     });
   });
 
-  describe('getPriceStringFromPriceRange()', () => {
+  describe('formatPrice()', () => {
     test('should return correct string', () => {
       // Setup
       const currencyCode = 'USD';
-      const price = 29.99;
-      const priceRange = {
-        maximum_price: {
-          final_price: {
-            currency: currencyCode,
-            value: price,
-          },
-        },
+      const value = 29.99;
+      const price = {
+        currency: currencyCode,
+        value,
       };
-      const expectedResult = `${currencySymbols[currencyCode]} ${price}`;
+      const expectedResult = `${currencySymbols[currencyCode]} ${value}`;
 
       // Exercise
-      const result = getPriceStringFromPriceRange(priceRange);
+      const result = formatPrice(price);
 
       // Verify
       expect(result).toBe(expectedResult);

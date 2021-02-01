@@ -1,5 +1,10 @@
 import { useEffect } from 'react';
-import { useLazyQuery, useMutation, useQuery } from '@apollo/client';
+import {
+  ApolloError,
+  useLazyQuery,
+  useMutation,
+  useQuery,
+} from '@apollo/client';
 import Toast from 'react-native-simple-toast';
 import {
   IsLoggedInDataType,
@@ -16,7 +21,9 @@ import { translate } from '../../i18n';
 
 interface Result {
   cartData: GetCartDataType | undefined;
-  loading: boolean;
+  cartLoading: boolean;
+  cartError: ApolloError | undefined;
+  addToCartLoading: boolean;
   isLoggedIn: boolean;
   addProductsToCart(arg0: CartItemInputType): void;
 }
@@ -25,10 +32,11 @@ export const useCart = (): Result => {
   const { data: { isLoggedIn = false } = {} } = useQuery<IsLoggedInDataType>(
     IS_LOGGED_IN,
   );
-  const [fetchCart, { data: cartData }] = useLazyQuery<GetCartDataType>(
-    GET_CART,
-  );
-  const [_addProductsToCart, { loading, data }] = useMutation<
+  const [
+    fetchCart,
+    { data: cartData, loading: cartLoading, error: cartError },
+  ] = useLazyQuery<GetCartDataType>(GET_CART);
+  const [_addProductsToCart, { loading: addToCartLoading, data }] = useMutation<
     AddProductsToCartDataType,
     AddProductsToCartVars
   >(ADD_PRODUCTS_TO_CART, {
@@ -68,6 +76,8 @@ export const useCart = (): Result => {
     addProductsToCart,
     isLoggedIn,
     cartData,
-    loading,
+    cartLoading,
+    cartError,
+    addToCartLoading,
   };
 };

@@ -22,6 +22,9 @@
     "lastName": "Last Name",
     "register": "Register",
     "logout": "Logout",
+    "quantity": "Qty",
+    "price": "price",
+    "total": "Total",
     "pluralizationExample": {
       "one": "You have 1 item",
       "other": "You have %{count} items",
@@ -33,7 +36,10 @@
   },
   "cartScreen": {
     "appbarTitle": "Cart",
-    "guestUserPromptMessage": "In order to view cart, please login or create new account"
+    "guestUserPromptMessage": "In order to view cart, please login or create new account",
+    "cartEmptyTitle": "Hey, it feels so light!",
+    "cartEmptyMessage": "There is nothing in your bag. Let's add some items.",
+    "placeOrderButton": "Place Order"
   },
   "categoriesScreen": {
     "appbarTitle": "Category"

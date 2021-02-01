@@ -2,7 +2,7 @@ import React, { useContext } from 'react';
 import { View, StyleSheet, TouchableOpacity } from 'react-native';
 import { Text, Image, ThemeContext } from 'react-native-elements';
 import { ProductInListType } from '../../apollo/queries/productsFragment';
-import { getPriceStringFromPriceRange } from '../../logic';
+import { formatPrice } from '../../logic';
 import { DIMENS } from '../../constants';
 
 interface Props {
@@ -45,7 +45,7 @@ const ProductListItem = ({
         {renderImage()}
         <Text style={styles.name}>{item.name}</Text>
         <Text style={styles.price}>
-          {getPriceStringFromPriceRange(item.price_range)}
+          {formatPrice(item.price_range.maximum_price.final_price)}
         </Text>
       </View>
     </TouchableOpacity>

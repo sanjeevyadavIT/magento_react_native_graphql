@@ -9,7 +9,7 @@ import { MediaGallery, GenericTemplate } from '../../components';
 import { SPACING } from '../../constants';
 import { AppStackParamList, Routes } from '../../navigation';
 import { useProductDetails } from '../../logic/products/useProductDetails';
-import { getPriceStringFromPriceRange, showLoginPrompt } from '../../logic';
+import { formatPrice, showLoginPrompt } from '../../logic';
 import { translate } from '../../i18n';
 import { useCart } from '../../logic/cart/useCart';
 import { ProductTypeEnum } from '../../apollo/queries/getProductDetails';
@@ -39,11 +39,7 @@ const ProductDetailsScreen = ({
   } = useProductDetails({
     sku,
   });
-  const {
-    isLoggedIn,
-    addProductsToCart,
-    loading: addProductsToCartLoading,
-  } = useCart();
+  const { isLoggedIn, addProductsToCart, addToCartLoading } = useCart();
   const { theme } = useContext(ThemeContext);
 
   useEffect(() => {
@@ -78,7 +74,7 @@ const ProductDetailsScreen = ({
       errorMessage={error?.message}
       footer={
         <Button
-          loading={addProductsToCartLoading}
+          loading={addToCartLoading}
           containerStyle={styles.noBorderRadius}
           buttonStyle={styles.noBorderRadius}
           title={translate('productDetailsScreen.addToCart')}
@@ -93,7 +89,7 @@ const ProductDetailsScreen = ({
         </Text>
         {!!productDetails && (
           <Text style={styles.price}>
-            {getPriceStringFromPriceRange(productDetails.price_range)}
+            {formatPrice(productDetails.price_range.maximum_price.final_price)}
           </Text>
         )}
         {!!productDetails && (

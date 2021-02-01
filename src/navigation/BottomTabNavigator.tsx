@@ -1,14 +1,15 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { useQuery } from '@apollo/client';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { StackNavigationProp } from '@react-navigation/stack';
-import { Icon } from 'react-native-elements';
+import { Icon, ThemeContext } from 'react-native-elements';
 import { translate } from '../i18n';
 import { HomeScreen, CartScreen, ProfileScreen } from '../screens';
 import { Routes } from './routeNames';
 import { AppStackParamList, BottomTabNavigatorParamList } from './routeParams';
 import { IS_LOGGED_IN, IsLoggedInDataType } from '../apollo/queries/isLoggedIn';
 import { showLoginPrompt } from '../logic';
+import { useCart } from '../logic/cart/useCart';
 
 const Tab = createBottomTabNavigator<BottomTabNavigatorParamList>();
 
@@ -21,6 +22,8 @@ type Props = {
 
 const BottomTabNavigator = ({ navigation }: Props) => {
   const { data } = useQuery<IsLoggedInDataType>(IS_LOGGED_IN);
+  const { cartCount } = useCart();
+  const { theme } = useContext(ThemeContext);
 
   return (
     <Tab.Navigator>
@@ -64,6 +67,10 @@ const BottomTabNavigator = ({ navigation }: Props) => {
           tabBarIcon: ({ color, size }) => (
             <Icon name="shopping-cart" color={color} size={size} />
           ),
+          tabBarBadgeStyle: {
+            backgroundColor: theme.colors?.error,
+          },
+          ...(cartCount !== '' && { tabBarBadge: cartCount }),
         }}
         listeners={{
           tabPress: e => {

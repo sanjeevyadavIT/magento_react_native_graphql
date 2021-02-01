@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { useLazyQuery, ApolloError } from '@apollo/client';
+import { useQuery, ApolloError } from '@apollo/client';
 import {
   GET_PRODUCT_DETAILS,
   GetProductDetailsVars,
@@ -12,7 +12,6 @@ interface Props {
 }
 
 interface Result {
-  getProductDetails(): void;
   productDetails?: ProductDetailsType | null;
   loading: boolean;
   error: ApolloError | undefined;
@@ -22,7 +21,7 @@ export const useProductDetails = ({ sku }: Props): Result => {
   const [productDetails, setProductDetails] = useState<
     ProductDetailsType | null | undefined
   >(null);
-  const [getProductDetails, { loading, error }] = useLazyQuery<
+  const { loading, error } = useQuery<
     ProductDetailsDataType,
     GetProductDetailsVars
   >(GET_PRODUCT_DETAILS, {
@@ -37,7 +36,6 @@ export const useProductDetails = ({ sku }: Props): Result => {
   });
 
   return {
-    getProductDetails,
     productDetails,
     loading,
     error,

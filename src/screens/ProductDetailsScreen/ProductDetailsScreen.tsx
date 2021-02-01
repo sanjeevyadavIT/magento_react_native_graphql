@@ -1,12 +1,17 @@
-import React, { useContext, useEffect } from 'react';
+import React, { useContext, useLayoutEffect } from 'react';
 import { View, StyleSheet, Dimensions } from 'react-native';
-import { Text, ThemeContext, Button } from 'react-native-elements';
+import { Text, ThemeContext, Button, Badge } from 'react-native-elements';
 import { RouteProp } from '@react-navigation/native';
 import { StackNavigationProp } from '@react-navigation/stack';
 import HTML from 'react-native-render-html';
 import Toast from 'react-native-simple-toast';
-import { MediaGallery, GenericTemplate } from '../../components';
-import { SPACING } from '../../constants';
+import {
+  MediaGallery,
+  GenericTemplate,
+  CustomHeaderButtons,
+  CustomHeaderItem,
+} from '../../components';
+import { DIMENS, SPACING } from '../../constants';
 import { AppStackParamList, Routes } from '../../navigation';
 import { useProductDetails } from '../../logic/products/useProductDetails';
 import { formatPrice, showLoginPrompt } from '../../logic';
@@ -31,20 +36,40 @@ const ProductDetailsScreen = ({
     params: { sku },
   },
 }: Props): React.ReactElement => {
-  const {
-    error,
-    loading,
-    productDetails,
-    getProductDetails,
-  } = useProductDetails({
+  const { error, loading, productDetails } = useProductDetails({
     sku,
   });
-  const { isLoggedIn, addProductsToCart, addToCartLoading } = useCart();
+  const {
+    cartCount,
+    isLoggedIn,
+    addProductsToCart,
+    addToCartLoading,
+  } = useCart();
   const { theme } = useContext(ThemeContext);
 
-  useEffect(() => {
-    getProductDetails();
-  }, []);
+  useLayoutEffect(() => {
+    navigation.setOptions({
+      headerRight: () => (
+        <CustomHeaderButtons>
+          <CustomHeaderItem
+            title={translate('common.cart')}
+            iconName="shopping-cart"
+            onPress={() =>
+              navigation.navigate(Routes.NAVIGATION_TO_CART_SCREEN)
+            }
+          />
+          {cartCount !== '' && (
+            <Badge
+              value={cartCount}
+              status="error"
+              textStyle={styles.badgeText}
+              containerStyle={styles.badge}
+            />
+          )}
+        </CustomHeaderButtons>
+      ),
+    });
+  }, [navigation, cartCount]);
 
   const handleAddToCart = () => {
     if (!isLoggedIn) {
@@ -119,6 +144,15 @@ const styles = StyleSheet.create({
   },
   noBorderRadius: {
     borderRadius: 0,
+  },
+  badge: {
+    position: 'absolute',
+    top: -4,
+    right: 0,
+  },
+  badgeText: {
+    fontSize: DIMENS.common.cartItemCountFontSize,
+    textAlign: 'center',
   },
 });
 

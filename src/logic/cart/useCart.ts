@@ -18,8 +18,10 @@ import {
   CartItemInputType,
 } from '../../apollo/mutations/addProductsToCart';
 import { translate } from '../../i18n';
+import { getCartCount } from '../utils/cartHelpers';
 
 interface Result {
+  cartCount: string;
   cartData: GetCartDataType | undefined;
   cartLoading: boolean;
   cartError: ApolloError | undefined;
@@ -54,6 +56,7 @@ export const useCart = (): Result => {
       );
     },
   });
+  const cartCount: string = getCartCount(cartData?.customerCart?.items?.length);
 
   useEffect(() => {
     if (isLoggedIn) {
@@ -75,6 +78,7 @@ export const useCart = (): Result => {
   return {
     addProductsToCart,
     isLoggedIn,
+    cartCount,
     cartData,
     cartLoading,
     cartError,

@@ -14,6 +14,7 @@ const DIMENS = Object.freeze({
   common: {
     WINDOW_WIDTH: screenWidth,
     WINDOW_HEIGHT: screenHeight,
+    cartItemCountFontSize: moderateScale(10),
     borderWidth: moderateScale(StyleSheet.hairlineWidth),
     appbarIconSize: moderateScale(23),
   },

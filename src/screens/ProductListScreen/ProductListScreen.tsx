@@ -1,4 +1,4 @@
-import React, { useContext, useLayoutEffect, useMemo, useState } from 'react';
+import React, { useContext, useLayoutEffect } from 'react';
 import { View, RefreshControl, StyleSheet, FlatList } from 'react-native';
 import { RouteProp } from '@react-navigation/native';
 import { StackNavigationProp } from '@react-navigation/stack';
@@ -53,7 +53,7 @@ const ProductListScreen = ({
         </CustomHeaderButtons>
       ),
     });
-  }, [navigation, setVisible]);
+  }, [navigation]);
 
   const onProductItemClicked = (index: number) => {
     if (data?.products?.items) {

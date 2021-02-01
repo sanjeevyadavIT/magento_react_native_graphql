@@ -12,16 +12,27 @@ E-Commerce App written in React Native which consumes [Magento 2 GraphQL api](ht
 ## :camera: Screenshots
 
 <div style="display:flex;" >
-  <img src=".github/screenshots/1.png" width="19%" >
-  <img src=".github/screenshots/2.png" style="margin-left:10px;" width="19%" >
-  <img src=".github/screenshots/3.png" style="margin-left:10px;" width="19%" >
-  <img src=".github/screenshots/4.png" style="margin-left:10px;" width="19%" >
-  <img src=".github/screenshots/5.png" style="margin-left:10px;" width="19%" >
+  <img src=".github/screenshots/light/1.jpg" width="19%" >
+  <img src=".github/screenshots/light/2.jpg" style="margin-left:10px;" width="19%" >
+  <img src=".github/screenshots/light/3.jpg" style="margin-left:10px;" width="19%" >
+  <img src=".github/screenshots/light/4.jpg" style="margin-left:10px;" width="19%" >
+  <img src=".github/screenshots/light/5.jpg" style="margin-left:10px;" width="19%" >
 </div>
 
 <div style="display:flex;" >
-  <img src=".github/screenshots/6.png" width="19%" >
-  <img src=".github/screenshots/7.png" width="19%" >
+  <img src=".github/screenshots/light/6.jpg" width="19%" >
+  <img src=".github/screenshots/light/7.jpg" width="19%" >
+  <img src=".github/screenshots/light/8.jpg" width="19%" >
+</div>
+
+### (Dark mode)
+
+<div style="display:flex;" >
+  <img src=".github/screenshots/dark/1.jpg" width="19%" >
+  <img src=".github/screenshots/dark/2.jpg" style="margin-left:10px;" width="19%" >
+  <img src=".github/screenshots/dark/3.jpg" style="margin-left:10px;" width="19%" >
+  <img src=".github/screenshots/dark/4.jpg" style="margin-left:10px;" width="19%" >
+  <img src=".github/screenshots/dark/5.jpg" style="margin-left:10px;" width="19%" >
 </div>
 
 ## 🚀 Getting Started:

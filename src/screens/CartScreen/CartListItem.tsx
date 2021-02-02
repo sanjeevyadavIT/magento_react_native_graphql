@@ -3,7 +3,7 @@ import { StyleSheet } from 'react-native';
 import { Image, ListItem } from 'react-native-elements';
 import { translate } from '../../i18n';
 import { DIMENS } from '../../constants';
-import { CartItemType } from '../../apollo/queries/cartItemsFragment';
+import { CartItemType } from '../../apollo/queries/basicCartFragment';
 import { formatPrice } from '../../logic';
 
 type Props = {

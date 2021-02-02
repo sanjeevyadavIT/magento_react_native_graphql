@@ -29,6 +29,7 @@ export interface ProductDetailsType {
 
 export enum ProductTypeEnum {
   SIMPLE = 'SimpleProduct',
+  GROUPED = 'GroupedProduct',
 }
 
 export const GET_PRODUCT_DETAILS = gql`

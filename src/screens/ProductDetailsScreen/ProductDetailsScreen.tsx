@@ -80,7 +80,10 @@ const ProductDetailsScreen = ({
       return;
     }
 
-    if (productDetails?.type === ProductTypeEnum.SIMPLE) {
+    if (
+      productDetails?.type === ProductTypeEnum.SIMPLE ||
+      productDetails?.type === ProductTypeEnum.GROUPED
+    ) {
       addProductsToCart({
         quantity: 1,
         sku: productDetails.sku,

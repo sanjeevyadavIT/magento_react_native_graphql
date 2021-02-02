@@ -1,17 +1,12 @@
 import { gql } from '@apollo/client';
+import {
+  BasicCartDetailsType,
+  BASIC_CART_DETAILS_FRAGMENT,
+} from '../queries/basicCartFragment';
 
 export interface AddProductsToCartDataType {
   addProductsToCart: {
-    cart: {
-      items: Array<{
-        id: string;
-        product: {
-          name: string;
-          sku: string;
-        };
-        quantity: number;
-      }>;
-    };
+    cart: BasicCartDetailsType;
   };
 }
 
@@ -29,15 +24,9 @@ export const ADD_PRODUCTS_TO_CART = gql`
   mutation AddProductsToCart($cartId: String!, $cartItems: [CartItemInput!]!) {
     addProductsToCart(cartId: $cartId, cartItems: $cartItems) {
       cart {
-        items {
-          id
-          product {
-            name
-            sku
-          }
-          quantity
-        }
+        ...BasicCartDetailsFragment
       }
     }
   }
+  ${BASIC_CART_DETAILS_FRAGMENT}
 `;

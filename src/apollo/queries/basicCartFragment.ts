@@ -1,5 +1,17 @@
 import { gql } from '@apollo/client';
 
+export interface BasicCartDetailsType {
+  id: string;
+  items: Array<CartItemType>;
+  prices: {
+    grandTotal: {
+      value: number;
+      currency: string;
+    };
+  };
+  totalQuantity: number;
+}
+
 export interface CartItemType {
   id: number;
   product: {
@@ -18,8 +30,9 @@ export interface CartItemType {
   quantity: number;
 }
 
-export const CART_ITEMS_FRAGMENT = gql`
-  fragment CartItemsFragment on Cart {
+export const BASIC_CART_DETAILS_FRAGMENT = gql`
+  fragment BasicCartDetailsFragment on Cart {
+    id
     items {
       id
       prices {
@@ -37,5 +50,12 @@ export const CART_ITEMS_FRAGMENT = gql`
       }
       quantity
     }
+    prices {
+      grandTotal: grand_total {
+        value
+        currency
+      }
+    }
+    totalQuantity: total_quantity
   }
 `;

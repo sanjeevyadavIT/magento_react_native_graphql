@@ -28,9 +28,9 @@ export const CartFooter = ({
   return (
     <View style={[styles.container, containerStyle]}>
       {grandTotal && (
-        <Text h4 h4Style={styles.totalPrice}>{`${translate(
-          'common.total',
-        )} : ${formatPrice(grandTotal)}`}</Text>
+        <Text h4>{`${translate('common.total')} : ${formatPrice(
+          grandTotal,
+        )}`}</Text>
       )}
       <Button
         containerStyle={styles.placeOrder}
@@ -47,9 +47,6 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     padding: SPACING.small,
     borderTopWidth: DIMENS.common.borderWidth,
-  },
-  totalPrice: {
-    fontSize: DIMENS.cartScreen.totalPriceFontSize,
   },
   placeOrder: {
     flex: 1,

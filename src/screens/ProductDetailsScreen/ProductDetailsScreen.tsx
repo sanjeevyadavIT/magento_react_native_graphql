@@ -1,6 +1,12 @@
-import React, { useContext, useLayoutEffect } from 'react';
+import React, { useState, useContext, useLayoutEffect } from 'react';
 import { View, StyleSheet, Dimensions } from 'react-native';
-import { Text, ThemeContext, Button, Badge } from 'react-native-elements';
+import {
+  Text,
+  ThemeContext,
+  Button,
+  Badge,
+  Divider,
+} from 'react-native-elements';
 import { RouteProp } from '@react-navigation/native';
 import { StackNavigationProp } from '@react-navigation/stack';
 import HTML from 'react-native-render-html';
@@ -18,6 +24,7 @@ import { formatPrice, showLoginPrompt } from '../../logic';
 import { translate } from '../../i18n';
 import { useCart } from '../../logic/cart/useCart';
 import { ProductTypeEnum } from '../../apollo/queries/getProductDetails';
+import ConfigurableOption from './ConfigurableOptions';
 
 type Props = {
   navigation: StackNavigationProp<
@@ -36,6 +43,9 @@ const ProductDetailsScreen = ({
     params: { sku },
   },
 }: Props): React.ReactElement => {
+  const [selectedOptions, setSelectedOptions] = useState<{
+    [key: number]: number;
+  }>({});
   const { error, loading, productDetails } = useProductDetails({
     sku,
   });
@@ -95,6 +105,55 @@ const ProductDetailsScreen = ({
     }
   };
 
+  const renderPrice = (): React.ReactNode => {
+    if (productDetails) {
+      return (
+        <Text h2 style={styles.price}>
+          {formatPrice(productDetails.price_range.maximum_price.final_price)}
+        </Text>
+      );
+    }
+    return null;
+  };
+
+  const renderConfigurableOptions = (): React.ReactNode => {
+    if (productDetails && productDetails.type === ProductTypeEnum.CONFIGURED) {
+      return (
+        <>
+          <Divider style={styles.divider} />
+          {productDetails.configurableOptions?.map(item => (
+            <ConfigurableOption
+              key={item.id}
+              id={item.id}
+              label={item.label}
+              options={item.values}
+              selectedValue={selectedOptions[item.id]}
+              onPress={(id, value) =>
+                setSelectedOptions(prevState => ({ ...prevState, [id]: value }))
+              }
+            />
+          ))}
+          <Divider />
+        </>
+      );
+    }
+    return null;
+  };
+
+  const renderDiscription = (): React.ReactNode => {
+    if (productDetails) {
+      return (
+        <HTML
+          source={{ html: productDetails.description.html }}
+          contentWidth={Dimensions.get('window').width}
+          containerStyle={styles.description}
+          baseFontStyle={{ color: theme.colors?.black }}
+        />
+      );
+    }
+    return null;
+  };
+
   return (
     <GenericTemplate
       scrollable
@@ -112,22 +171,12 @@ const ProductDetailsScreen = ({
     >
       <View>
         <MediaGallery items={productDetails?.media_gallery ?? []} />
-        <Text h4 style={styles.name}>
+        <Text h1 style={styles.name}>
           {productDetails?.name}
         </Text>
-        {!!productDetails && (
-          <Text style={styles.price}>
-            {formatPrice(productDetails.price_range.maximum_price.final_price)}
-          </Text>
-        )}
-        {!!productDetails && (
-          <HTML
-            source={{ html: productDetails.description.html }}
-            contentWidth={Dimensions.get('window').width}
-            containerStyle={styles.description}
-            baseFontStyle={{ color: theme.colors?.black }}
-          />
-        )}
+        {renderPrice()}
+        {renderConfigurableOptions()}
+        {renderDiscription()}
       </View>
     </GenericTemplate>
   );
@@ -156,6 +205,9 @@ const styles = StyleSheet.create({
   badgeText: {
     fontSize: DIMENS.common.cartItemCountFontSize,
     textAlign: 'center',
+  },
+  divider: {
+    marginVertical: SPACING.tiny,
   },
 });
 

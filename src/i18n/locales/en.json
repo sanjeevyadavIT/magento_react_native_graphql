@@ -59,7 +59,8 @@
     "guestUserPromptMessage": "In order to add product to cart, please login or create new account",
     "productTypeNotSupported": "Currently only Simple & grouped product types are supported",
     "addToCartSuccessful": "Product added to cart",
-    "addToCartError": "Unable to add product to cart, something went wrong."
+    "addToCartError": "Unable to add product to cart, something went wrong.",
+    "select": "Select %{label}"
   },
   "productListScreen": {
     "appbarTitle": "Products"

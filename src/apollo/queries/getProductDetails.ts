@@ -1,5 +1,9 @@
 import { gql } from '@apollo/client';
 import {
+  ConfigurableOptionType,
+  CONFIGURABLE_PRODUCT_FRAGMENT,
+} from './configurableProductFragment';
+import {
   MEDIA_GALLERY_FRAGMENT,
   MediaGalleryItemType,
 } from './mediaGalleryFragment';
@@ -25,11 +29,13 @@ export interface ProductDetailsType {
   };
   price_range: PriceRangeType;
   media_gallery: Array<MediaGalleryItemType>;
+  configurableOptions: Array<ConfigurableOptionType>;
 }
 
 export enum ProductTypeEnum {
   SIMPLE = 'SimpleProduct',
   GROUPED = 'GroupedProduct',
+  CONFIGURED = 'ConfigurableProduct',
 }
 
 export const GET_PRODUCT_DETAILS = gql`
@@ -52,8 +58,10 @@ export const GET_PRODUCT_DETAILS = gql`
           }
         }
         ...MediaGallery
+        ...ConfigurableProduct
       }
     }
   }
   ${MEDIA_GALLERY_FRAGMENT}
+  ${CONFIGURABLE_PRODUCT_FRAGMENT}
 `;

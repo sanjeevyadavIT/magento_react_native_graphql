@@ -1,7 +1,9 @@
 import { DefaultTheme } from '@react-navigation/native';
 import { lightColors } from './colors';
+import { typography } from './typography';
 
 export const lightTheme = {
+  ...typography,
   colors: {
     primary: lightColors.primary,
     // secondary

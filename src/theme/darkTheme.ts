@@ -1,7 +1,9 @@
 import { DarkTheme } from '@react-navigation/native';
 import { darkColors } from './colors';
+import { typography } from './typography';
 
 export const darkTheme = {
+  ...typography,
   colors: {
     primary: darkColors.secondary,
     // secondary

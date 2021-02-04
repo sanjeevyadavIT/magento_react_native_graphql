@@ -20,14 +20,10 @@ const DIMENS = Object.freeze({
   },
   cartScreen: {
     imageSize: moderateScale(100),
-    totalPriceFontSize: moderateScale(16),
   },
   categoryListItem: {
     imageWidth: moderateScale(70),
     imageHeight: moderateScale(70),
-  },
-  featuredProductList: {
-    titleFontSize: moderateScale(16),
   },
   homeScreen: {
     carouselHeight: moderateScale(200),

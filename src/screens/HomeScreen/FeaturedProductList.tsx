@@ -67,7 +67,7 @@ const FeaturedProductList = ({
   return (
     <View style={styles.container(theme)}>
       {name && (
-        <Text h4 h4Style={styles.title}>
+        <Text h2 h2Style={styles.title}>
           {name}
         </Text>
       )}
@@ -90,7 +90,6 @@ const styles = StyleSheet.create({
   title: {
     marginStart: SPACING.large,
     paddingVertical: SPACING.small,
-    fontSize: DIMENS.featuredProductList.titleFontSize,
   },
   loadingBox: theme => ({
     alignContent: 'center',

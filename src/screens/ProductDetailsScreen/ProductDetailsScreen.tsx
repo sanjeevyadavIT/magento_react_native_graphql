@@ -10,7 +10,7 @@ import {
 import { RouteProp } from '@react-navigation/native';
 import { StackNavigationProp } from '@react-navigation/stack';
 import HTML from 'react-native-render-html';
-import Toast from 'react-native-simple-toast';
+import { showMessage } from 'react-native-flash-message';
 import {
   MediaGallery,
   GenericTemplate,
@@ -99,9 +99,11 @@ const ProductDetailsScreen = ({
         sku: productDetails.sku,
       });
     } else {
-      Toast.show(
-        translate('productDetailsScreen.productTypeNotSupported', Toast.LONG),
-      );
+      showMessage({
+        message: translate('common.attention'),
+        description: translate('productDetailsScreen.productTypeNotSupported'),
+        type: 'warning',
+      });
     }
   };
 

@@ -17,9 +17,10 @@ export const darkTheme = {
     // grey5: '#354052',
     // searchBg
     // greyOutline: ,
-    // success: '#52c41a',
-    // error: '#ff190c',
-    // warning: ,
+    success: darkColors.sucess,
+    error: darkColors.error,
+    warning: darkColors.warning,
+    info: darkColors.info,
     // divider: '#ced2d9',
   },
 };

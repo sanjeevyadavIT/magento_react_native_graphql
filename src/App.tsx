@@ -5,6 +5,7 @@ import {
   ColorSchemeName,
 } from 'react-native-appearance';
 import { ThemeProvider } from 'react-native-elements';
+import FlashMessage from 'react-native-flash-message';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 import { OverflowMenuProvider } from 'react-navigation-header-buttons';
 import Navigator from './navigation';
@@ -27,6 +28,13 @@ const App = (): React.ReactElement => {
       ({ colorScheme: newColorScheme }) => {
         // do something with color scheme
         setColorScheme(newColorScheme);
+        const theme = newColorScheme === 'dark' ? darkTheme : lightTheme;
+        FlashMessage.setColorTheme({
+          success: theme.colors.success,
+          info: theme.colors.info,
+          warning: theme.colors.warning,
+          danger: theme.colors.error,
+        });
       },
     );
 
@@ -47,9 +55,12 @@ const App = (): React.ReactElement => {
               useDark={colorScheme === 'dark'}
               theme={colorScheme === 'dark' ? darkTheme : lightTheme}
             >
-              <OverflowMenuProvider>
-                <Navigator />
-              </OverflowMenuProvider>
+              <>
+                <OverflowMenuProvider>
+                  <Navigator />
+                </OverflowMenuProvider>
+                <FlashMessage position="top" />
+              </>
             </ThemeProvider>
           </SafeAreaProvider>
         </AppearanceProvider>

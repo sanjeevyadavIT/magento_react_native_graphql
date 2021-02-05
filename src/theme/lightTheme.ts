@@ -17,9 +17,10 @@ export const lightTheme = {
     // grey5: '#354052',
     searchBg: '#ebebeb',
     // greyOutline: ,
-    // success: '#52c41a',
-    // error: '#ff190c',
-    // warning: ,
+    success: lightColors.sucess,
+    error: lightColors.error,
+    warning: lightColors.warning,
+    info: lightColors.info,
     // divider: '#ced2d9',
   },
 };

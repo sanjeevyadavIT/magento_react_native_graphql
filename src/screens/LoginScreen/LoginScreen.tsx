@@ -3,7 +3,7 @@ import { StyleSheet } from 'react-native';
 import { Button, Input } from 'react-native-elements';
 import { CompositeNavigationProp } from '@react-navigation/native';
 import { StackNavigationProp } from '@react-navigation/stack';
-import Toast from 'react-native-simple-toast';
+import { showMessage } from 'react-native-flash-message';
 import { useLogin } from '../../logic';
 import { translate } from '../../i18n';
 import { SPACING } from '../../constants';
@@ -38,14 +38,22 @@ const LoginScreen = ({ navigation }: Props): React.ReactElement => {
 
   useEffect(() => {
     if (data?.generateCustomerToken?.token) {
-      Toast.show(translate('loginScreen.successMessage', Toast.LONG));
+      showMessage({
+        message: translate('common.success'),
+        description: translate('loginScreen.successMessage'),
+        type: 'success',
+      });
       navigation.navigate(Routes.NAVIGATION_TO_HOME_SCREEN);
     }
   }, [data]);
 
   useEffect(() => {
     if (error) {
-      Toast.show(error.message ?? translate('errors.genericError'), Toast.LONG);
+      showMessage({
+        message: translate('common.error'),
+        description: error.message ?? translate('errors.genericError'),
+        type: 'danger',
+      });
     }
   }, [error]);
 

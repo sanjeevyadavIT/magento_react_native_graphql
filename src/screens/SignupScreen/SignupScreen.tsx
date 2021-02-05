@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import { StyleSheet } from 'react-native';
 import { Button, Input } from 'react-native-elements';
 import { StackNavigationProp } from '@react-navigation/stack';
-import Toast from 'react-native-simple-toast';
+import { showMessage } from 'react-native-flash-message';
 import { translate } from '../../i18n';
 import { AutheticationStackParamList, Routes } from '../../navigation';
 import { SPACING } from '../../constants';
@@ -28,14 +28,22 @@ const SignupScreen = ({ navigation }: Props): React.ReactElement => {
 
   useEffect(() => {
     if (data?.createCustomerV2?.customer?.email) {
-      Toast.show(translate('signupScreen.successMessage', Toast.LONG));
+      showMessage({
+        message: translate('common.success'),
+        description: translate('signupScreen.successMessage'),
+        type: 'success',
+      });
       navigation.replace(Routes.NAVIGATION_TO_LOGIN_SCREEN);
     }
   }, [data]);
 
   useEffect(() => {
     if (error) {
-      Toast.show(error.message ?? translate('errors.genericError'), Toast.LONG);
+      showMessage({
+        message: translate('common.error'),
+        description: error.message ?? translate('errors.genericError'),
+        type: 'danger',
+      });
     }
   }, [error]);
 

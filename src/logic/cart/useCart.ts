@@ -5,7 +5,7 @@ import {
   useMutation,
   useQuery,
 } from '@apollo/client';
-import Toast from 'react-native-simple-toast';
+import { showMessage } from 'react-native-flash-message';
 import {
   IsLoggedInDataType,
   IS_LOGGED_IN,
@@ -43,17 +43,19 @@ export const useCart = (): Result => {
     AddProductsToCartVars
   >(ADD_PRODUCTS_TO_CART, {
     onCompleted() {
-      Toast.show(
-        translate('productDetailsScreen.addToCartSuccessful', Toast.LONG),
-      );
+      showMessage({
+        message: translate('common.success'),
+        description: translate('productDetailsScreen.addToCartSuccessful'),
+        type: 'success',
+      });
     },
     onError(_error) {
-      Toast.show(
-        translate(
-          _error.message || 'productDetailsScreen.addToCartError',
-          Toast.LONG,
-        ),
-      );
+      showMessage({
+        message: translate('common.error'),
+        description:
+          _error.message || translate('productDetailsScreen.addToCartError'),
+        type: 'danger',
+      });
     },
   });
   const cartCount: string = getCartCount(cartData?.customerCart?.items?.length);

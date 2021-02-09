@@ -11,7 +11,8 @@
     "prettier": "prettier --ignore-path .gitignore \"src/**/*.+(js|json|ts|tsx)\"",
     "format": "npm run prettier -- --write",
     "check-format": "npm run prettier -- --list-different",
-    "validate": "npm-run-all --parallel check-format test"
+    "validate": "npm-run-all --parallel check-format test",
+    "generatePossibleTypes": "node ./scripts/generatePossibleTypes.js"
   },
   "dependencies": {
     "@apollo/client": "^3.3.6",

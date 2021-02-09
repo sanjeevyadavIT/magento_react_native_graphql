@@ -4,6 +4,7 @@ import { magentoConfig } from '../../magento.config';
 import { AsyncStorageKeys } from '../constants';
 import { getData } from '../logic/utils/asyncStorageHelper';
 import { IS_LOGGED_IN } from './queries/isLoggedIn';
+import possibleTypes from './data/possibleTypes.json';
 
 let _client: ApolloClient<any>;
 
@@ -13,6 +14,7 @@ export async function getApolloClient(): Promise<ApolloClient<any>> {
   }
 
   const cache = new InMemoryCache({
+    possibleTypes,
     typePolicies: {
       Query: {
         fields: {

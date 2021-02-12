@@ -3,7 +3,7 @@ name: Custom Issue Template
 about: Tell us something related to the project or general discussion
 title: ''
 labels: question
-assignees: alexakasanjeev
+assignees: sanjeevyadavit
 
 ---
 

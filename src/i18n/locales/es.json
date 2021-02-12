@@ -1,0 +1,85 @@
+{
+  "common": {
+    "brand": "E-Kart",
+    "ok": "OK",
+    "cancel": "Cancelar",
+    "yes": "Sí",
+    "no": "No",
+    "menu": "Menú",
+    "search": "Buscar",
+    "sort": "Clasificar",
+    "aToZ": "Nombre: de la A a la Z",
+    "zToA": "Nombre: de la Z a la A",
+    "lowToHigh": "Precio: Bajo a Alto",
+    "highToLow": "Precio: Alto a Bajo",
+    "user": "Usuario",
+    "dearUser": "Estimado usuario",
+    "login": "Acceso",
+    "signup": "Inscribirse",
+    "email": "Correo electrónico",
+    "password": "Contraseña",
+    "firstName": "Nombre de pila",
+    "lastName": "Apellido",
+    "register": "Registrarse",
+    "logout": "Cerrar sesión",
+    "cart": "Carro",
+    "quantity": "Qty",
+    "price": "precio",
+    "total": "Total",
+    "success": "Éxito",
+    "error": "Error",
+    "attention": "Atención",
+    "pluralizationExample": {
+      "one": "Tienes 1 artículo",
+      "other": "Tienes %{count} artículos",
+      "zero": "Tu carrito está vacío"
+    }
+  },
+  "errors": {
+    "genericError": "¡Algo salió mal! Inténtalo de nuevo."
+  },
+  "cartScreen": {
+    "appbarTitle": "Cart",
+    "guestUserPromptMessage": "In order to view cart, please login or create new account",
+    "cartEmptyTitle": "Hey, it feels so light!",
+    "cartEmptyMessage": "There is nothing in your bag. Let's add some items.",
+    "placeOrderButton": "Place Order"
+  },
+  "categoriesScreen": {
+    "appbarTitle": "Categoría"
+  },
+  "homeScreen": {
+    "appbarTitle": "Hogar"
+  },
+  "loginScreen": {
+    "appbarTitle": "Acceso",
+    "noAccount": "Don't have account? SignUp",
+    "successMessage": "Login Successful"
+  },
+  "productDetailsScreen": {
+    "appbarTitle": "Product Details",
+    "addToCart": "Add To Cart",
+    "guestUserPromptMessage": "In order to add product to cart, please login or create new account",
+    "productTypeNotSupported": "Currently only Simple & grouped product types are supported",
+    "addToCartSuccessful": "Product added to cart",
+    "addToCartError": "Unable to add product to cart, something went wrong.",
+    "select": "Select %{label}"
+  },
+  "productListScreen": {
+    "appbarTitle": "Products"
+  },
+  "profileScreen": {
+    "appbarTitle": "Profile",
+    "guestUserPromptMessage": "In order to view profile, please login or create new account",
+    "greeting": "Welcome %{name}"
+  },
+  "searchScreen": {
+    "searchBarHint": "Search product by name...",
+    "noProductsFound": "We couldn't found any products matching %{searchText}"
+  },
+  "signupScreen": {
+    "appbarTitle": "Signup",
+    "haveAccount": "Aldready have an account? Login",
+    "successMessage": "Account created successfully! Please Login to continue."
+  }
+}

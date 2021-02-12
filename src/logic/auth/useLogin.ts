@@ -5,9 +5,8 @@ import {
   CreateCustomerTokenDataType,
 } from '../../apollo/mutations/createCustomerToken';
 import { IS_LOGGED_IN } from '../../apollo/queries/isLoggedIn';
-import { AsyncStorageKeys } from '../../constants';
 import { useForm, FormResult } from '../app/useForm';
-import { storeData } from '../utils/asyncStorageHelper';
+import { saveCustomerToken } from '../utils/storage';
 
 interface LoginForm {
   email: string;
@@ -28,10 +27,7 @@ export const useLogin = (): Result<LoginForm> => {
   >(CREATE_CUSTOMER_TOKEN, {
     async update(cache, { data: _data }) {
       if (_data?.generateCustomerToken?.token) {
-        await storeData(
-          AsyncStorageKeys.CUSTOMER_TOKEN,
-          _data.generateCustomerToken.token,
-        );
+        await saveCustomerToken(_data.generateCustomerToken.token);
         cache.writeQuery({
           query: IS_LOGGED_IN,
           data: {

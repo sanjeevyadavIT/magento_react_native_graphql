@@ -1,8 +1,7 @@
 import { ApolloClient, InMemoryCache, createHttpLink } from '@apollo/client';
 import { setContext } from '@apollo/client/link/context';
 import { magentoConfig } from '../../magento.config';
-import { AsyncStorageKeys } from '../constants';
-import { getData } from '../logic/utils/asyncStorageHelper';
+import { loadCustomerToken } from '../logic';
 import { IS_LOGGED_IN } from './queries/isLoggedIn';
 import possibleTypes from './data/possibleTypes.json';
 
@@ -42,9 +41,9 @@ export async function getApolloClient(): Promise<ApolloClient<any>> {
     },
   });
 
-  const customerToken = await getData(AsyncStorageKeys.CUSTOMER_TOKEN);
+  const customerToken = await loadCustomerToken();
 
-  if (customerToken != null) {
+  if (customerToken !== null) {
     cache.writeQuery({
       query: IS_LOGGED_IN,
       data: {
@@ -59,12 +58,12 @@ export async function getApolloClient(): Promise<ApolloClient<any>> {
 
   const authLink = setContext(async (_, { headers }) => {
     // get the authentication token from local storage if it exists
-    const token = await getData(AsyncStorageKeys.CUSTOMER_TOKEN);
+    const token = await loadCustomerToken();
     // return the headers to the context so httpLink can read them
     return {
       headers: {
         ...headers,
-        authorization: token ? `Bearer ${token}` : '',
+        authorization: token !== null ? `Bearer ${token}` : '',
       },
     };
   });

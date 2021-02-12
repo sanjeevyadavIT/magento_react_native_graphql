@@ -1,4 +1,4 @@
-import { getCurrencySymbolFromCode, formatPrice } from './price';
+import { getCurrencySymbolFromCode, formatPrice } from '../utils/price';
 import { currencySymbols } from '../../../magento.config';
 
 describe('price.js', () => {

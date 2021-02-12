@@ -9,4 +9,4 @@ export * from './auth/useSignup';
 export * from './profile/useCustomer';
 export * from './utils/price';
 export * from './utils/loginPrompt';
-export * from './utils/asyncStorageHelper';
+export * from './utils/storage';

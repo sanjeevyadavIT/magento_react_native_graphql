@@ -1,7 +1,6 @@
 import { getApolloClient } from '../../apollo/client';
 import { IS_LOGGED_IN } from '../../apollo/queries/isLoggedIn';
-import { AsyncStorageKeys } from '../../constants';
-import { removeData } from '../utils/asyncStorageHelper';
+import { saveCustomerToken } from '../utils/storage';
 
 interface Result {
   logout(): Promise<any>;
@@ -11,7 +10,7 @@ export const useLogout = (): Result => {
   const logout = async () => {
     try {
       // clear apollo cache
-      await removeData(AsyncStorageKeys.CUSTOMER_TOKEN);
+      await saveCustomerToken(null);
       const client = await getApolloClient();
       client.writeQuery({
         query: IS_LOGGED_IN,

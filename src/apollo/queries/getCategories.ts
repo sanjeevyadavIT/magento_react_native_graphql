@@ -29,7 +29,7 @@ export interface CategoryType {
 interface CategoryProductPreviewImageType {
   items: Array<{
     small_image: {
-      url: String;
+      url: string;
     };
   }>;
 }

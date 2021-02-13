@@ -13,7 +13,6 @@ interface Colors {
   info: string;
 }
 
-const WHITE = '#fff';
 const BLACK = '#000';
 const PRIMARY_COLOR = '#333333';
 const SECONDARY_COLOR = '#FF7900';

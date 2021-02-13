@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { NetworkStatus, useLazyQuery } from '@apollo/client';
+import { ApolloError, NetworkStatus, useLazyQuery } from '@apollo/client';
 import {
   GetSearchProductsVars,
   GET_SEARCH_PRODUCTS,
@@ -11,6 +11,7 @@ interface Result {
   data: SearchProductsDataType | undefined;
   networkStatus: NetworkStatus;
   called: boolean;
+  error?: ApolloError;
   searchText: string;
   handleChange(arg1: string): void;
   getSearchProducts(): void;
@@ -79,6 +80,7 @@ export const useSearch = (): Result => {
     data,
     networkStatus,
     called,
+    error,
     searchText,
     loadMore,
     handleChange,

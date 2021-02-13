@@ -75,7 +75,7 @@ export function useForm<Values extends FormValues = FormValues>(
     });
   };
 
-  const handleSubmit = async event => {
+  const handleSubmit = async () => {
     await props.onSubmit?.(state.values);
   };
 

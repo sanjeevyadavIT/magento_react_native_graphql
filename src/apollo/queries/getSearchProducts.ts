@@ -8,7 +8,7 @@ export interface GetSearchProductsVars {
   currentPage: number;
 }
 
-export interface SearchProductsDataType extends CategoryProductsDataType {}
+export type SearchProductsDataType = CategoryProductsDataType;
 
 export const GET_SEARCH_PRODUCTS = gql`
   query GetSearchProducts(

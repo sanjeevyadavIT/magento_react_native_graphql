@@ -8,7 +8,7 @@ export interface GetCartDataType {
   customerCart: CartType;
 }
 
-export interface CartType extends BasicCartDetailsType {}
+export type CartType = BasicCartDetailsType;
 
 export const GET_CART = gql`
   query GetCart {

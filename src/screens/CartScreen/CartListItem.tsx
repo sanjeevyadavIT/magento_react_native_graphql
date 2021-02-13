@@ -10,7 +10,7 @@ type Props = {
   item: CartItemType;
   index: number;
   onPress(arg0: number): void;
-  onRemovePress(arg0: Number): void;
+  onRemovePress(arg0: number): void;
 };
 
 const CartListItem = ({

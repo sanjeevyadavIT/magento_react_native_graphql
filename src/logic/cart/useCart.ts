@@ -38,7 +38,7 @@ export const useCart = (): Result => {
     fetchCart,
     { data: cartData, loading: cartLoading, error: cartError },
   ] = useLazyQuery<GetCartDataType>(GET_CART);
-  const [_addProductsToCart, { loading: addToCartLoading, data }] = useMutation<
+  const [_addProductsToCart, { loading: addToCartLoading }] = useMutation<
     AddProductsToCartDataType,
     AddProductsToCartVars
   >(ADD_PRODUCTS_TO_CART, {

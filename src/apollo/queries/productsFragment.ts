@@ -5,7 +5,7 @@ export interface ProductInListType {
   sku: string;
   name: string;
   small_image: {
-    url: String;
+    url: string;
   };
   price_range: PriceRangeType;
 }

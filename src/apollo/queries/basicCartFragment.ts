@@ -18,7 +18,7 @@ export interface CartItemType {
     sku: string;
     name: string;
     small_image: {
-      url: String;
+      url: string;
     };
   };
   prices: {

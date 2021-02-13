@@ -8,7 +8,7 @@ export interface ConfigurableOptionType {
 }
 
 export interface ValueType {
-  label: String;
+  label: string;
   valueIndex: number;
 }
 

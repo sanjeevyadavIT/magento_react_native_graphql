@@ -1,5 +1,5 @@
 import { renderHook, act } from '@testing-library/react-hooks';
-import { useForm } from '../app/useForm';
+import { useForm } from '../useForm';
 
 describe('useForm', () => {
   // Global constants
@@ -20,7 +20,7 @@ describe('useForm', () => {
       password: '',
     };
 
-    // Test
+    // Exercise
     const { result } = renderHook(() =>
       useForm<{ email: string; password: string }>(inititalProps),
     );
@@ -44,7 +44,7 @@ describe('useForm', () => {
       password,
     };
 
-    // Test
+    // Exercise
     const { result } = renderHook(() =>
       useForm<{ email: string; password: string }>(inititalProps),
     );
@@ -68,7 +68,7 @@ describe('useForm', () => {
       isChecked: true,
     };
 
-    // Test
+    // Exercise
     const { result } = renderHook(() =>
       useForm<{ isChecked: boolean }>(inititalProps),
     );
@@ -95,7 +95,7 @@ describe('useForm', () => {
       password,
     };
 
-    // Test
+    // Exercise
     const { result } = renderHook(() =>
       useForm<{ email: string; password: string }>(inititalProps),
     );

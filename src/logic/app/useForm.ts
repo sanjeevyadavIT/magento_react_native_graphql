@@ -15,7 +15,7 @@ interface FormConfig<Values> {
 export interface FormResult<Values> {
   values: Values;
   handleChange(field1: string): (field2: any) => void;
-  handleSubmit(event: any): Promise<any>;
+  handleSubmit(): Promise<any>;
 }
 
 /**

@@ -8,7 +8,7 @@ import { IS_LOGGED_IN } from '../../apollo/queries/isLoggedIn';
 import { useForm, FormResult } from '../app/useForm';
 import { saveCustomerToken } from '../utils/storage';
 
-interface LoginForm {
+export interface LoginForm {
   email: string;
   password: string;
   secureTextEntry: boolean;
@@ -16,8 +16,8 @@ interface LoginForm {
 
 interface Result<Values> extends FormResult<Values> {
   loading: boolean;
-  data: CreateCustomerTokenDataType | null | undefined;
-  error: ApolloError | null | undefined;
+  data?: CreateCustomerTokenDataType | null;
+  error?: ApolloError;
 }
 
 export const useLogin = (): Result<LoginForm> => {

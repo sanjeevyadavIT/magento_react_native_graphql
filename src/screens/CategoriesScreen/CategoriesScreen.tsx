@@ -20,7 +20,7 @@ const CategoriesScreen = ({
     params: { categoryId },
   },
 }: Props): React.ReactElement => {
-  const { categories, loading, error } = useCategories({
+  const { categories = [], loading, error } = useCategories({
     categoryId,
   });
 

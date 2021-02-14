@@ -14,10 +14,10 @@ interface Props {
 
 const CategoryListItem = ({ item, navigation }: Props): React.ReactElement => {
   const [disabled] = useState<boolean>(
-    +item.children_count < 1 && item.product_count < 1,
+    +item.childrenCount < 1 && item.productCount < 1,
   );
   const onCategoryPress = () => {
-    if (+item.children_count > 0) {
+    if (+item.childrenCount > 0) {
       navigation.navigate(Routes.NAVIGATION_TO_CATEGORIES_SCREEN, {
         categoryId: item.id,
         name: item.name,
@@ -32,7 +32,7 @@ const CategoryListItem = ({ item, navigation }: Props): React.ReactElement => {
 
   const renderImage = () => {
     const rawUri =
-      item.image ?? item.productPreviewImage?.items?.[0]?.small_image?.url;
+      item.image ?? item.productPreviewImage?.items?.[0]?.smallImage?.url;
     if (!rawUri) {
       return null;
     }

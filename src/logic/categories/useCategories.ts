@@ -1,5 +1,4 @@
-import { useEffect, useState } from 'react';
-import { useLazyQuery, ApolloError } from '@apollo/client';
+import { useQuery, ApolloError } from '@apollo/client';
 import {
   GET_CATEGORIES,
   CategoryType,
@@ -12,14 +11,13 @@ interface Props {
 }
 
 interface Result {
-  categories: Array<CategoryType>;
+  categories?: Array<CategoryType>;
   loading: boolean;
   error: ApolloError | undefined;
 }
 
 export const useCategories = ({ categoryId: id }: Props): Result => {
-  const [categories, setCategories] = useState<Array<CategoryType>>([]);
-  const [getCategories, { called, loading, data, error }] = useLazyQuery<
+  const { loading, data, error } = useQuery<
     CategoriesDataType,
     GetCategoriesVars
   >(GET_CATEGORIES, {
@@ -28,25 +26,8 @@ export const useCategories = ({ categoryId: id }: Props): Result => {
     },
   });
 
-  useEffect(() => {
-    if (!called) {
-      getCategories();
-    }
-  }, [called]);
-
-  useEffect(() => {
-    if (data) {
-      if (data.categoryList?.[0]?.children?.length > 0) {
-        setCategories(data.categoryList[0].children);
-      }
-    }
-    if (error) {
-      console.log(error);
-    }
-  }, [data, error]);
-
   return {
-    categories,
+    categories: data?.categoryList?.[0]?.children,
     loading,
     error,
   };

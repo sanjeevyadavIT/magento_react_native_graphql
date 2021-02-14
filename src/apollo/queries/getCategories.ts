@@ -16,8 +16,8 @@ interface CategoryListType {
 export interface CategoryType {
   id: number;
   name: string;
-  product_count: number;
-  children_count: string;
+  productCount: number;
+  childrenCount: string;
   image: string;
   /**
    * In case category doesn't contain image,
@@ -28,7 +28,7 @@ export interface CategoryType {
 
 interface CategoryProductPreviewImageType {
   items: Array<{
-    small_image: {
+    smallImage: {
       url: string;
     };
   }>;
@@ -41,12 +41,12 @@ export const GET_CATEGORIES = gql`
       children {
         id
         name
-        product_count
-        children_count
+        productCount: product_count
+        childrenCount: children_count
         image
         productPreviewImage: products(pageSize: 1) {
           items {
-            small_image {
+            smallImage: small_image {
               url
             }
           }

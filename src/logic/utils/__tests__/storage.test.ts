@@ -3,7 +3,7 @@ import {
   AsyncStorageKeys,
   saveCustomerToken,
   loadCustomerToken,
-} from '../utils/storage';
+} from '../storage';
 
 describe('storage.ts', () => {
   beforeEach(() => {

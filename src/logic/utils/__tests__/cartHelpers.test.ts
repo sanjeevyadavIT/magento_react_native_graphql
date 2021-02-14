@@ -1,4 +1,4 @@
-import { getCartCount } from '../utils/cartHelpers';
+import { getCartCount } from '../cartHelpers';
 
 describe('cartHelpers.js', () => {
   describe('getCartCount()', () => {

@@ -100,7 +100,7 @@ describe('useForm', () => {
       useForm<{ email: string; password: string }>(inititalProps),
     );
     await act(async () => {
-      await result.current.handleSubmit({});
+      await result.current.handleSubmit();
     });
 
     // Verify

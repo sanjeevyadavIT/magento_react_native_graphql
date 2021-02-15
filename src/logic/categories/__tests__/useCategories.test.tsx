@@ -75,8 +75,8 @@ describe('useCategories', () => {
 
     // Verify
     expect(result.current.loading).toBeFalsy();
-    expect(result.current.categories).toEqual(categoryList);
     expect(result.current.error).toBeUndefined();
+    expect(result.current.categories).toEqual(categoryList);
   });
 
   test('should return error when request fails', async () => {
@@ -90,8 +90,8 @@ describe('useCategories', () => {
     await waitForNextUpdate();
 
     // Verify
-    expect(result.current.categories).toBeUndefined();
     expect(result.current.loading).toBeFalsy();
     expect(result.current.error).toBeTruthy();
+    expect(result.current.categories).toBeUndefined();
   });
 });

@@ -58,8 +58,8 @@ describe('useCustomer', () => {
 
     // Verify
     expect(result.current.loading).toBeFalsy();
-    expect(result.current.data).toEqual({ customer });
     expect(result.current.error).toBeUndefined();
+    expect(result.current.data).toEqual({ customer });
   });
 
   test('should return error when request fails', async () => {
@@ -76,7 +76,7 @@ describe('useCustomer', () => {
 
     // Verify
     expect(result.current.loading).toBeFalsy();
-    expect(result.current.data).toBeUndefined();
     expect(result.current.error).toBeTruthy();
+    expect(result.current.data).toBeUndefined();
   });
 });

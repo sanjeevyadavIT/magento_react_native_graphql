@@ -100,8 +100,8 @@ describe('useProductDetails', () => {
 
     // Verify
     expect(result.current.loading).toBeFalsy();
-    expect(result.current.productDetails).toEqual(product);
     expect(result.current.error).toBeUndefined();
+    expect(result.current.productDetails).toEqual(product);
   });
 
   test('should return error when request fails', async () => {
@@ -116,7 +116,7 @@ describe('useProductDetails', () => {
 
     // Verify
     expect(result.current.loading).toBeFalsy();
-    expect(result.current.productDetails).toBeUndefined();
     expect(result.current.error).toBeTruthy();
+    expect(result.current.productDetails).toBeUndefined();
   });
 });

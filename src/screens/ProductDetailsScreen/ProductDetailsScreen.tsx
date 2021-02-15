@@ -111,7 +111,7 @@ const ProductDetailsScreen = ({
     if (productDetails) {
       return (
         <Text h2 style={styles.price}>
-          {formatPrice(productDetails.price_range.maximum_price.final_price)}
+          {formatPrice(productDetails.priceRange.maximumPrice.finalPrice)}
         </Text>
       );
     }
@@ -172,7 +172,7 @@ const ProductDetailsScreen = ({
       }
     >
       <View>
-        <MediaGallery items={productDetails?.media_gallery ?? []} />
+        <MediaGallery items={productDetails?.mediaGallery ?? []} />
         <Text h1 style={styles.name}>
           {productDetails?.name}
         </Text>

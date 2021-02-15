@@ -4,15 +4,15 @@ export interface ProductInListType {
   id: number;
   sku: string;
   name: string;
-  small_image: {
+  smallImage: {
     url: string;
   };
-  price_range: PriceRangeType;
+  priceRange: PriceRangeType;
 }
 
 export interface PriceRangeType {
-  maximum_price: {
-    final_price: {
+  maximumPrice: {
+    finalPrice: {
       currency: string;
       value: number;
     };
@@ -25,12 +25,12 @@ export const PRODUCTS_FRAGMENT = gql`
       id
       sku
       name
-      small_image {
+      smallImage: small_image {
         url
       }
-      price_range {
-        maximum_price {
-          final_price {
+      priceRange: price_range {
+        maximumPrice: maximum_price {
+          finalPrice: final_price {
             currency
             value
           }

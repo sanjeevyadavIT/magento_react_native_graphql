@@ -1,4 +1,3 @@
-import { useState } from 'react';
 import { useQuery, ApolloError } from '@apollo/client';
 import {
   GET_PRODUCT_DETAILS,
@@ -18,24 +17,17 @@ interface Result {
 }
 
 export const useProductDetails = ({ sku }: Props): Result => {
-  const [productDetails, setProductDetails] = useState<
-    ProductDetailsType | null | undefined
-  >(null);
-  const { loading, error } = useQuery<
+  const { data, loading, error } = useQuery<
     ProductDetailsDataType,
     GetProductDetailsVars
   >(GET_PRODUCT_DETAILS, {
     variables: {
       sku,
     },
-    onCompleted: responseData => {
-      console.log(responseData);
-      setProductDetails(responseData?.products?.items?.[0]);
-    },
   });
 
   return {
-    productDetails,
+    productDetails: data?.products?.items?.[0],
     loading,
     error,
   };

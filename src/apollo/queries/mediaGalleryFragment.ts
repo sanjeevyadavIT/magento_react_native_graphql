@@ -9,7 +9,7 @@ export interface MediaGalleryItemType {
 
 export const MEDIA_GALLERY_FRAGMENT = gql`
   fragment MediaGallery on ProductInterface {
-    media_gallery {
+    mediaGallery: media_gallery {
       disabled
       label
       position

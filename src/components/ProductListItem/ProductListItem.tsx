@@ -25,7 +25,7 @@ const ProductListItem = ({
 }: Props): React.ReactElement => {
   const { theme } = useContext(ThemeContext);
   const renderImage = () => {
-    const uri = `${item.small_image.url}?width=${COLUMN_WIDTH}`;
+    const uri = `${item.smallImage.url}?width=${COLUMN_WIDTH}`;
     return <Image source={{ uri }} style={styles.image} />;
   };
 
@@ -45,7 +45,7 @@ const ProductListItem = ({
         {renderImage()}
         <Text style={styles.name}>{item.name}</Text>
         <Text style={styles.price}>
-          {formatPrice(item.price_range.maximum_price.final_price)}
+          {formatPrice(item.priceRange.maximumPrice.finalPrice)}
         </Text>
       </View>
     </TouchableOpacity>

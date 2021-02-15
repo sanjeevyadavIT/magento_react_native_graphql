@@ -27,8 +27,8 @@ export interface ProductDetailsType {
   description: {
     html: string;
   };
-  price_range: PriceRangeType;
-  media_gallery: Array<MediaGalleryItemType>;
+  priceRange: PriceRangeType;
+  mediaGallery: Array<MediaGalleryItemType>;
   configurableOptions: Array<ConfigurableOptionType>;
 }
 
@@ -49,9 +49,9 @@ export const GET_PRODUCT_DETAILS = gql`
           html
         }
         type: __typename
-        price_range {
-          maximum_price {
-            final_price {
+        priceRange: price_range {
+          maximumPrice: maximum_price {
+            finalPrice: final_price {
               currency
               value
             }

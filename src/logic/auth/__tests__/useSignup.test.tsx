@@ -1,80 +1,82 @@
 import React from 'react';
 import { renderHook, act } from '@testing-library/react-hooks';
-import { InMemoryCache } from '@apollo/client';
 import { MockedProvider } from '@apollo/client/testing';
-import { LoginForm, useLogin } from '../useLogin';
-import { CREATE_CUSTOMER_TOKEN } from '../../../apollo/mutations/createCustomerToken';
-import { IS_LOGGED_IN } from '../../../apollo/queries/isLoggedIn';
+import { SignupForm, useSignup } from '../useSignup';
+import { CREATE_CUSTOMER } from '../../../apollo/mutations/createCustomer';
 
-const initialLoginForm: LoginForm = {
+const initialSignupForm: SignupForm = {
+  firstName: '',
+  lastName: '',
   email: '',
   password: '',
   secureTextEntry: true,
 };
+const firstName = 'Alex';
+const lastName = 'Warner';
 const email = 'alexwarner@gmail.com';
-const password = 'password123';
-const successResponse = {
-  generateCustomerToken: {
-    token: '#$Gfh12DF%22kauw',
-  },
-};
-const loginMutationMock = {
+const password = 'Password123';
+const signupMutationMock = {
   request: {
-    query: CREATE_CUSTOMER_TOKEN,
+    query: CREATE_CUSTOMER,
     variables: {
+      firstName,
+      lastName,
       email,
       password,
     },
   },
   result: {
-    data: successResponse,
+    data: {
+      createCustomerV2: {
+        customer: {
+          email,
+        },
+      },
+    },
   },
 };
-const loginMutationErrorMock = {
+const signupMutationErrorMock = {
   request: {
-    query: CREATE_CUSTOMER_TOKEN,
+    query: CREATE_CUSTOMER,
     variables: {
+      firstName,
+      lastName,
       email,
       password,
     },
   },
   error: new Error('Something went wrong'),
 };
-
-describe('useLogin', () => {
+describe('useSignup', () => {
   function getHookWrapper(mocks: any = []) {
-    const cache = new InMemoryCache({
-      addTypename: false,
-    });
     const wrapper = ({
       children,
     }: {
       children: React.ReactElement;
     }): React.ReactElement => (
-      <MockedProvider mocks={mocks} addTypename={false} cache={cache}>
+      <MockedProvider mocks={mocks} addTypename={false}>
         {children}
       </MockedProvider>
     );
-    const { result, waitForNextUpdate } = renderHook(() => useLogin(), {
+    const { result, waitForNextUpdate } = renderHook(() => useSignup(), {
       wrapper,
     });
-    const getLoggedInStatusFromCache = () =>
-      cache.readQuery({ query: IS_LOGGED_IN });
     // Test the initial state of the request
     expect(result.current.loading).toBeFalsy();
     expect(result.current.error).toBeUndefined();
     expect(result.current.data).toBeUndefined();
-    expect(result.current.values).toEqual(initialLoginForm);
-    expect(getLoggedInStatusFromCache()).toBeNull();
+    expect(result.current.values).toEqual(initialSignupForm);
     expect(typeof result.current.handleChange).toBe('function');
     expect(typeof result.current.handleSubmit).toBe('function');
 
-    return { result, waitForNextUpdate, getLoggedInStatusFromCache };
+    return { result, waitForNextUpdate };
   }
 
   test('should handle change in values', () => {
     // Setup
-    const expectedValues: LoginForm = {
+    const expectedValues: SignupForm = {
+      firstName,
+      lastName,
       email,
       password,
       secureTextEntry: false,
@@ -83,6 +85,8 @@ describe('useLogin', () => {
 
     // Exercise
     act(() => {
+      result.current.handleChange('firstName')(firstName);
+      result.current.handleChange('lastName')(lastName);
       result.current.handleChange('email')(email);
       result.current.handleChange('password')(password);
       result.current.handleChange('secureTextEntry')(true); // the value true will be ignored, it will get toggled of previous value
@@ -94,14 +98,19 @@ describe('useLogin', () => {
 
   test('should handle success', async () => {
     // Setup
-    const {
-      result,
-      getLoggedInStatusFromCache,
-      waitForNextUpdate,
-    } = getHookWrapper([loginMutationMock]);
+    const expectedResult = {
+      createCustomerV2: {
+        customer: {
+          email,
+        },
+      },
+    };
+    const { result, waitForNextUpdate } = getHookWrapper([signupMutationMock]);
 
-    // Enter correct credentials for login
+    // Enter correct credentials for signup
     await act(async () => {
+      result.current.handleChange('firstName')(firstName);
+      result.current.handleChange('lastName')(lastName);
       result.current.handleChange('email')(email);
       result.current.handleChange('password')(password);
       await waitForNextUpdate();
@@ -111,20 +120,19 @@ describe('useLogin', () => {
     // Verify
     expect(result.current.loading).toBeFalsy();
     expect(result.current.error).toBeUndefined();
-    expect(result.current.data).toEqual(successResponse);
-    expect(getLoggedInStatusFromCache()).toEqual({ isLoggedIn: true });
+    expect(result.current.data).toEqual(expectedResult);
   });
 
   test('should handle error', async () => {
     // Setup
-    const {
-      result,
-      getLoggedInStatusFromCache,
-      waitForNextUpdate,
-    } = getHookWrapper([loginMutationErrorMock]);
+    const { result, waitForNextUpdate } = getHookWrapper([
+      signupMutationErrorMock,
+    ]);
 
-    // Enter credentials for login
+    // Enter correct credentials for signup
     await act(async () => {
+      result.current.handleChange('firstName')(firstName);
+      result.current.handleChange('lastName')(lastName);
       result.current.handleChange('email')(email);
       result.current.handleChange('password')(password);
       await waitForNextUpdate();
@@ -134,7 +142,6 @@ describe('useLogin', () => {
     // Verify
     expect(result.current.loading).toBeFalsy();
     expect(result.current.data).toBeUndefined();
-    expect(getLoggedInStatusFromCache()).toBeNull();
     expect(result.current.error).toEqual(new Error('Something went wrong'));
   });
 });

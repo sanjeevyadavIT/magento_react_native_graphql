@@ -6,7 +6,7 @@ import {
 } from '../../apollo/mutations/createCustomer';
 import { useForm, FormResult } from '../app/useForm';
 
-interface SignupForm {
+export interface SignupForm {
   firstName: string;
   lastName: string;
   email: string;

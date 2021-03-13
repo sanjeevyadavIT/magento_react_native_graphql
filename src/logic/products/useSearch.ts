@@ -70,7 +70,7 @@ export const useSearch = (): Result => {
     if (
       currentPage * LIMITS.searchScreenPageSize ===
         data?.products?.items?.length &&
-      data?.products?.items.length < data?.products?.total_count
+      data?.products?.items.length < data?.products?.totalCount
     ) {
       setCurrentPage(prevPage => prevPage + 1);
     }

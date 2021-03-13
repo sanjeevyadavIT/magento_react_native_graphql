@@ -21,7 +21,7 @@ export const GET_SEARCH_PRODUCTS = gql`
       pageSize: $pageSize
       currentPage: $currentPage
     ) {
-      total_count
+      totalCount: total_count
       ...ProductListFragment
     }
   }

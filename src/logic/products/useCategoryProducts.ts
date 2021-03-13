@@ -53,7 +53,7 @@ export const useCategoryProducts = ({ categoryId: id }: Props): Result => {
     if (
       currentPage * LIMITS.categoryProductsPageSize ===
         data?.products?.items?.length &&
-      data?.products?.items.length < data?.products?.total_count
+      data?.products?.items.length < data?.products?.totalCount
     ) {
       setCurrentPage(prevState => prevState + 1);
     }

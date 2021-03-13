@@ -11,7 +11,7 @@ export interface GetCategoryProductsVars {
 
 export interface CategoryProductsDataType {
   products: {
-    total_count: number;
+    totalCount: number;
     items: Array<ProductInListType>;
   };
 }
@@ -35,7 +35,7 @@ export const GET_CATGEORY_PRODUCTS = gql`
       sort: { price: $price, name: $name }
       currentPage: $currentPage
     ) {
-      total_count
+      totalCount: total_count
       ...ProductListFragment
     }
   }

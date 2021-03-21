@@ -28,6 +28,9 @@ const DIMENS = Object.freeze({
   homeScreen: {
     carouselHeight: moderateScale(200),
   },
+  productDetailScreen: {
+    configurableOptionValueBoxSize: moderateScale(46),
+  },
 });
 
 export default DIMENS;

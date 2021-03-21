@@ -1,12 +1,6 @@
-import React, { useState, useContext, useLayoutEffect } from 'react';
+import React, { useContext, useLayoutEffect } from 'react';
 import { View, StyleSheet, Dimensions } from 'react-native';
-import {
-  Text,
-  ThemeContext,
-  Button,
-  Badge,
-  Divider,
-} from 'react-native-elements';
+import { Text, ThemeContext, Button, Badge } from 'react-native-elements';
 import { RouteProp } from '@react-navigation/native';
 import { StackNavigationProp } from '@react-navigation/stack';
 import HTML from 'react-native-render-html';
@@ -24,7 +18,7 @@ import { formatPrice, showLoginPrompt } from '../../logic';
 import { translate } from '../../i18n';
 import { useCart } from '../../logic/cart/useCart';
 import { ProductTypeEnum } from '../../apollo/queries/getProductDetails';
-import ConfigurableOption from './ConfigurableOptions';
+import ConfigurableProductOptions from './ConfigurableProductOptions';
 
 type Props = {
   navigation: StackNavigationProp<
@@ -43,9 +37,6 @@ const ProductDetailsScreen = ({
     params: { sku },
   },
 }: Props): React.ReactElement => {
-  const [selectedOptions, setSelectedOptions] = useState<{
-    [key: number]: number;
-  }>({});
   const { error, loading, productDetails } = useProductDetails({
     sku,
   });
@@ -118,25 +109,12 @@ const ProductDetailsScreen = ({
     return null;
   };
 
-  const renderConfigurableOptions = (): React.ReactNode => {
-    if (productDetails && productDetails.type === ProductTypeEnum.CONFIGURED) {
+  const renderOptions = (): React.ReactNode => {
+    if (productDetails?.type === ProductTypeEnum.CONFIGURED) {
       return (
-        <>
-          <Divider style={styles.divider} />
-          {productDetails.configurableOptions?.map(item => (
-            <ConfigurableOption
-              key={item.id}
-              id={item.id}
-              label={item.label}
-              options={item.values}
-              selectedValue={selectedOptions[item.id]}
-              onPress={(id, value) =>
-                setSelectedOptions(prevState => ({ ...prevState, [id]: value }))
-              }
-            />
-          ))}
-          <Divider />
-        </>
+        <ConfigurableProductOptions
+          options={productDetails?.configurableOptions}
+        />
       );
     }
     return null;
@@ -177,7 +155,7 @@ const ProductDetailsScreen = ({
           {productDetails?.name}
         </Text>
         {renderPrice()}
-        {renderConfigurableOptions()}
+        {renderOptions()}
         {renderDiscription()}
       </View>
     </GenericTemplate>
@@ -207,9 +185,6 @@ const styles = StyleSheet.create({
   badgeText: {
     fontSize: DIMENS.common.cartItemCountFontSize,
     textAlign: 'center',
-  },
-  divider: {
-    marginVertical: SPACING.tiny,
   },
 });
 

@@ -19,17 +19,34 @@ export interface ProductDetailsDataType {
   };
 }
 
-export interface ProductDetailsType {
+export type ProductDetailsType =
+  | SimpleProductDetailsType
+  | ConfigurableProductDetailsType
+  | GroupedProductDetailsType;
+
+export interface ProductInterfaceDetailsType {
   id: number;
   sku: string;
   name: string;
-  type: ProductTypeEnum;
   description: {
     html: string;
   };
   priceRange: PriceRangeType;
   mediaGallery: Array<MediaGalleryItemType>;
+}
+
+export interface SimpleProductDetailsType extends ProductInterfaceDetailsType {
+  type: ProductTypeEnum.SIMPLE;
+}
+
+export interface ConfigurableProductDetailsType
+  extends ProductInterfaceDetailsType {
+  type: ProductTypeEnum.CONFIGURED;
   configurableOptions: Array<ConfigurableOptionType>;
+}
+
+export interface GroupedProductDetailsType extends ProductInterfaceDetailsType {
+  type: ProductTypeEnum.GROUPED;
 }
 
 export enum ProductTypeEnum {

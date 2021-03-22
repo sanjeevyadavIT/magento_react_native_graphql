@@ -4,18 +4,33 @@ import { Divider, Text } from 'react-native-elements';
 import { ConfigurableOptionType } from '../../apollo/queries/configurableProductFragment';
 import { SPACING } from '../../constants';
 import ConfigurableOptionValues from './ConfigurableOptionValues';
+import {
+  SelectedConfigurableProductOptions,
+  HandleSelectedConfigurableOptions,
+} from '../../logic';
 
 export interface Props {
   options: Array<ConfigurableOptionType>;
+  selectedConfigurableProductOptions: SelectedConfigurableProductOptions;
+  handleSelectedConfigurableOptions: HandleSelectedConfigurableOptions;
 }
 
-const ConfigurableProductOptions: React.FC<Props> = ({ options }) => {
+const ConfigurableProductOptions: React.FC<Props> = ({
+  options,
+  selectedConfigurableProductOptions,
+  handleSelectedConfigurableOptions,
+}) => {
   const renderOption = (item: ConfigurableOptionType) => (
     <View key={String(item.id)} style={styles.container}>
       <Text h3 h3Style={styles.label}>
         {item.label}
       </Text>
-      <ConfigurableOptionValues values={item.values} />
+      <ConfigurableOptionValues
+        values={item.values}
+        optionCode={item.attributeCode}
+        selectedIndex={selectedConfigurableProductOptions[item.attributeCode]}
+        handleSelectedConfigurableOptions={handleSelectedConfigurableOptions}
+      />
     </View>
   );
 

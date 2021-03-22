@@ -37,7 +37,13 @@ const ProductDetailsScreen = ({
     params: { sku },
   },
 }: Props): React.ReactElement => {
-  const { error, loading, productDetails } = useProductDetails({
+  const {
+    error,
+    loading,
+    productDetails,
+    selectedConfigurableProductOptions,
+    handleSelectedConfigurableOptions,
+  } = useProductDetails({
     sku,
   });
   const {
@@ -114,6 +120,10 @@ const ProductDetailsScreen = ({
       return (
         <ConfigurableProductOptions
           options={productDetails?.configurableOptions}
+          selectedConfigurableProductOptions={
+            selectedConfigurableProductOptions
+          }
+          handleSelectedConfigurableOptions={handleSelectedConfigurableOptions}
         />
       );
     }

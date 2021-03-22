@@ -4,6 +4,7 @@ export interface ConfigurableOptionType {
   id: number;
   label: string;
   position: number;
+  attributeCode: string;
   values: Array<ConfigurableProductOptionValueType>;
 }
 
@@ -22,6 +23,7 @@ export const CONFIGURABLE_PRODUCT_FRAGMENT = gql`
       id
       label
       position
+      attributeCode: attribute_code
       values {
         label
         valueIndex: value_index

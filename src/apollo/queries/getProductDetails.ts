@@ -1,13 +1,14 @@
 import { gql } from '@apollo/client';
 import {
   ConfigurableOptionType,
+  ConfigurableProductVariant,
   CONFIGURABLE_PRODUCT_FRAGMENT,
 } from './configurableProductFragment';
 import {
   MEDIA_GALLERY_FRAGMENT,
   MediaGalleryItemType,
 } from './mediaGalleryFragment';
-import { PriceRangeType } from './productsFragment';
+import { PriceRangeType, PRODUCT_PRICE_FRAGMENT } from './productPriceFragment';
 
 export interface GetProductDetailsVars {
   sku: string;
@@ -43,6 +44,7 @@ export interface ConfigurableProductDetailsType
   extends ProductInterfaceDetailsType {
   type: ProductTypeEnum.CONFIGURED;
   configurableOptions: Array<ConfigurableOptionType>;
+  variants: Array<ConfigurableProductVariant>;
 }
 
 export interface GroupedProductDetailsType extends ProductInterfaceDetailsType {
@@ -66,19 +68,13 @@ export const GET_PRODUCT_DETAILS = gql`
           html
         }
         type: __typename
-        priceRange: price_range {
-          maximumPrice: maximum_price {
-            finalPrice: final_price {
-              currency
-              value
-            }
-          }
-        }
+        ...ProductPrice
         ...MediaGallery
         ...ConfigurableProduct
       }
     }
   }
+  ${PRODUCT_PRICE_FRAGMENT}
   ${MEDIA_GALLERY_FRAGMENT}
   ${CONFIGURABLE_PRODUCT_FRAGMENT}
 `;

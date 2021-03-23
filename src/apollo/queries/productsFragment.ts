@@ -1,4 +1,6 @@
 import { gql } from '@apollo/client';
+import { PRODUCT_PRICE_FRAGMENT } from './productPriceFragment';
+import type { PriceRangeType } from './productPriceFragment';
 
 export interface ProductInListType {
   id: number;
@@ -10,15 +12,6 @@ export interface ProductInListType {
   priceRange: PriceRangeType;
 }
 
-export interface PriceRangeType {
-  maximumPrice: {
-    finalPrice: {
-      currency: string;
-      value: number;
-    };
-  };
-}
-
 export const PRODUCTS_FRAGMENT = gql`
   fragment ProductListFragment on Products {
     items {
@@ -28,14 +21,8 @@ export const PRODUCTS_FRAGMENT = gql`
       smallImage: small_image {
         url
       }
-      priceRange: price_range {
-        maximumPrice: maximum_price {
-          finalPrice: final_price {
-            currency
-            value
-          }
-        }
-      }
+      ...ProductPrice
     }
   }
+  ${PRODUCT_PRICE_FRAGMENT}
 `;

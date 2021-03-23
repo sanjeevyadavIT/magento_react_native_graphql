@@ -40,6 +40,8 @@ const ProductDetailsScreen = ({
   const {
     error,
     loading,
+    priceRange,
+    mediaGallery,
     productDetails,
     selectedConfigurableProductOptions,
     handleSelectedConfigurableOptions,
@@ -105,10 +107,10 @@ const ProductDetailsScreen = ({
   };
 
   const renderPrice = (): React.ReactNode => {
-    if (productDetails) {
+    if (productDetails && priceRange) {
       return (
         <Text h2 style={styles.price}>
-          {formatPrice(productDetails.priceRange.maximumPrice.finalPrice)}
+          {formatPrice(priceRange.maximumPrice.finalPrice)}
         </Text>
       );
     }
@@ -160,7 +162,7 @@ const ProductDetailsScreen = ({
       }
     >
       <View>
-        <MediaGallery items={productDetails?.mediaGallery ?? []} />
+        <MediaGallery items={mediaGallery} />
         <Text h1 style={styles.name}>
           {productDetails?.name}
         </Text>

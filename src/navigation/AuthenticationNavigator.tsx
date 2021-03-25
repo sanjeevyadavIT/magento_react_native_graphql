@@ -1,9 +1,13 @@
 import React from 'react';
 import { createStackNavigator } from '@react-navigation/stack';
 import { Routes } from './routeNames';
-import { AutheticationStackParamList } from './routeParams';
 import { translate } from '../i18n';
 import { LoginScreen, SignupScreen } from '../screens';
+
+export type AutheticationStackParamList = {
+  [Routes.NAVIGATION_TO_LOGIN_SCREEN]: undefined;
+  [Routes.NAVIGATION_TO_SIGNUP_SCREEN]: undefined;
+};
 
 const AuthStack = createStackNavigator<AutheticationStackParamList>();
 

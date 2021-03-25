@@ -1,10 +1,10 @@
 import React from 'react';
 import { createStackNavigator } from '@react-navigation/stack';
 import BottomTabNavigator from './BottomTabNavigator';
+import { NavigatorScreenParams } from '@react-navigation/native';
 import AuthenticationNavigator from './AuthenticationNavigator';
 import { CustomHeaderButtons, CustomHeaderItem } from '../components';
 import { Routes } from './routeNames';
-import { AppStackParamList } from './routeParams';
 import { translate } from '../i18n';
 import {
   SearchScreen,
@@ -12,6 +12,24 @@ import {
   ProductListScreen,
   ProductDetailsScreen,
 } from '../screens';
+
+export type AppStackParamList = {
+  [Routes.NAVIGATION_TO_HOME_SCREEN]: undefined;
+  [Routes.NAVIGATION_TO_AUTHENTICATION_SPLASH_SCREEN]: NavigatorScreenParams<AutheticationStackParamList>;
+  [Routes.NAVIGATION_TO_CATEGORIES_SCREEN]: {
+    categoryId: string;
+    name: string;
+  };
+  [Routes.NAVIGATION_TO_PRODUCT_LIST_SCREEN]: {
+    categoryId: string;
+    name: string;
+  };
+  [Routes.NAVIGATION_TO_PRODUCT_DETAILS_SCREEN]: {
+    name: string;
+    sku: string;
+  };
+  [Routes.NAVIGATION_TO_SEARCH_SCREEN]: undefined;
+};
 
 const Stack = createStackNavigator<AppStackParamList>();
 

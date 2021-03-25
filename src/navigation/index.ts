@@ -1,4 +1,7 @@
 import RootNavigator from './RootNavigator';
+import type { BottomTabNavigatorParamList } from './BottomTabNavigator';
+import type { AutheticationStackParamList } from './AuthenticationNavigator';
+import type { AppStackParamList } from './StackNavigator';
 
 /**
  * Only one default export will be there,
@@ -6,4 +9,8 @@ import RootNavigator from './RootNavigator';
  */
 export default RootNavigator;
 export * from './routeNames';
-export * from './routeParams';
+export type {
+  AppStackParamList,
+  BottomTabNavigatorParamList,
+  AutheticationStackParamList,
+};

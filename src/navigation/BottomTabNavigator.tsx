@@ -6,10 +6,16 @@ import { Icon, ThemeContext } from 'react-native-elements';
 import { translate } from '../i18n';
 import { HomeScreen, CartScreen, ProfileScreen } from '../screens';
 import { Routes } from './routeNames';
-import { AppStackParamList, BottomTabNavigatorParamList } from './routeParams';
+import type { AppStackParamList } from './StackNavigator';
 import { IS_LOGGED_IN, IsLoggedInDataType } from '../apollo/queries/isLoggedIn';
 import { showLoginPrompt } from '../logic';
 import { useCart } from '../logic/cart/useCart';
+
+export type BottomTabNavigatorParamList = {
+  [Routes.NAVIGATION_TO_HOME_SCREEN]: undefined;
+  [Routes.NAVIGATION_TO_PROFILE_SCREEN]: undefined;
+  [Routes.NAVIGATION_TO_CART_SCREEN]: undefined;
+};
 
 const Tab = createBottomTabNavigator<BottomTabNavigatorParamList>();
 

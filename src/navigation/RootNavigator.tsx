@@ -1,7 +1,7 @@
 import React from 'react';
+import { useColorScheme } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createDrawerNavigator } from '@react-navigation/drawer';
-import { useColorScheme } from 'react-native-appearance';
 import StackNavigator from './StackNavigator';
 import { DrawerScreen } from '../screens';
 import { navigationLightTheme, navigationDarkTheme } from '../theme';
